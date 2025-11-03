@@ -5,4 +5,5 @@ User-agent: *
 Allow: /
 
 # (Important: Please change the URL below to your actual website's domain)
-Sitemap: https://your-website-url.com/sitemap.xml
+
+Sitemap: https://www.macca3.shop/sitemap.xml
