@@ -38,9 +38,9 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Load fonts non-blockingly -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap"></noscript>
+    <!-- Load fonts non-blockingly and use display=block to prevent CLS -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=block" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=block"></noscript>
     <style>
         body {
             font-family: 'Cairo', sans-serif; 
@@ -482,6 +482,7 @@
                 <img src="https://i.postimg.cc/rmD00KSG/00000.jpg" 
                      alt="عرض خاص - تقسيط 0%" 
                      class="w-full h-full object-cover"
+                     fetchpriority="high" 
                      onerror="this.src='https://placehold.co/1400x78/294e3a/ffffff?text=Special+Offer+Banner'">
             </a>
         </div>
@@ -489,7 +490,8 @@
             <a href="#products" class="block h-full" title="عرض خاص (وضع داكن)">
                 <img src="https://i.postimg.cc/rmD00KSG/00000.jpg" 
                      alt="عرض خاص - الوضع الداكن" 
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover"
+                     fetchpriority="high">
             </a>
         </div>
 
@@ -3775,3 +3777,10 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
