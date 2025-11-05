@@ -1,10 +1,4 @@
-# This file tells search engine crawlers (like Googlebot) how to index your site.
 User-agent: *
-
-# Allow all crawlers to access everything.
 Allow: /
 
-# (Important: Please change the URL below to your actual website's domain)
-
-Sitemap: https://macca3.shop/sitemap.xml
-
+Sitemap: https://www.macca3.shop/sitemap.xml
