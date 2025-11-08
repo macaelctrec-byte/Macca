@@ -132,29 +132,19 @@
         /* --- END NEW DROPDOWN STYLES --- */
 
         .nav-link {
-            @apply relative py-2 text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-200;
+            @apply relative px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 transition-all duration-200 rounded-lg;
         }
         
-        .nav-link:hover {
-            @apply text-[#ffcd00];
+        .nav-link:hover, .nav-link.active {
+            @apply text-[#ffcd00] bg-gray-100/50 dark:bg-[#ffcd00]/10;
         }
 
         .nav-link::after {
-            @apply content-[''] absolute bottom-0 w-0 h-0.5 bg-[#ffcd00] transition-all duration-300;
-            right: 0;
-            left: auto;
-        }
-
-        .nav-link.active {
-            @apply text-[#ffcd00];
-        }
-
-        .nav-link.active::after {
-            @apply w-full;
+            display: none; /* Removing the old underline effect for a modern pill look */
         }
 
         .mobile-nav-link.active {
-            @apply bg-[#ffcd00] text-gray-900;
+            @apply bg-[#ffcd00]/10 text-[#ffcd00];
         }
 
         @keyframes fadeIn {
@@ -366,6 +356,50 @@
             @apply w-20 text-xs top-12 right-[-28px] py-0.5;
         }
         /* --- END NEW STYLES --- */
+        
+        /* --- NEW TESTIMONIALS SCROLL STYLES --- */
+        .testimonials-scroll-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .testimonials-scroll-container::before,
+        .testimonials-scroll-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+        }
+        .testimonials-scroll-container::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-color), transparent);
+        }
+        .testimonials-scroll-container::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-color), transparent);
+        }
+        :root {
+            --bg-color: #f3f4f6; /* bg-gray-100 */
+        }
+        .dark {
+            --bg-color: #192230; /* dark:bg-[#192230] */
+        }
+
+        .testimonials-scroll-track {
+            display: inline-block;
+            animation: scroll-rtl 120s linear infinite; /* Increased duration for more items */
+        }
+        .testimonials-scroll-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-rtl {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); } /* Move half the width (original set) */
+        }
+        /* --- END TESTIMONIALS SCROLL STYLES --- */
     </style>
     
 </head>
@@ -373,125 +407,125 @@
 
     <div id="app" class="min-h-screen flex flex-col">
         
-        <header class="sticky top-0 z-50 w-full bg-white/90 dark:bg-[#2c2f38]/90 backdrop-blur-lg shadow-md border-b border-gray-200 dark:border-gray-700/50">
-            <nav class="px-4 sm:px-6 lg:px-8">
+        <header class="sticky top-0 z-50 w-full bg-white/70 dark:bg-[#252222] backdrop-blur-xl shadow-lg border-b border-white/20 dark:border-gray-700/30 transition-all duration-300 supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-[#252222]">
+            <nav class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                 <div class="flex justify-between items-center h-16">
                     
-                    <a href="#home" class="logo-link flex-shrink-0 flex items-center" data-page="home">
+                    <a href="#home" class="logo-link flex-shrink-0 flex items-center gap-2" data-page="home">
+                        <div class="p-2 bg-[#ffcd00]/10 rounded-xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffcd00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M13 3L7 12h4l-1 8 7-12h-4z"/></svg>
+                        </div>
                         <div class="flex flex-col">
-                            <span class="text-xl sm:text-2xl font-bold text-[#ffcd00] leading-tight">متجر مكة</span>
-                            <span class="text-xs text-gray-500 dark:text-gray-400 -mt-1">للإضائة الحديثة والدهانات</span>
+                            <span class="text-xl font-extrabold text-gray-900 dark:text-white leading-none tracking-tight">متجر مكة</span>
+                            <span class="text-[0.65rem] font-medium text-[#ffcd00] tracking-wider mt-0.5">للأدوات الكهربائية</span>
                         </div>
                     </a>
-                    <div class="hidden sm:mr-6 sm:flex sm:gap-x-6">
-                        <a href="#home" class="nav-link" data-page="home">
-                            الرئيسية
-                        </a>
-                        <a href="#products" class="nav-link" data-page="products">
-                            المنتجات
-                        </a>
-                        <a href="#blog" class="nav-link" data-page="blog">
-                            المدونة
-                        </a>
-                        <a href="#contact" class="nav-link" data-page="contact">
-                            اتصل بنا
-                        </a>
-                      
+                    
+                    <div class="hidden md:flex items-center gap-x-4">
+                        <a href="#home" class="nav-link" data-page="home">الرئيسية</a>
+                        <a href="#products" class="nav-link" data-page="products">المنتجات</a>
+                        <a href="#blog" class="nav-link" data-page="blog">المدونة</a>
+                        <a href="#contact" class="nav-link" data-page="contact">اتصل بنا</a>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <a href="#cart" class="nav-link relative p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" data-page="cart" title="سلة المشتريات">
-                           
-                            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-                            <span id="cart-count-badge" class="absolute top-0 right-0 block w-5 h-5 -mt-1 -mr-1 text-xs font-bold text-center text-gray-900 bg-[#ffcd00] rounded-full hidden">0</span>
+
+                    <div class="flex items-center gap-1.5">
+                        <a href="#cart" class="nav-link !px-3 relative flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 !rounded-full border border-transparent hover:border-gray-200 dark:hover:border-gray-700" data-page="cart" title="سلة المشتريات">
+                            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                            <span id="cart-count-badge" class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#ffcd00] text-[10px] font-bold text-gray-900 ring-2 ring-white dark:ring-[#2c2f38] hidden">0</span>
                         </a>
-                        <button id="google-login-btn" class="mr-1 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 items-center gap-2 hidden sm:inline-flex" title="تسجيل الدخول">
-                         
-                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-5.5-2.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zM10 12a5.99 5.99 0 00-4.793 2.39A6.483 6.483 0 0010 16.5a6.483 6.483 0 004.793-2.11A5.99 5.99 0 0010 12z" clip-rule="evenodd" />
-                            </svg>
+                        
+                        <div class="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-1 hidden sm:block"></div>
+
+                        <button id="google-login-btn" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-bold hover:opacity-90 transition-opacity" title="تسجيل الدخول">
+                             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+                             <span>دخول</span>
                         </button>
                         
-                        
-                        <div id="user-info" class="relative mr-1 items-center hidden"> 
-                            
-                           
-                            <button id="user-avatar-btn" type="button" class="p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ffcd00]">
-                                <img id="user-avatar" class="w-8 h-8 rounded-full" src="https://placehold.co/32x32" alt="الصورة الرمزية للمستخدم">
+                        <div id="user-info" class="relative items-center hidden"> 
+                            <button id="user-avatar-btn" type="button" class="p-0.5 rounded-full ring-2 ring-transparent hover:ring-[#ffcd00] transition-all">
+                                <img id="user-avatar" class="w-9 h-9 rounded-full object-cover" src="https://placehold.co/32x32" alt="الصورة الرمزية">
                             </button>
-
-                            
-                            <div id="user-dropdown-menu" data-state="closed" class="absolute left-0 mt-2 w-48 bg-white dark:bg-[#2c2f38] rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 z-50"
+                            <!-- Dropdown remains same structure, just ensuring it's inside the relative container -->
+                            <div id="user-dropdown-menu" data-state="closed" class="absolute left-0 mt-2 w-56 bg-white dark:bg-[#192230] rounded-xl shadow-2xl py-2 ring-1 ring-black/5 dark:ring-white/5 z-50 origin-top-left focus:outline-none"
                                  role="menu" aria-orientation="vertical" aria-labelledby="user-avatar-btn">
-                                
-                              
-                                <a href="#admin" id="dropdown-admin-link" data-page="admin" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">
+                                <a href="#admin" id="dropdown-admin-link" data-page="admin" class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-[#2c2f38] transition-colors" role="menuitem">
+                                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
                                     لوحة التحكم
                                 </a>
-                                
-                                
-                                <button id="google-logout-btn-dropdown" class="w-full text-right block px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">
+                                <div class="h-px bg-gray-100 dark:bg-gray-700/50 my-2 mx-4"></div>
+                                <button id="google-logout-btn-dropdown" class="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors text-right" role="menuitem">
+                                    <i data-lucide="log-out" class="w-4 h-4"></i>
                                     تسجيل الخروج
                                 </button>
                             </div>
                         </div>
 
-                        <div class="flex items-center sm:hidden">
-                            <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#ffcd00]" aria-controls="mobile-menu" aria-expanded="false">
-                                <span class="sr-only">فتح القائمة الرئيسية</span>
-                                <svg id="mobile-menu-open-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                </svg>
-                                <svg id="mobile-menu-close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
+                        <div class="flex items-center md:hidden">
+                            <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-lg text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                                <span class="sr-only">فتح القائمة</span>
+                                <i id="mobile-menu-open-icon" data-lucide="menu" class="w-6 h-6 block"></i>
+                                <i id="mobile-menu-close-icon" data-lucide="x" class="w-6 h-6 hidden"></i>
                             </button>
                         </div>
                     </div>
                     
                 </div>
             </nav>
-            <div class="hidden sm:hidden" id="mobile-menu">
+            <!-- Mobile Menu with glass effect -->
+            <div class="md:hidden hidden border-t border-gray-200/50 dark:border-gray-700/50" id="mobile-menu">
                 <div class="px-2 pt-2 pb-3 space-y-1">
-                    <a href="#home" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-800" data-page="home">الرئيسية</a>
-                    <a href="#products" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-800" data-page="products">المنتجات</a>
-                    <a href="#blog" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-800" data-page="blog">المدونة</a>
-                    <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-800" data-page="contact">اتصل بنا</a>
-                    
-                    <a href="#cart" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-800" data-page="cart">
-                        سلة المشتريات
-                        <span id="mobile-cart-count-badge" class="inline-block w-5 h-5 mr-2 text-xs font-bold text-center text-gray-900 bg-[#ffcd00] rounded-full hidden">0</span>
+                    <a href="#home" class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors" data-page="home">
+                        <i data-lucide="home" class="w-5 h-5 opacity-70"></i>
+                        الرئيسية
                     </a>
-                    <a href="#" id="google-login-btn-mobile" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-800">
+                    <a href="#products" class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors" data-page="products">
+                        <i data-lucide="package" class="w-5 h-5 opacity-70"></i>
+                        المنتجات
+                    </a>
+                    <a href="#blog" class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors" data-page="blog">
+                        <i data-lucide="book-open" class="w-5 h-5 opacity-70"></i>
+                        المدونة
+                    </a>
+                    <a href="#contact" class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors" data-page="contact">
+                        <i data-lucide="phone" class="w-5 h-5 opacity-70"></i>
+                        اتصل بنا
+                    </a>
+                    
+                    <div class="h-px bg-gray-200 dark:bg-gray-700/50 my-2 mx-4"></div>
+
+                    <a href="#" id="google-login-btn-mobile" class="mobile-nav-link flex items-center gap-3 px-4 py-3 rounded-xl text-base font-bold text-white bg-gray-900 dark:bg-white dark:text-gray-900 mx-2 justify-center">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
                         تسجيل الدخول بحساب جوجل
                     </a>
-                    <div id="user-info-mobile" class="hidden items-center justify-between px-3 py-2">
-                        <div class="flex items-center gap-2">
-                            <img id="user-avatar-mobile" class="w-8 h-8 rounded-full" src="https://placehold.co/32x32" alt="الصورة الرمزية للمستخدم">
-                            <span id="user-name-mobile" class="text-base font-medium text-gray-700 dark:text-gray-200"></span>
+                    <div id="user-info-mobile" class="hidden flex-col px-4 py-3 space-y-3">
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-white/5 rounded-xl">
+                            <img id="user-avatar-mobile" class="w-10 h-10 rounded-full" src="https://placehold.co/32x32" alt="الصورة الرمزية">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-500 dark:text-gray-400">مرحباً بك</span>
+                                <span id="user-name-mobile" class="text-sm font-bold text-gray-900 dark:text-white"></span>
+                            </div>
                         </div>
-                        <a href="#" id="google-logout-btn-mobile" class="block px-3 py-2 rounded-md text-base font-medium text-red-500 hover:bg-gray-200 dark:hover:bg-gray-800">
+                        <a href="#" id="google-logout-btn-mobile" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-sm font-medium text-red-600 bg-red-50 dark:bg-red-900/10 dark:text-red-400 hover:bg-red-100 transition-colors">
+                            <i data-lucide="log-out" class="w-4 h-4"></i>
                             تسجيل الخروج
                         </a>
                     </div>
                 </div>
             </div>
         </header>
-
-        <div id="special-offer-banner-light" class="w-full bg-[#294e3a] sticky top-[64px] z-40 h-[100px] transition-transform duration-300 ease-in-out dark:hidden">
-            <a href="#products" class="block h-full" title="عرض خاص">
-                <img src="" 
-                     alt="" 
+        <div id="special-offer-banner-light" class="w-full bg-[#294e3a] sticky top-[85px] z-40 h-[100px] transition-transform duration-300 ease-in-out hidden">
                      class="w-full h-full object-cover"
                      fetchpriority="high" 
-                     onerror="this.src='https://placehold.co/1400x78/294e3a/ffffff?text=Special+Offer+Banner'">
+                     onerror="this.style.display='none'; this.parentElement.parentElement.classList.add('hidden');">
             </a>
         </div>
-        <div id="special-offer-banner-dark" class="w-full bg-[#1a2b20] sticky top-[64px] z-40 h-[100px] transition-transform duration-300 ease-in-out hidden dark:block">
+        <div id="special-offer-banner-dark" class="w-full bg-[#1a2b20] sticky top-[64px] z-40 h-[100px] transition-transform duration-300 ease-in-out hidden">
             <a href="#products" class="block h-full" title="عرض خاص (وضع داكن)">
                 <img src="" 
                      alt="" 
                      class="w-full h-full object-cover"
-                     fetchpriority="high">
+                     fetchpriority="high"
+                     onerror="this.style.display='none'; this.parentElement.parentElement.classList.add('hidden');">
             </a>
         </div>
 
@@ -529,65 +563,79 @@
             
                 <div>
                     <h2 class="text-2xl sm:text-3xl font-bold text-right mb-6">أقسامنا الرئيسية</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                    <!-- تم تعديل grid-cols-5 إلى grid-cols-6 للشاشات الكبيرة -->
+                    <div class="grid grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4">
                         <a href="#products" 
-                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-6 rounded-2xl shadow-lg text-center transition-all duration-300" 
+                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-4 rounded-2xl shadow-lg text-center transition-all duration-300" 
                            data-page="products" data-category-filter="Lighting">
                             
+                            <!-- تم تصغير حجم الصور قليلاً لتناسب العرض الجديد -->
                             <img src="https://i.postimg.cc/bYWdsZg0/pngtree-light-bulb-electrical-equipment-spiral-png-image-6469929.webp" 
                                  alt="لمبات وإضاءة"
-                                 class="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
+                                 class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
                             
-                            <h3 class="text-base sm:text-lg font-semibold mt-4 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
+                            <h3 class="text-sm sm:text-base font-semibold mt-3 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
                                 لمبات وإضاءة
                             </h3>
                         </a>
                         <a href="#products" 
-                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-6 rounded-2xl shadow-lg text-center transition-all duration-300" 
+                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-4 rounded-2xl shadow-lg text-center transition-all duration-300" 
                            data-page="products" data-category-filter="Cables">
                             
                             <img src="https://i.postimg.cc/8k9sj746/pngegg-1.webp" 
                                  alt="كابلات وأسلاك"
-                                 class="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
+                                 class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
                             
-                            <h3 class="text-base sm:text-lg font-semibold mt-4 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
+                            <h3 class="text-sm sm:text-base font-semibold mt-3 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
                                 كابلات وأسلاك
                             </h3>
                         </a>
                         <a href="#products" 
-                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-6 rounded-2xl shadow-lg text-center transition-all duration-300" 
+                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-4 rounded-2xl shadow-lg text-center transition-all duration-300" 
                            data-page="products" data-category-filter="Switches">
                             
                             <img src="https://i.postimg.cc/c126rvht/pngegg.webp" 
                                  alt="مفاتيح وبرايز"
-                                 class="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
+                                 class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
                             
-                            <h3 class="text-base sm:text-lg font-semibold mt-4 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
+                            <h3 class="text-sm sm:text-base font-semibold mt-3 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
                                 مفاتيح وبرايز
                             </h3>
                         </a>
                         <a href="#products" 
-                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-6 rounded-2xl shadow-lg text-center transition-all duration-300" 
+                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-4 rounded-2xl shadow-lg text-center transition-all duration-300" 
                            data-page="products" data-category-filter="Paints">
                             
                             <img src="https://i.postimg.cc/1R24f8BN/0Rwy-P3z-WFNu1nm-Q31e-Uqv-KMh-M2ws-NBKv-QIw-FM9o1-1000x1000.webp" 
                                  alt="دهانات"
-                                 class="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
+                                 class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
                             
-                            <h3 class="text-base sm:text-lg font-semibold mt-4 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
+                            <h3 class="text-sm sm:text-base font-semibold mt-3 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
                                 دهانات
                             </h3>
                         </a>
                         <a href="#products" 
-                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-6 rounded-2xl shadow-lg text-center transition-all duration-300" 
+                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-4 rounded-2xl shadow-lg text-center transition-all duration-300" 
                            data-page="products" data-category-filter="Parts">
                             
                             <img src="https://i.postimg.cc/RCyqNWdt/64f8ce87bfcba599968620.webp" 
                                  alt="قطع غيار كهربائية"
-                                 class="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
+                                 class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
                             
-                            <h3 class="text-base sm:text-lg font-semibold mt-4 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
-                                قطع غيار كهربائية
+                            <h3 class="text-sm sm:text-base font-semibold mt-3 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
+                                قطع غيار
+                            </h3>
+                        </a>
+                        <a href="#products" 
+                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-4 rounded-2xl shadow-lg text-center transition-all duration-300" 
+                           data-page="products" data-category-filter="Ironmongery">
+                            
+                            <img src="https://i.postimg.cc/5t57Xgth/pngtree-bolts-and-nuts-texture-industrial-part-photo-image-15980034.jpg" 
+                                 alt="حدايد"
+                                 class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
+                            
+                            <h3 class="text-sm sm:text-base font-semibold mt-3 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
+                                حدايد
                             </h3>
                         </a>
                     </div>
@@ -625,26 +673,82 @@
                     </div>
                 </div>
 
-                <div class="bg-white dark:bg-[#2c2f38] rounded-2xl shadow-xl overflow-hidden p-8 sm:p-12 mt-12">
-                    <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-8 text-center md:text-left">
+                <!-- Modernized Supply & Installation Services Section -->
+                <div class="relative bg-gradient-to-br from-gray-900 to-gray-800 dark:from-[#222] dark:to-[#1a1a1a] rounded-[2.5rem] shadow-2xl overflow-hidden mt-16 isolate">
+                    <!-- Decorative glows -->
+                    <div class="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-96 h-96 bg-[#ffcd00]/20 blur-3xl rounded-full -z-10 opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-64 h-64 bg-[#ffcd00]/10 blur-3xl rounded-full -z-10"></div>
 
-                        <div class="flex justify-center md:justify-start">
-                            <div class="p-4 bg-gray-100 dark:bg-[#3d474e] rounded-full text-[#ffcd00]">
-                                <i data-lucide="clipboard-check" class="w-16 h-16"></i>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0">
+                        <!-- Text Content -->
+                        <div class="p-8 sm:p-12 lg:py-16 lg:pr-16 lg:pl-8 flex flex-col justify-center order-2 lg:order-1">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ffcd00]/10 border border-[#ffcd00]/20 text-[#ffcd00] text-sm font-bold w-fit mb-6 backdrop-blur-md">
+                                <i data-lucide="shield-check" class="w-4 h-4"></i>
+                                <span>للمشاريع والشركات</span>
+                            </div>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6">
+                                شريكك الموثوق في
+                                <br>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ffcd00] to-[#ffda33]">التوريد والتركيب</span>
+                            </h2>
+                            <p class="text-lg text-gray-300 leading-relaxed mb-8 max-w-xl">
+                                لا نكتفي ببيع المنتجات، بل نقدم حلولاً كهربائية متكاملة. من توريد أجود الخامات بأسعار تنافسية إلى التركيب الاحترافي الآمن، نضمن نجاح مشروعك بكفاءة عالية.
+                            </p>
+
+                            <!-- Feature List -->
+                            <ul class="space-y-5 mb-10">
+                                <li class="flex items-center gap-4">
+                                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
+                                        <i data-lucide="hard-hat" class="w-5 h-5 text-gray-900"></i>
+                                    </div>
+                                    <span class="text-gray-100 font-medium text-lg">فريق فني متخصص ومعتمد</span>
+                                </li>
+                                <li class="flex items-center gap-4">
+                                     <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
+                                        <i data-lucide="badge-check" class="w-5 h-5 text-gray-900"></i>
+                                    </div>
+                                    <span class="text-gray-100 font-medium text-lg">ضمان شامل على جودة التركيب</span>
+                                </li>
+                                <li class="flex items-center gap-4">
+                                     <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
+                                        <i data-lucide="coins" class="w-5 h-5 text-gray-900"></i>
+                                    </div>
+                                    <span class="text-gray-100 font-medium text-lg">أسعار خاصة لتوريدات الجملة والمشاريع</span>
+                                </li>
+                            </ul>
+
+                            <div class="flex flex-wrap gap-4">
+                                 <a href="https://wa.me/201146641942" target="_blank" class="flex-1 sm:flex-none justify-center inline-flex items-center gap-3 px-8 py-4 bg-white/5 text-white font-bold text-lg rounded-2xl hover:bg-white/10 transition-all border border-white/10 backdrop-blur-sm">
+                                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                    <span>استشارة فنية</span>
+                                </a>
                             </div>
                         </div>
 
-                        <div class="md:col-span-2 space-y-3">
-                            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                                خدمات التوريد والتركيب الاحترافية
-                            </h2>
-                            <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                                لسنا مجرد متجر، بل شركاء لك في النجاح. نقدم خدمات توريد متكاملة للمشاريع والشركات، مع فريق فني متخصص للتركيب يضمن لك أعلى معايير الجودة والأمان.
-                            </p>
-                            <a href="#contact" class="nav-link mt-4 inline-flex items-center gap-2 px-6 py-3 bg-[#ffcd00] text-gray-900 font-bold rounded-lg shadow-lg hover:bg-[#ffda33] transform transition-all duration-300 hover:-translate-y-0.5" data-page="contact">
-                                <span>اطلب خدمتك الآن</span>
-                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                            </a>
+                        <!-- Image Side -->
+                        <div class="relative min-h-[300px] lg:min-h-full order-1 lg:order-2">
+                            <div class="absolute inset-0 lg:ml-8 rounded-[2.5rem] overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop"
+                                     alt="فني كهرباء محترف أثناء العمل"
+                                     class="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105"
+                                     loading="lazy"
+                                     onerror="this.src='https://placehold.co/800x1000/2c2f38/ffcd00?text=خدمات+احترافية'">
+                                <!-- Gradient overlay for better text integration on small screens if needed -->
+                                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent lg:bg-gradient-to-r lg:from-gray-900 lg:via-transparent lg:to-transparent opacity-80 lg:opacity-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم آراء العملاء الجديد -->
+                <div class="mt-16">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+                        ماذا يقول عملاؤنا عنا
+                    </h2>
+                    
+                    <div class="testimonials-scroll-container py-4">
+                        <div class="testimonials-scroll-track space-x-4 space-x-reverse" id="testimonials-track">
+                            <!-- سيتم ملء هذا القسم بواسطة JavaScript -->
                         </div>
                     </div>
                 </div>
@@ -655,45 +759,47 @@
             <section id="page-products" class="page-section pt-8">
                 <h1 class="text-3xl sm:text-4xl font-bold mb-8">جميع المنتجات</h1>
                 
-                <div class="flex flex-col sm:flex-row gap-4 mb-8 items-center">
+                <div class="flex flex-col sm:flex-row gap-4 mb-8 items-center p-1.5 bg-white/50 dark:bg-[#2c2f38]/50 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/30 shadow-sm">
                     
-                    
-                    <div class="flex-grow w-full flex items-center bg-white dark:bg-[#2d2d2d] rounded-full shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
-                        <div class="relative">
+                    <div class="flex-grow w-full flex items-center">
+                        <div class="relative h-full flex items-center pl-4 flex-shrink-0">
                             <i data-lucide="chevron-down" class="w-4 h-4 absolute top-1/2 left-3 -translate-y-1/2 text-gray-400 z-10 pointer-events-none"></i>
-                            <select id="product-category-filter" class="w-auto px-4 py-3 pl-10 pr-4 rounded-full bg-gray-50 dark:bg-[#3d474e] border-none focus:border-transparent focus:ring-0 focus:z-10 text-sm font-medium text-gray-700 dark:text-gray-200 appearance-none">
+                            <select id="product-category-filter" class="h-10 pl-8 pr-4 rounded-xl bg-transparent border-none focus:ring-0 text-sm font-medium text-gray-700 dark:text-gray-200 appearance-none cursor-pointer hover:bg-black/5 dark:hover:bg-white/5 transition-colors [&>option]:bg-gray-100 [&>option]:text-gray-900 dark:[&>option]:bg-[#1f1f1f] dark:[&>option]:text-gray-100">
                                 <option value="all">جميع الأقسام</option>
                                 <option value="Lighting">إضاءة</option>
                                 <option value="Cables">كابلات</option>
                                 <option value="Switches">مفاتيح</option>
                                 <option value="Paints">دهانات</option>
                                 <option value="Parts">قطع غيار</option>
+                                <option value="Ironmongery">حدايد</option>
                             </select>
                         </div>
 
+                        <div class="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-2"></div>
+
                         <div class="relative flex-grow">
-                            <input type="text" id="product-search-input" placeholder="ابحث في جميع الأقسام..." class="w-full px-4 py-3 pr-10 pl-4 bg-transparent border-none focus:border-transparent focus:ring-0 focus:z-10 text-gray-900 dark:text-white placeholder:text-gray-400">
-                            <span class="absolute right-4 left-auto top-1/2 -translate-y-1/2 text-gray-400">
-                                <i data-lucide="search" class="w-5 h-5"></i>
+                            <input type="text" id="product-search-input" placeholder="ابحث في جميع الأقسام..." class="w-full h-10 pr-10 pl-4 bg-transparent border-none focus:ring-0 text-gray-900 dark:text-white placeholder:text-gray-400/80">
+                            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                                <i data-lucide="search" class="w-5 h-5 opacity-70"></i>
                             </span>
                         </div>
                     </div>
 
-                    
-                    <div class="relative w-full sm:w-auto">
-                         <i data-lucide="chevron-down" class="w-4 h-4 absolute top-1/2 right-4 left-auto -translate-y-1/2 text-gray-400 z-10 pointer-events-none"></i>
-                        <select id="product-sort-filter" class="w-full sm:w-auto px-4 py-3 pl-4 pr-10 rounded-full bg-white dark:bg-[#2d2d2d] border border-gray-200 dark:border-gray-700 focus:border-transparent focus:ring-0 text-sm font-medium text-gray-700 dark:text-gray-200 shadow-lg appearance-none">
-                            <option value="default">الترتيب حسب</option>
-                            <option value="price-asc">السعر: من الأقل للأعلى</option>
-                            <option value="price-desc">السعر: من الأعلى للأقل</option>
-                        </select>
+                    <div class="flex items-center gap-2 w-full sm:w-auto pl-1.5 flex-shrink-0">
+                        <div class="relative w-full sm:w-auto">
+                             <i data-lucide="chevron-down" class="w-4 h-4 absolute top-1/2 left-3 -translate-y-1/2 text-gray-400 z-10 pointer-events-none"></i>
+                            <select id="product-sort-filter" class="w-full sm:w-auto h-10 pl-8 pr-4 rounded-xl bg-gray-100/50 dark:bg-gray-800/50 border-none focus:ring-0 text-sm font-medium text-gray-700 dark:text-gray-200 appearance-none cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors [&>option]:bg-gray-100 [&>option]:text-gray-900 dark:[&>option]:bg-[#1f1f1f] dark:[&>option]:text-gray-100">
+                                <option value="default">الترتيب حسب</option>
+                                <option value="price-asc">السعر: من الأقل للأعلى</option>
+                                <option value="price-desc">السعر: من الأعلى للأقل</option>
+                            </select>
+                        </div>
+                        
+                        <button id="show-add-product-modal-btn" type="button" class="hidden items-center justify-center gap-2 h-10 px-4 bg-[#ffcd00] text-gray-900 font-bold text-sm rounded-xl hover:bg-[#ffda33] transition-colors flex-shrink-0">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                            <span class="hidden sm:inline">إضافة</span>
+                        </button>
                     </div>
-                    
-                    
-                    <button id="show-add-product-modal-btn" type="button" class="hidden items-center justify-center sm:justify-start gap-2 px-4 py-3 bg-[#ffcd00] text-gray-900 font-bold text-sm rounded-full shadow-lg hover:bg-[#ffda33] flex-shrink-0">
-                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
-                        <span>إضافة منتج</span>
-                    </button>
                 </div>
                 
                 
@@ -1236,6 +1342,11 @@
             </div>
         </footer>
         
+        <!-- Scroll to top button -->
+        <button id="scroll-to-top-btn" class="fixed bottom-24 right-6 z-40 bg-[#ffcd00] text-gray-900 p-3 sm:p-4 rounded-full shadow-lg transform transition-all duration-300 opacity-0 translate-y-10 pointer-events-none hover:scale-110" aria-label="العودة للأعلى">
+            <i data-lucide="arrow-up" class="w-6 h-6 sm:w-8 sm:h-8"></i>
+        </button>
+
         <a href="https://wa.me/201146641942" target="_blank" rel="noopener noreferrer" 
            class="whatsapp-fab fixed bottom-6 right-6 z-40 bg-green-500 text-white p-3 sm:p-4 rounded-full shadow-lg transform transition-transform hover:scale-110">
             <span class="sr-only">تواصل معنا عبر واتساب</span>
@@ -1269,6 +1380,7 @@
                             <option value="Switches">مفاتيح</option>
                             <option value="Paints">دهانات</option>
                             <option value="Parts">قطع غيار</option>
+                            <option value="Ironmongery">حدايد</option>
                             <option value="Other">أخرى</option>
                         </select>
                     </div>
@@ -1547,6 +1659,71 @@
         let currentGalleryImages = [];
         let currentGalleryIndex = 0;
 
+        // بيانات آراء العملاء (33 عميل) - تم تحديثها لتشمل تنوع الخدمات
+        const testimonialsData = [
+            { name: "محمد أحمد", rating: 5, text: "اشتريت من عندهم دهانات جوتن، الألوان طلعت زي الكتالوج بالظبط، وفريقهم ساعدني اختار الدرجات المناسبة." },
+            { name: "سارة علي", rating: 5, text: "خدمة تركيب الدش عندهم ممتازة، الفني جه في ميعاده وظبط الإشارة بسرعة واحترافية." },
+            { name: "خالد حسن", rating: 5, text: "أسعار العدد الكهربائية (شنيور وصاروخ) عندهم أقل من السوق، والمنتجات أصلية بضمان." },
+            { name: "منى إبراهيم", rating: 5, text: "جبت كل مفاتيح الكهرباء والبرايز لشقتي الجديدة من عندهم، تشكيلة كبيرة وموديلات شيك جداً." },
+            { name: "يوسف محمود", rating: 5, text: "احتجت حدايد ومسامير لشغل في البيت، لقيت كل المقاسات اللي عايزها وبأسعار كويسة." },
+            { name: "رانيا كمال", rating: 5, text: "الموقع سهل جداً في الطلب، طلبت لمبات ليد ووصلتني تاني يوم، تغليف ممتاز." },
+            { name: "عمر فاروق", rating: 5, text: "فريق التركيبات الكهربائية عندهم فاهم شغله كويس، أسسوا لي كهرباء المحل بضمير." },
+            { name: "ليلى عبد الرحمن", rating: 5, text: "متجر متكامل فعلاً، جبت الدهانات وأدوات النقاشة والكهرباء من مكان واحد ووفرت وقت ومجهود." },
+            { name: "أحمد مصطفى", rating: 5, text: "اشتريت طبق دش 100 سم وعدسة، جودتهم عالية والإشارة قوية جداً." },
+            { name: "هبة سعيد", rating: 5, text: "خدمة العملاء محترمة جداً، ردوا على كل استفساراتي بخصوص أنواع سلك السويدي الأصلي." },
+            { name: "كريم عادل", rating: 5, text: "أسعار جملة فعلاً مش كلام، اشتريت كمية لمشروع صغير والفرق كان واضح." },
+            { name: "نورهان جمال", rating: 5, text: "كنت محتاجة أغير لون أوضة الأطفال، نصحوني بنوع دهان قابل للغسيل وطلع تحفة." },
+            { name: "حسام الدين", rating: 5, text: "اشتريت شنيور بوش أصلي من عندهم، شغال معايا زي الفل بقاله سنة." },
+            { name: "مريم يوسف", rating: 5, text: "ركبوا لي كاميرات مراقبة في العمارة، شغل نظيف وسريع وسعرهم معقول جداً." },
+            { name: "تامر نبيل", rating: 5, text: "كل لوازم الحدايد اللي دورت عليها بره وملقتهاش، لقيتها عندهم بسهولة." },
+            { name: "دعاء حسن", rating: 5, text: "اللمبات الليد اللي اشتريتها من عندهم موفرة جداً في الكهرباء وإضاءتها قوية." },
+            { name: "وائل سمير", rating: 5, text: "تعامل راقي ومصداقية في المواعيد، طلبت فني لتركيب نجف وجه في الميعاد بالظبط." },
+            { name: "شروق محمد", rating: 5, text: "جبت من عندهم مشترك كهرباء أصلي يستحمل الأحمال العالية، ممتاز وأنصح بيه." },
+            { name: "أسامة فتحي", rating: 5, text: "لو بتدور على عدة يدوية تعيش معاك، ده أنسب مكان، خامات محترمة جداً." },
+            { name: "يارا السيد", rating: 5, text: "ساعدوني في اختيار أطباق الدش المناسبة للشبكة المركزية في العمارة." },
+            { name: "محمود عبد الله", rating: 5, text: "دهانات سكيب اللي عندهم أصلية وتاريخ إنتاجها جديد، والنتيجة على الحيطة روعة." },
+            { name: "إيمان فوزي", rating: 5, text: "المكان الوحيد في المقطم اللي أثق أشتري منه كابلات وأنا مطمنة إنها مش مضروبة." },
+            { name: "زياد طارق", rating: 5, text: "خدمة ما بعد البيع ممتازة، كان في مشكلة بسيطة في جهاز ورجعته وبدلوه فوراً." },
+            { name: "نادية كمال", rating: 5, text: "تشكيلة الأوكر والمقابض (الحدايد) عندهم شيك جداً وتناسب كل الأذواق." },
+            { name: "هشام طلعت", rating: 5, text: "فني الدش اللي بعتوه محترف جداً، ظبط قنوات النايل سات والعرب سات في وقت قياسي." },
+            { name: "أميرة سعيد", rating: 5, text: "اشتريت صاروخ ومجموعة أسطوانات قطع، أسعارهم ممتازة مقارنة بالمحلات التانية." },
+            { name: "رامي وجدي", rating: 5, text: "طلبت طلبية دهانات كبيرة للموقع ووصلت في ميعادها بدون أي تأخير." },
+            { name: "سلوى محمود", rating: 5, text: "إضاءات الليد بروفايل اللي ركبوها في الريسبشن غيرت شكل المكان تماماً." },
+            { name: "أشرف زكي", rating: 5, text: "مؤسسة محترمة، عندهم ضمير في شغل التركيبات وبيستخدموا خامات أصلية." },
+            { name: "غادة عادل", rating: 5, text: "كل إكسسوارات الدش من سلك ووصلات lnb موجودة عندهم بجودة عالية." },
+            { name: "ماجد سامي", rating: 5, text: "اشتريت طقم مفكات وبنس، خامتهم ممتازة وبيستحملوا الشغل التقيل." },
+            { name: "نهى كريم", rating: 5, text: "الألوان اللي خلطوها لي على الكمبيوتر طلعت بالظبط زي ما كنت عايزاها." },
+            { name: "عماد الدين", rating: 5, text: "مكان واحد بيوفر عليك لف كتير، كهرباء، دهانات، حدايد، ودش.. شكراً ليكم." }
+        ];
+
+        function renderTestimonials() {
+            const track = document.getElementById('testimonials-track');
+            if (!track) return;
+
+            let testimonialsHTML = '';
+            testimonialsData.forEach(t => {
+                testimonialsHTML += `
+                    <div class="inline-block w-80 p-6 mx-2 bg-white dark:bg-[#2c2f38] rounded-xl shadow-md border border-gray-200 dark:border-gray-700 whitespace-normal align-top">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-lg font-bold text-gray-600 dark:text-gray-300 ml-3">
+                                ${t.name.charAt(0)}
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-white">${t.name}</h4>
+                                <div class="text-[#ffcd00] text-sm">★★★★★</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                            "${t.text}"
+                        </p>
+                    </div>
+                `;
+            });
+
+            // تكرار المحتوى لضمان حركة سلسة ومستمرة (Infinite Loop)
+            track.innerHTML = testimonialsHTML + testimonialsHTML; 
+        }
+
         
         function generateShortId(length = 5) {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -1811,6 +1988,7 @@
             loadProducts(); 
             loadArticles(); 
             loadSiteConfig(); 
+            renderTestimonials(); // استدعاء دالة عرض آراء العملاء
         });
 
         let cart = []; 
@@ -3318,36 +3496,63 @@
                 const bannerConfigRef = doc(db, "config", "main_banners");
                 
                 onSnapshot(bannerConfigRef, (docSnap) => {
-                    const lightBannerImg = document.getElementById('special-offer-banner-light')?.querySelector('img');
-                    const darkBannerImg = document.getElementById('special-offer-banner-dark')?.querySelector('img');
+                    const lightBanner = document.getElementById('special-offer-banner-light');
+                    const darkBanner = document.getElementById('special-offer-banner-dark');
+                    const lightBannerImg = lightBanner?.querySelector('img');
+                    const darkBannerImg = darkBanner?.querySelector('img');
                     const adminLightUrlInput = document.getElementById('admin-light-banner-url');
                     const adminDarkUrlInput = document.getElementById('admin-dark-banner-url');
 
                     if (docSnap.exists()) {
                         const data = docSnap.data();
+                        const isDarkMode = document.documentElement.classList.contains('dark');
+
+                        // Handle Light Banner
+                        if (lightBanner && lightBannerImg) {
+                            if (data.lightUrl && data.lightUrl.trim() !== '') {
+                                lightBannerImg.src = data.lightUrl;
+                                lightBannerImg.style.display = 'block';
+                                
+                                if (!isDarkMode) {
+                                     lightBanner.classList.remove('hidden');
+                                } else {
+                                     lightBanner.classList.add('hidden');
+                                }
+                            } else {
+                                lightBanner.classList.add('hidden');
+                            }
+                        }
+
+                        // Handle Dark Banner
+                        if (darkBanner && darkBannerImg) {
+                             if (data.darkUrl && data.darkUrl.trim() !== '') {
+                                darkBannerImg.src = data.darkUrl;
+                                darkBannerImg.style.display = 'block';
+                                
+                                if (isDarkMode) {
+                                     darkBanner.classList.remove('hidden');
+                                } else {
+                                     darkBanner.classList.add('hidden');
+                                }
+                            } else {
+                                darkBanner.classList.add('hidden');
+                            }
+                        }
                         
-                     
-                        if (lightBannerImg && data.lightUrl) {
-                            lightBannerImg.src = data.lightUrl;
-                        }
-                        if (darkBannerImg && data.darkUrl) {
-                            darkBannerImg.src = data.darkUrl;
-                        }
-                        
-                       
-                        if (adminLightUrlInput) {
-                            adminLightUrlInput.value = data.lightUrl || '';
-                        }
-                        if (adminDarkUrlInput) {
-                            adminDarkUrlInput.value = data.darkUrl || '';
-                        }
+                        // Update Admin Inputs
+                        if (adminLightUrlInput) adminLightUrlInput.value = data.lightUrl || '';
+                        if (adminDarkUrlInput) adminDarkUrlInput.value = data.darkUrl || '';
                         
                     } else {
-                        console.log("No banner config document found!");
+                        // Hide banners if config doesn't exist
+                        if (lightBanner) lightBanner.classList.add('hidden');
+                        if (darkBanner) darkBanner.classList.add('hidden');
                     }
                 }, (error) => {
                     console.error("Error fetching banner config: ", error);
-                    showToast("خطأ في تحميل إعدادات البانر.");
+                    // Optionally hide banners on error to avoid broken UI
+                     if (lightBanner) lightBanner.classList.add('hidden');
+                     if (darkBanner) darkBanner.classList.add('hidden');
                 });
 
                
@@ -3766,6 +3971,26 @@
 
                 handleRouting();
 
+                // --- Scroll to Top Logic ---
+                const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+                if (scrollToTopBtn) {
+                    window.addEventListener('scroll', () => {
+                        // Show button after scrolling down 300px
+                        if (window.scrollY > 300) {
+                            scrollToTopBtn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                            scrollToTopBtn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                        } else {
+                            scrollToTopBtn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                            scrollToTopBtn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                        }
+                    }, { passive: true });
+
+                    scrollToTopBtn.addEventListener('click', () => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+                }
+                // ---------------------------
+
 
             } catch (error) {
                 console.error('Error initializing app:', error);
@@ -3777,10 +4002,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
