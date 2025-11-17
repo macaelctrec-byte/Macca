@@ -639,18 +639,6 @@
                         </a>
                         <a href="#products" 
                            class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-4 rounded-2xl shadow-lg text-center transition-all duration-300" 
-                           data-page="products" data-category-filter="Paints">
-                            
-                            <img src="https://i.postimg.cc/1R24f8BN/0Rwy-P3z-WFNu1nm-Q31e-Uqv-KMh-M2ws-NBKv-QIw-FM9o1-1000x1000.webp" 
-                                 alt="دهانات"
-                                 class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
-                            
-                            <h3 class="text-sm sm:text-base font-semibold mt-3 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
-                                دهانات
-                            </h3>
-                        </a>
-                        <a href="#products" 
-                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-4 rounded-2xl shadow-lg text-center transition-all duration-300" 
                            data-page="products" data-category-filter="Parts">
                             
                             <img src="https://i.postimg.cc/RCyqNWdt/64f8ce87bfcba599968620.webp" 
@@ -659,6 +647,18 @@
                             
                             <h3 class="text-sm sm:text-base font-semibold mt-3 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
                                 قطع غيار
+                            </h3>
+                        </a>
+                        <a href="#products" 
+                           class="nav-link card-hover group block bg-white dark:bg-[#2c2f38] p-4 rounded-2xl shadow-lg text-center transition-all duration-300" 
+                           data-page="products" data-category-filter="Paints">
+                            
+                            <img src="https://i.postimg.cc/1R24f8BN/0Rwy-P3z-WFNu1nm-Q31e-Uqv-KMh-M2ws-NBKv-QIw-FM9o1-1000x1000.webp" 
+                                 alt="دهانات"
+                                 class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-transparent group-hover:border-[#ffcd00] transition-all duration-300 group-hover:scale-110 aspect-square">
+                            
+                            <h3 class="text-sm sm:text-base font-semibold mt-3 text-gray-800 dark:text-white transition-colors group-hover:text-[#ffcd00]">
+                                دهانات
                             </h3>
                         </a>
                         <a href="#products" 
@@ -833,11 +833,22 @@
                                 <option value="Lighting">إضاءة</option>
                                 <option value="Cables">كابلات</option>
                                 <option value="Switches">مفاتيح</option>
-                                <option value="Paints">دهانات</option>
                                 <option value="Parts">قطع غيار</option>
+                                <option value="Paints">دهانات</option>
                                 <option value="Ironmongery">حدايد</option>
                             </select>
                         </div>
+
+                        <!-- NEW: Brand Filter -->
+                        <div class="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-2"></div>
+                        <div class="relative h-full flex items-center pl-4 flex-shrink-0">
+                            <i data-lucide="chevron-down" class="w-4 h-4 absolute top-1/2 left-3 -translate-y-1/2 text-gray-400 z-10 pointer-events-none"></i>
+                            <select id="product-brand-filter" class="h-10 pl-8 pr-4 rounded-xl bg-transparent border-none focus:ring-0 text-sm font-medium text-gray-700 dark:text-gray-200 appearance-none cursor-pointer hover:bg-black/5 dark:hover:bg-white/5 transition-colors [&>option]:bg-gray-100 [&>option]:text-gray-900 dark:[&>option]:bg-[#1f1f1f] dark:[&>option]:text-gray-100">
+                                <option value="all">جميع الماركات</option>
+                                <!-- Brands will be populated by JS -->
+                            </select>
+                        </div>
+                        <!-- END NEW -->
 
                         <div class="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-2"></div>
 
@@ -903,11 +914,11 @@
                                          alt="صورة المنتج الرئيسية" 
                                          class="w-full h-auto object-cover rounded-lg shadow-md aspect-square">
 
-                                    <button id="gallery-prev-btn" class="absolute top-1/2 right-2 left-auto -translate-y-1/2 z-10 p-2 bg-black/30 text-white rounded-full hover:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button id="gallery-prev-btn" class="absolute top-1/2 right-2 left-auto -translate-y-1/2 z-10 p-2 bg-black/30 text-white rounded-full hover:bg-black/50 opacity-70 hover:opacity-100 transition-opacity">
                                         <i data-lucide="chevron-left" class="w-6 h-6"></i>
                                     </button>
 
-                                    <button id="gallery-next-btn" class="absolute top-1/2 left-2 right-auto -translate-y-1/2 z-10 p-2 bg-black/30 text-white rounded-full hover:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button id="gallery-next-btn" class="absolute top-1/2 left-2 right-auto -translate-y-1/2 z-10 p-2 bg-black/30 text-white rounded-full hover:bg-black/50 opacity-70 hover:opacity-100 transition-opacity">
                                         <i data-lucide="chevron-right" class="w-6 h-6"></i>
                                     </button>
                                 </div>
@@ -1330,6 +1341,87 @@
             </section>
            
             
+            <!-- NEW: Terms of Use Page Section -->
+            <section id="page-terms" class="page-section pt-8">
+                <!-- Modern Header -->
+                <div class="flex items-center gap-3 mb-8">
+                    <i data-lucide="shield" class="w-8 h-8 sm:w-10 sm:h-10 text-[#ffcd00]"></i>
+                    <h1 class="text-3xl sm:text-4xl font-bold">شروط الاستخدام وسياسة الخصوصية</h1>
+                </div>
+
+                <!-- Content Body -->
+                <div class="text-gray-700 dark:text-gray-300 leading-relaxed space-y-6">
+                    <!-- Constrain the text width for readability -->
+                    <div class="prose prose-lg dark:prose-invert max-w-4xl text-right text-gray-700 dark:text-gray-300 leading-relaxed space-y-6">
+                        <h2>مرحباً بك في متجر مكة</h2>
+                        <p>باستخدامك لهذا الموقع، فإنك توافق على الالتزام بالشروط والأحكام التالية. يرجى قراءتها بعناية.</p>
+                        
+                        <h3>1. استخدام الموقع</h3>
+                        <p>يجب استخدام هذا الموقع لأغراض مشروعة فقط. يُمنع استخدامه في أي نشاط قد يشكل انتهاكًا للقوانين المحلية أو الدولية.</p>
+                        
+                        <h3>2. المنتجات والأسعار</h3>
+                        <p>نحن نسعى جاهدين لضمان دقة معلومات المنتجات والأسعار، ولكن قد تحدث أخطاء. نحتفظ بالحق في تصحيح أي أخطاء وتحديث المعلومات في أي وقت دون إشعار مسبق. جميع الأسعار بالجنيه المصري.</p>
+                        
+                        <h3>3. الطلبات</h3>
+                        <p>تعتمد عملية إتمام الطلب على توفر المنتجات. حاليًا، يتم إتمام الطلبات وتأكيدها عبر التواصل المباشر (مثل واتساب) بعد إرسال الفاتورة المبدئية من الموقع.</p>
+
+                        <h3>4. سياسة الخصوصية</h3>
+                        <p>نحن نحترم خصوصيتك. المعلومات التي نجمعها (مثل عند استخدام "تسجيل الدخول بحساب جوجل") تُستخدم فقط لإدارة حسابك وتسهيل عملية الطلب. نحن لا نشارك بياناتك الشخصية مع أطراف ثالثة دون موافقتك.</p>
+
+                        <h3>5. المساعد الذكي (AI)</h3>
+                        <p>المساعد الذكي متوفر لتقديم معلومات عن المنتجات ونصائح عامة. المعلومات المقدمة من المساعد الذكي هي لأغراض إرشادية وقد لا تكون دقيقة بنسبة 100%. للحصول على تأكيد نهائي بخصوص المواصفات أو الأسعار، يرجى التواصل مع فريقنا مباشرة.</p>
+                        
+                        <h3>6. حقوق الملكية الفكرية</h3>
+                        <p>جميع المحتويات على هذا الموقع، بما في ذلك النصوص، الرسومات، الشعارات، والصور، هي ملك لـ "متجر مكة" ومحمية بموجب قوانين حقوق النشر.</p>
+
+                        <h3>7. طرق الدفع</h3>
+                        <p>نحن نقبل حاليًا طرق الدفع التالية:</p>
+                        
+                        <!-- NEW: Modern Payment Methods Section -->
+                        <div class="not-prose my-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                            <!-- Cash -->
+                            <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl flex flex-col items-center justify-center text-center border border-gray-200 dark:border-gray-700 min-h-[120px]">
+                                <i data-lucide="wallet" class="w-10 h-10 text-green-600 dark:text-green-400 mb-2"></i>
+                                <span class="text-sm font-semibold text-gray-800 dark:text-white">نقدي</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">عند الاستلام</span>
+                            </div>
+                            <!-- Vodafone Cash -->
+                            <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl flex flex-col items-center justify-center text-center border border-gray-200 dark:border-gray-700 min-h-[120px]">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Vodafone_Cash_logo.svg" alt="Vodafone Cash" class="w-auto h-10 mb-2" onerror="this.style.display='none'">
+                                <span class="text-sm font-semibold text-gray-800 dark:text-white">فودافون كاش</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">Vodafone Cash</span>
+                            </div>
+                            <!-- InstaPay -->
+                            <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl flex flex-col items-center justify-center text-center border border-gray-200 dark:border-gray-700 min-h-[120px]">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/InstaPay_logo.svg/512px-InstaPay_logo.svg.png" alt="InstaPay" class="w-9 h-9 mb-2 rounded" onerror="this.style.display='none'">
+                                <span class="text-sm font-semibold text-gray-800 dark:text-white">انستا باي</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">InstaPay</span>
+                            </div>
+                            <!-- Visa (Disabled) -->
+                            <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl flex flex-col items-center justify-center text-center border border-gray-200 dark:border-gray-700 min-h-[120px] opacity-60">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="w-auto h-7 mb-2" onerror="this.style.display='none'">
+                                <span class="text-sm font-semibold text-gray-800 dark:text-white">فيزا</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">متوقفة مؤقتاً</span>
+                            </div>
+                        </div>
+                        <!-- END: Modern Payment Methods Section -->
+
+
+                        <h3>8. سياسة الإسترجاع وحماية المستهلك</h3>
+                        <p>نحن نلتزم بقانون حماية المستهلك المصري. يحق للعملاء استرجاع المنتجات خلال 14 يومًا من تاريخ الشراء، بشرط أن يكون المنتج بحالته الأصلية ولم يتم استخدامه.</p>
+                        <p>في حالة وجود أي شكوى أو للاستفسار عن حقوقك كمستهلك، يمكنك التواصل مباشرة مع جهاز حماية المستهلك:</p>
+                        <ul>
+                            <li><strong>الخط الساخن:</strong> 19588</li>
+                            <li><strong>البريد الإلكتروني:</strong> info@cpa.gov.eg</li>
+                            <li><strong>واتساب:</strong> 01577779999 - 01000000329</li>
+                            <li><strong>العنوان:</strong> ش التسعين - التجمع الخامس - القاهرة</li>
+                            <li><strong>أرقام التليفون:</strong> 33055796 - 33055795 - 33055768 - 33055797 - 33055762 - 33055765</li>
+                            <li><strong>فاكس:</strong> 33055753</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
         </main>
 
         <footer class="bg-white dark:bg-[#2c2f38] border-t border-gray-200 dark:border-gray-700 mt-12">
@@ -1349,7 +1441,7 @@
                             <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4">معلومات</h3>
                             <ul class="space-y-3 text-sm">
                                 <li>
-                                    <a href="#" id="open-terms-modal-btn" class="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-[#ffcd00]">
+                                    <a href="#terms" data-page="terms" class="nav-link inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-[#ffcd00]">
                                         <i data-lucide="shield" class="w-4 h-4 text-[#ffcd00] flex-shrink-0"></i>
                                         <span>شروط الاستخدام</span>
                                     </a>
@@ -1475,8 +1567,8 @@
                             <option value="Lighting">إضاءة</option>
                             <option value="Cables">كابلات</option>
                             <option value="Switches">مفاتيح</option>
-                            <option value="Paints">دهانات</option>
                             <option value="Parts">قطع غيار</option>
+                            <option value="Paints">دهانات</option>
                             <option value="Ironmongery">حدايد</option>
                             <option value="Other">أخرى</option>
                         </select>
@@ -1606,90 +1698,8 @@
     </div>
 
 
-    <div id="add-article-modal" class="modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm p-4" style="animation: fadeIn 0.3s ease-out;">
-        <div class="w-full max-w-3xl bg-white dark:bg-[#2c2f38] rounded-xl shadow-2xl overflow-hidden m-4 max-h-[90vh] flex flex-col">
-            <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
-                <h2 id="article-modal-title" class="text-2xl font-bold">إضافة مقالة جديدة</h2>
-                <button id="close-add-article-modal-btn" class="p-2 text-gray-600 dark:text-gray-300 hover:text-red-500 rounded-full">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-            
-            <form id="add-article-form" class="p-6 sm:p-8 space-y-6 overflow-y-auto">
-                <div>
-                    <label for="articleTitle" class="block text-sm font-medium mb-1">عنوان المقالة</label>
-                    <input type="text" id="articleTitle" required class="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00]">
-                </div>
-                
-                <div>
-                    <label for="articleImageUrl" class="block text-sm font-medium mb-1">رابط صورة المقالة</label>
-                    <input type="text" id="articleImageUrl" required class="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00]" placeholder="https://...image.jpg">
-                </div>
-                
-                <hr class="border-gray-200 dark:border-gray-700">
-                <h3 class="text-lg font-semibold">محتوى المقالة</h3>
-                
-                <div id="article-paragraphs-container" class="space-y-4">
-                 
-                </div>
+    <!-- Terms Modal (REMOVED) -->
 
-                <div class="flex gap-4">
-                    <button type="button" id="add-paragraph-btn" class="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600">
-                        <i data-lucide="plus" class="w-4 h-4"></i>
-                        <span>إضافة فقرة</span>
-                    </button>
-                    <button type="button" id="add-gallery-btn" class="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600">
-                        <i data-lucide="image" class="w-4 h-4"></i>
-                        <span>إضافة معرض صور</span>
-                    </button>
-                </div>
-                
-            </form>
-            
-            <div class="flex justify-end items-center gap-4 p-6 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
-                <button type="button" id="cancel-add-article-btn" class="px-6 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600">
-                    إلغاء
-                </button>
-                <button type="submit" id="article-modal-submit-btn" form="add-article-form" class="px-6 py-2 bg-[#ffcd00] text-gray-900 font-bold rounded-lg shadow-md hover:bg-[#ffda33]">
-                    حفظ المقالة
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="terms-modal" class="modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm p-4" style="animation: fadeIn 0.3s ease-out;">
-        <div class="w-full max-w-2xl bg-white dark:bg-[#2c2f38] rounded-xl shadow-2xl overflow-hidden m-4 max-h-[90vh] flex flex-col">
-            <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
-                <h2 class="text-2xl font-bold">شروط الاستخدام</h2>
-                <button id="close-terms-modal-btn" class="p-2 text-gray-600 dark:text-gray-300 hover:text-red-500 rounded-full">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-            <div class="p-6 sm:p-8 space-y-4 overflow-y-auto prose prose-lg dark:prose-invert max-w-none">
-                <h3>مرحباً بك في متجر مكة</h3>
-                <p>باستخدامك لهذا الموقع، فإنك توافق على الالتزام بالشروط والأحكام التالية. يرجى قراءتها بعناية.</p>
-                
-                <h4>1. استخدام الموقع</h4>
-                <p>يجب استخدام هذا الموقع لأغراض مشروعة فقط. يُمنع استخدامه في أي نشاط قد يشكل انتهاكًا للقوانين المحلية أو الدولية.</p>
-                
-                <h4>2. المنتجات والأسعار</h4>
-                <p>نحن نسعى جاهدين لضمان دقة معلومات المنتجات والأسعار، ولكن قد تحدث أخطاء. نحتفظ بالحق في تصحيح أي أخطاء وتحديث المعلومات في أي وقت دون إشعار مسبق. جميع الأسعار بالجنيه المصري.</p>
-                
-                <h4>3. الطلبات</h4>
-                <p>تعتمد عملية إتمام الطلب على توفر المنتجات. حاليًا، يتم إتمام الطلبات وتأكيدها عبر التواصل المباشر (مثل واتساب) بعد إرسال الفاتورة المبدئية من الموقع.</p>
-
-                <h4>4. سياسة الخصوصية</h4>
-                <p>نحن نحترم خصوصيتك. المعلومات التي نجمعها (مثل عند استخدام "تسجيل الدخول بحساب جوجل") تُستخدم فقط لإدارة حسابك وتسهيل عملية الطلب. نحن لا نشارك بياناتك الشخصية مع أطراف ثالثة دون موافقتك.</p>
-
-                <h4>5. المساعد الذكي (AI)</h4>
-                <p>المساعد الذكي متوفر لتقديم معلومات عن المنتجات ونصائح عامة. المعلومات المقدمة من المساعد الذكي هي لأغراض إرشادية وقد لا تكون دقيقة بنسبة 100%. للحصول على تأكيد نهائي بخصوص المواصفات أو الأسعار، يرجى التواصل مع فريقنا مباشرة.</p>
-                
-                <h4>6. حقوق الملكية الفكرية</h4>
-                <p>جميع المحتويات على هذا الموقع، بما في ذلك النصوص، الرسومات، الشعارات، والصور، هي ملك لـ "متجر مكة" ومحمية بموجب قوانين حقوق النشر.</p>
-            </div>
-        </div>
-    </div>
 
     <!-- New Order Details Modal -->
     <div id="order-details-modal" class="modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm p-4" style="animation: fadeIn 0.3s ease-out;">
@@ -2646,6 +2656,9 @@
                     currentIntensity: document.getElementById('productCurrent').value,
                     watt: document.getElementById('productWatt').value,
                     sizes: document.getElementById('productSizes').value,
+                    // NEW: Add weight and size
+                    weight: document.getElementById('productWeight').value,
+                    size: document.getElementById('productSize').value,
                     // Removed old 'colors' string field, replaced with 'colorOptions' array
                     colorOptions: colorVariants 
                 };
@@ -2831,30 +2844,7 @@
                 if(articleModal) articleModal.classList.add('hidden');
             });
 
-            const termsModal = document.getElementById('terms-modal');
-            const openTermsBtn = document.getElementById('open-terms-modal-btn');
-            const closeTermsBtn = document.getElementById('close-terms-modal-btn');
-
-            if (openTermsBtn && termsModal) {
-                openTermsBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    termsModal.classList.remove('hidden');
-                });
-            }
-
-            if (closeTermsBtn && termsModal) {
-                closeTermsBtn.addEventListener('click', () => {
-                    termsModal.classList.add('hidden');
-                });
-            }
-
-            if (termsModal) {
-                termsModal.addEventListener('click', (e) => {
-                    if (e.target === termsModal) {
-                        termsModal.classList.add('hidden');
-                    }
-                });
-            }
+            // Terms Modal JavaScript (REMOVED)
 
             const helpModal = document.getElementById('gemini-help-modal');
             const openHelpBtn = document.getElementById('open-help-modal-btn');
@@ -3180,6 +3170,10 @@ ${productsContext}
 
                     <div class="p-4 flex-grow flex flex-col">
                         
+                        <!-- MODIFIED: Company Name -->
+                        ${product.company ? `<span class="inline-block px-2 py-0.5 border border-[#ffcd00]/50 text-[#997a00] dark:text-[#ffcd00] rounded-md text-[10px] font-bold mb-1 truncate" title="${product.company}">${product.company}</span>` : ''}
+                        <!-- END MODIFIED -->
+                        
                         <div class="flex justify-between items-start gap-2 mb-2">
                             <a href="#product/${product.shortId || product.id}" class="product-details-link flex-grow truncate" data-product-id="${product.id}" title="${product.name}">
                                 <h3 class="text-base font-semibold text-gray-800 dark:text-white product-name">${product.name}</h3>
@@ -3239,6 +3233,7 @@ ${productsContext}
 
                 const searchTerm = document.getElementById('product-search-input').value.toLowerCase();
                 const category = document.getElementById('product-category-filter').value;
+                const brand = document.getElementById('product-brand-filter').value; // NEW
                 const sort = document.getElementById('product-sort-filter').value;
 
                 
@@ -3253,12 +3248,19 @@ ${productsContext}
                 
 
                 
+                // MODIFIED: Search in name AND company
                 filteredProducts = filteredProducts.filter(p => 
-                    p.name.toLowerCase().includes(searchTerm)
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    (p.company && p.company.toLowerCase().includes(searchTerm)) // NEW
                 );
 
                 if (category !== 'all') {
                     filteredProducts = filteredProducts.filter(p => p.category === category);
+                }
+
+                // NEW: Filter by brand
+                if (brand !== 'all') {
+                    filteredProducts = filteredProducts.filter(p => p.company === brand);
                 }
 
                 
@@ -3509,6 +3511,9 @@ ${productsContext}
                 setVal('productCurrent', product.currentIntensity || '');
                 setVal('productWatt', product.watt || '');
                 setVal('productSizes', product.sizes || '');
+                // NEW: Populate weight and size in edit modal
+                setVal('productWeight', product.weight || '');
+                setVal('productSize', product.size || '');
                 // Removed old productColors population
                 
                 // --- NEW: Populate Color Variants ---
@@ -4124,6 +4129,9 @@ ${productsContext}
                         { label: 'شدة السحب', value: product.currentIntensity },
                         { label: 'الواط', value: product.watt },
                         { label: 'المقاسات المتاحة', value: product.sizes },
+                        // NEW: Add weight and size to details display
+                        { label: 'الوزن', value: product.weight },
+                        { label: 'الأبعاد', value: product.size },
                         // Removed old colors from specs list as it now has its own section
                     ];
 
@@ -4293,6 +4301,7 @@ ${productsContext}
                     });
                     console.log("Products loaded from Firestore:", allProducts.length);
                     
+                    populateBrandFilter(); // NEW
                     renderAllProductViews();
                 }, (error) => {
                     console.error("Error fetching products: ", error);
@@ -4300,19 +4309,65 @@ ${productsContext}
                 });
             }
             
+            // NEW FUNCTION
+            function populateBrandFilter() {
+                const brandFilter = document.getElementById('product-brand-filter');
+                if (!brandFilter) return;
+
+                // 1. Get unique brands
+                const brands = [...new Set(
+                    allProducts
+                        .map(p => p.company)
+                        .filter(company => company && company.trim() !== '')
+                )];
+                brands.sort(); // Sort alphabetically
+
+                // 2. Clear existing options (keep the first default "all")
+                while (brandFilter.options.length > 1) {
+                    brandFilter.remove(1);
+                }
+
+                // 3. Add new options
+                brands.forEach(brand => {
+                    const option = document.createElement('option');
+                    option.value = brand;
+                    option.textContent = brand;
+                    brandFilter.appendChild(option);
+                });
+            }
+            // END NEW FUNCTION
+            
             document.getElementById('product-search-input').addEventListener('input', () => {
                 preFilterType = 'all';
                 renderAllProductViews();
             });
 
             const categoryFilterForPlaceholder = document.getElementById('product-category-filter');
+            const brandFilterForPlaceholder = document.getElementById('product-brand-filter'); // NEW
             const searchInputForPlaceholder = document.getElementById('product-search-input');
 
             function updateSearchPlaceholder() {
-                if (!categoryFilterForPlaceholder || !searchInputForPlaceholder) return;
-                const selectedOption = categoryFilterForPlaceholder.options[categoryFilterForPlaceholder.selectedIndex];
-                const selectedText = selectedOption.value === 'all' ? 'جميع الأقسام' : selectedOption.text;
-                searchInputForPlaceholder.placeholder = `ابحث في ${selectedText}...`;
+                if (!categoryFilterForPlaceholder || !searchInputForPlaceholder || !brandFilterForPlaceholder) return; // NEW check
+                
+                const selectedCategoryOption = categoryFilterForPlaceholder.options[categoryFilterForPlaceholder.selectedIndex];
+                const selectedCategoryText = selectedCategoryOption.value === 'all' ? 'الأقسام' : selectedCategoryOption.text;
+                
+                const selectedBrandOption = brandFilterForPlaceholder.options[brandFilterForPlaceholder.selectedIndex]; // NEW
+                const selectedBrandText = selectedBrandOption.value === 'all' ? 'الماركات' : selectedBrandOption.text; // NEW
+                
+                let placeholder = "ابحث في ";
+                
+                if (selectedCategoryOption.value !== 'all' && selectedBrandOption.value !== 'all') {
+                    placeholder += `${selectedCategoryText} (ماركة ${selectedBrandText})...`;
+                } else if (selectedCategoryOption.value !== 'all') {
+                    placeholder += `${selectedCategoryText}...`;
+                } else if (selectedBrandOption.value !== 'all') {
+                    placeholder += `ماركة ${selectedBrandText}...`;
+                } else {
+                    placeholder = "ابحث في جميع الأقسام والماركات...";
+                }
+                
+                searchInputForPlaceholder.placeholder = placeholder; // MODIFIED
             }
 
             if (categoryFilterForPlaceholder) {
@@ -4323,6 +4378,16 @@ ${productsContext}
                 });
             }
             
+            // NEW: Event listener for brand filter
+            if (brandFilterForPlaceholder) {
+                brandFilterForPlaceholder.addEventListener('change', () => {
+                    preFilterType = 'all';
+                    updateSearchPlaceholder();
+                    renderAllProductViews();
+                });
+            }
+            // END NEW
+
             document.getElementById('product-sort-filter').addEventListener('change', () => {
                 preFilterType = 'all';
                 renderAllProductViews();
@@ -4864,8 +4929,8 @@ ${productsContext}
 
                     let targetPageId = 'home'; // default
                     let targetItemId = null;
-                    // MODIFIED: Added 'offers' to simplePages
-                    const simplePages = ['home', 'products', 'blog', 'contact', 'cart', 'admin', 'about', 'offers'];
+                    // MODIFIED: Added 'offers' and 'terms' to simplePages
+                    const simplePages = ['home', 'products', 'blog', 'contact', 'cart', 'admin', 'about', 'offers', 'terms'];
 
                     if (hash.startsWith('#product/')) {
                         targetPageId = 'details';
@@ -4933,12 +4998,21 @@ ${productsContext}
                         }
                     });
 
-                    // 2. Increment count on every page load
+                    // 2. Increment count only if it's a new unique visitor
                     try {
-                        // Use setDoc with merge to safely create if it doesn't exist, 
-                        // and atomically increment if it does.
-                        await setDoc(visitorRef, { count: increment(1) }, { merge: true });
-                        console.log("Visitor count incremented.");
+                        // Check if the user has been flagged as visited in localStorage
+                        if (!localStorage.getItem('maccaStoreVisited_v1')) {
+                            // New visitor: Increment count in Firestore
+                            await setDoc(visitorRef, { count: increment(1) }, { merge: true });
+                            
+                            // Set a flag in localStorage to mark this device as visited
+                            // Using '_v1' allows us to reset this later if needed by changing the key
+                            localStorage.setItem('maccaStoreVisited_v1', 'true');
+                            console.log("New visitor counted and flagged.");
+                        } else {
+                            // Returning visitor (flag exists)
+                            console.log("Returning visitor. Count not incremented.");
+                        }
                     } catch (error) {
                         console.error("Error incrementing visitor count:", error);
                     }
