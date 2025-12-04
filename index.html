@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=1.0, user-scalable=yes">
     <title>مكة للأدوات الكهربائية بالمقطم | Macca Electric Tools</title>
     <meta name="description" content="مكة للأدوات الكهربائية بالمقطم – كل ما تحتاجه من لمبات، كابلات، مفاتيح، دهانات، وأدوات كهربائية منزلية. شحن سريع وخدمة تركيب احترافية.">
     <meta name="keywords" content="مكة للأدوات الكهربائية, أدوات كهربائية المقطم, محلات كهرباء القاهرة, متجر كهرباء مكة, كابلات وأسلاك, مفاتيح وبرايز, لمبات, دهانات, مستلزمات كهرباء, توريد وتركيب كهرباء">
@@ -442,7 +442,7 @@
         /* New Styles for Touch & Drag */
         .slider-container {
             -webkit-overflow-scrolling: touch; /* ناعم جداً على iOS */
-            touch-action: pan-x; /* يخبر المتصفح أن هذا العنصر يتحرك أفقياً */
+            touch-action: auto; /* تم التعديل لحل مشكلة السكرول العمودي في الموبايل */
             cursor: grab; /* شكل اليد للماوس */
             scrollbar-width: none; /* إخفاء السكرول بار */
         }
@@ -465,6 +465,68 @@
             #home-bestsellers-grid .product-card-wrapper {
                 width: 260px;
             }
+        }
+        
+        /* --- COMPACT SUGGESTIONS OVERRIDES (تصغير قسم قد يعجبك أيضا) --- */
+        #ai-suggestions-grid-desktop .product-card-wrapper,
+        #ai-suggestions-grid-mobile .product-card-wrapper {
+            border-radius: 0.75rem; /* زوايا أقل */
+        }
+        /* تصغير ارتفاع الصورة */
+        #ai-suggestions-grid-desktop .product-card-wrapper .h-48,
+        #ai-suggestions-grid-mobile .product-card-wrapper .h-48 {
+            height: 6rem !important; /* 96px للموبايل */
+        }
+        @media (min-width: 640px) {
+            #ai-suggestions-grid-desktop .product-card-wrapper .sm\:h-56,
+            #ai-suggestions-grid-mobile .product-card-wrapper .sm\:h-56 {
+                height: 8rem !important; /* 128px للكمبيوتر */
+            }
+        }
+        /* تصغير الهوامش الداخلية */
+        #ai-suggestions-grid-desktop .p-4, 
+        #ai-suggestions-grid-desktop .sm\:p-5,
+        #ai-suggestions-grid-mobile .p-4,
+        #ai-suggestions-grid-mobile .sm\:p-5 {
+            padding: 0.5rem !important;
+        }
+        /* تصغير عنوان المنتج */
+        #ai-suggestions-grid-desktop h3,
+        #ai-suggestions-grid-mobile h3 {
+            font-size: 0.65rem !important;
+            line-height: 1.2;
+            height: 2.4em; /* سطرين فقط */
+            margin-bottom: 0.25rem;
+        }
+        /* تصغير السعر */
+        #ai-suggestions-grid-desktop .text-xl,
+        #ai-suggestions-grid-desktop .sm\:text-2xl,
+        #ai-suggestions-grid-mobile .text-xl,
+        #ai-suggestions-grid-mobile .sm\:text-2xl {
+            font-size: 0.75rem !important;
+        }
+        #ai-suggestions-grid-desktop .text-sm,
+        #ai-suggestions-grid-mobile .text-sm {
+            font-size: 0.5rem !important;
+        }
+        /* تصغير زر الإضافة للسلة */
+        #ai-suggestions-grid-desktop .add-to-cart-btn,
+        #ai-suggestions-grid-mobile .add-to-cart-btn {
+            width: 1.5rem !important;
+            height: 1.5rem !important;
+        }
+        #ai-suggestions-grid-desktop .add-to-cart-btn i,
+        #ai-suggestions-grid-mobile .add-to-cart-btn i {
+            width: 0.75rem !important;
+            height: 0.75rem !important;
+        }
+        /* إخفاء بعض العناصر غير الضرورية في الحجم الصغير */
+        #ai-suggestions-grid-desktop .sale-badge,
+        #ai-suggestions-grid-mobile .sale-badge {
+            padding: 1px 4px;
+            font-size: 0.5rem;
+            top: 2px;
+            left: 2px;
         }
         /* --- END SLIDER STYLES --- */
     </style>
@@ -501,10 +563,11 @@
             <!-- bg-transparent to inherit header color -->
             <!-- REDUCED PADDING: py-4 to py-2 -->
             <div class="bg-transparent py-2 px-4 sm:px-6 lg:px-8 relative">
-                <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-4 gap-x-4">
+                <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-4 gap-x-2 sm:gap-x-4">
                     
                     <!-- Right: Logo (Macca Electric Tools) -->
-                    <a href="#home" class="flex-shrink-0 flex items-center gap-3 group order-1" data-page="home">
+                    <!-- MODIFIED: Added w-full justify-center sm:w-auto sm:justify-start to center logo on mobile -->
+                    <a href="#home" class="flex-shrink-0 flex items-center gap-3 group order-1 w-full justify-center sm:w-auto sm:justify-start" data-page="home">
                         
                         <!-- Custom Logo Image (Hidden by default) -->
                         <!-- INCREASED HEIGHT: h-14 to h-20 -->
@@ -515,7 +578,8 @@
                     </a>
 
                     <!-- Center: Global Search Bar -->
-                    <div class="flex-grow order-3 md:order-2 w-full md:w-auto">
+                    <!-- MODIFIED: Changed order to 2, removed w-full, added flex-grow and min-w-0 to sit next to icons -->
+                    <div class="flex-grow order-2 md:order-2 min-w-0">
                         <div class="relative max-w-2xl mx-auto">
                             <!-- REDUCED PADDING: py-3 to py-2 -->
                             <input type="text" id="global-search-input" 
@@ -528,7 +592,8 @@
                     </div>
 
                     <!-- Left: Login Button / User Actions -->
-                    <div class="flex items-center gap-4 order-2 md:order-3">
+                    <!-- MODIFIED: Changed order to 3, reduced gap on mobile (gap-2) to fit next to search -->
+                    <div class="flex items-center gap-2 sm:gap-4 order-3 md:order-3 flex-shrink-0">
                         
                         <!-- Favorites Icon (NEW) -->
                         <a href="#favorites" class="relative group p-1 transition-transform hover:scale-110" data-page="favorites" title="المفضلة">
@@ -543,8 +608,9 @@
                             <span id="cart-count-badge" class="absolute -top-1 -right-1 h-4 w-4 items-center justify-center rounded-full bg-[#ffcd00] text-[9px] font-bold text-gray-900 border-2 border-white dark:border-[#222] hidden">0</span>
                         </a>
 
-                        <!-- Login Button (Desktop) - Converted to Icon -->
-                        <button id="google-login-btn" class="hidden sm:inline-flex relative group p-1 transition-transform hover:scale-110" title="تسجيل الدخول">
+                        <!-- Login Button (Desktop & Mobile) - Modified to be visible on mobile -->
+                        <!-- MODIFIED: Removed 'hidden sm:inline-flex' and used 'inline-flex' to show on all screens -->
+                        <button id="google-login-btn" class="inline-flex relative group p-1 transition-transform hover:scale-110" title="تسجيل الدخول">
                             <i data-lucide="user-circle-2" class="w-7 h-7 text-gray-700 dark:text-gray-300 group-hover:text-[#ffcd00] transition-colors"></i>
                         </button>
 
@@ -567,39 +633,98 @@
                             </div>
                         </div>
 
-                        <!-- Mobile Menu Toggle -->
-                        <button id="mobile-menu-button" class="md:hidden text-gray-900 dark:text-white hover:text-[#ffcd00] p-1">
-                            <i id="mobile-menu-open-icon" data-lucide="menu" class="w-7 h-7 block"></i>
-                            <i id="mobile-menu-close-icon" data-lucide="x" class="w-7 h-7 hidden"></i>
-                        </button>
+                        <!-- Mobile Menu Toggle REMOVED -->
                     </div>
                 </div>
             </div>
             
-            <!-- Mobile Menu (Dropdown) - MOVED HERE to stay inside header context -->
-            <div class="md:hidden hidden bg-white dark:bg-[#2c2f38] border-t border-gray-200 dark:border-gray-700" id="mobile-menu">
-                <div class="px-4 py-4 space-y-2">
-                    <a href="#home" class="block px-4 py-3 rounded-lg text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-[#ffcd00]" data-page="home">الرئيسية</a>
-                    <a href="#products" class="block px-4 py-3 rounded-lg text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-[#ffcd00]" data-page="products">الأقسام</a>
-                    <a href="#offers" class="block px-4 py-3 rounded-lg text-red-600 dark:text-red-500 font-bold hover:bg-red-50 dark:hover:bg-red-900/10" data-page="offers">🔥 العروض</a>
-                    <a href="#blog" class="block px-4 py-3 rounded-lg text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-[#ffcd00]" data-page="blog">المدونة</a>
-                    <a href="#contact" class="block px-4 py-3 rounded-lg text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-[#ffcd00]" data-page="contact">تواصل معنا</a>
+            <!-- NEW: Mobile Horizontal Navigation Bar (Like Desktop) -->
+            <div class="md:hidden w-full border-t border-gray-100 dark:border-white/5 bg-white dark:bg-[#2c2f38] shadow-sm relative z-40">
+                <!-- MODIFIED: Added justify-center and reduced gap to gap-4 to center items -->
+                <div class="slider-container flex items-center justify-center gap-4 px-4 py-3 overflow-x-auto whitespace-nowrap text-sm font-bold no-scrollbar">
                     
-                    <div class="h-px bg-gray-200 dark:bg-gray-700 my-2"></div>
-                    
-                    <a href="#" id="google-login-btn-mobile" class="flex items-center justify-center gap-2 w-full bg-[#ffcd00] text-black font-bold py-3 rounded-lg mt-2">
-                        تسجيل الدخول
+                    <a href="#home" class="nav-link text-gray-800 dark:text-gray-200 hover:text-[#ffcd00] flex-shrink-0" data-page="home">
+                        الرئيسية
                     </a>
-                    
-                    <div id="user-info-mobile" class="hidden flex-col space-y-3 mt-2">
-                        <div class="flex items-center gap-3 px-4 py-2 bg-gray-100 dark:bg-white/5 rounded-lg">
-                            <img id="user-avatar-mobile" class="w-8 h-8 rounded-full" src="">
-                            <span id="user-name-mobile" class="text-gray-900 dark:text-white font-medium"></span>
-                        </div>
-                        <button id="google-logout-btn-mobile" class="w-full text-center text-red-600 dark:text-red-400 py-2 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg">تسجيل الخروج</button>
+
+                    <!-- MODIFIED: Changed to Button to toggle menu -->
+                    <button id="mobile-departments-btn" class="nav-link text-gray-800 dark:text-gray-200 hover:text-[#ffcd00] flex items-center gap-1 flex-shrink-0 focus:outline-none">
+                        الأقسام
+                        <i id="mobile-departments-icon" data-lucide="chevron-down" class="w-3 h-3 text-[#ffcd00] transition-transform duration-300"></i>
+                    </button>
+
+                    <a href="#offers" class="nav-link text-red-600 dark:text-red-500 hover:text-red-500 flex items-center gap-1 flex-shrink-0" data-page="offers">
+                        <i data-lucide="flame" class="w-3 h-3 fill-current animate-pulse"></i>
+                        العروض
+                    </a>
+
+                    <a href="#blog" class="nav-link text-gray-800 dark:text-gray-200 hover:text-[#ffcd00] flex-shrink-0" data-page="blog">
+                        المدونة
+                    </a>
+
+                    <a href="#contact" class="nav-link text-gray-800 dark:text-gray-200 hover:text-[#ffcd00] flex-shrink-0" data-page="contact">
+                        تواصل معنا
+                    </a>
+
+                </div>
+
+                <!-- NEW: Mobile Departments Dropdown Menu -->
+                <div id="mobile-departments-menu" class="hidden absolute top-full left-0 w-full bg-white dark:bg-[#2c2f38] border-t border-gray-100 dark:border-white/5 shadow-2xl z-50 max-h-[70vh] overflow-y-auto custom-scrollbar">
+                    <div class="p-4 grid grid-cols-3 gap-3">
+                        
+                        <a href="#products" data-page="products" data-category-filter="Lighting" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
+                            <i data-lucide="lightbulb" class="w-6 h-6 text-yellow-500"></i>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">إضاءة</span>
+                        </a>
+
+                        <a href="#products" data-page="products" data-category-filter="Cables" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
+                            <i data-lucide="plug-2" class="w-6 h-6 text-blue-500"></i>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">كابلات</span>
+                        </a>
+
+                        <a href="#products" data-page="products" data-category-filter="Switches" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
+                            <i data-lucide="toggle-right" class="w-6 h-6 text-gray-500 dark:text-gray-400"></i>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">مفاتيح</span>
+                        </a>
+
+                        <a href="#products" data-page="products" data-category-filter="Paints" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
+                            <i data-lucide="paint-bucket" class="w-6 h-6 text-green-500"></i>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">دهانات</span>
+                        </a>
+
+                        <a href="#products" data-page="products" data-category-filter="Ironmongery" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
+                            <i data-lucide="hammer" class="w-6 h-6 text-orange-500"></i>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">حدايد</span>
+                        </a>
+
+                        <a href="#products" data-page="products" data-category-filter="Showers" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
+                            <i data-lucide="satellite" class="w-6 h-6 text-cyan-500"></i>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">دش</span>
+                        </a>
+
+                        <a href="#products" data-page="products" data-category-filter="Electronics" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
+                            <i data-lucide="cpu" class="w-6 h-6 text-indigo-500"></i>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">الكترونيات</span>
+                        </a>
+
+                        <a href="#products" data-page="products" data-category-filter="OpticalPanels" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
+                            <i data-lucide="layout-grid" class="w-6 h-6 text-teal-500"></i>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">لوحات</span>
+                        </a>
+
+                        <a href="#products" data-page="products" data-category-filter="BuildingMaterials" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
+                            <i data-lucide="brick-wall" class="w-6 h-6 text-stone-500"></i>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">بناء</span>
+                        </a>
+
+                        <a href="#products" data-page="products" data-category-filter="all" class="col-span-3 py-3 text-center bg-[#ffcd00] text-gray-900 font-bold rounded-xl text-xs mt-1 shadow-md mobile-dept-item">
+                            عرض جميع المنتجات &larr;
+                        </a>
                     </div>
                 </div>
             </div>
+
+            <!-- Mobile Menu (Old Dropdown) REMOVED -->
         </header>
 
         <!-- 3. Navigation Bar (SEPARATED FROM HEADER) -->
@@ -794,7 +919,8 @@
             </section>
 
             <section id="page-home" class="page-section space-y-12 pt-8">
-                 <div class="relative w-full rounded-[2.5rem] overflow-hidden shadow-2xl isolate min-h-[400px] sm:min-h-[500px] flex items-center group">
+                 <!-- MODIFIED: Added id="hero-section-container" to control visibility -->
+                 <div id="hero-section-container" class="relative w-full rounded-[2.5rem] overflow-hidden shadow-2xl isolate min-h-[400px] sm:min-h-[500px] flex items-center group">
                     
                     <!-- Background Image with Zoom Effect on Hover -->
                     <!-- تم حذف الرابط الثابت وإخفاء الصورة افتراضياً -->
@@ -921,59 +1047,59 @@
                 </div>
 
                 <!-- Modernized Supply & Installation Services Section -->
-                <div class="relative bg-white dark:bg-gradient-to-br dark:from-[#222] dark:to-[#1a1a1a] rounded-[2.5rem] shadow-2xl overflow-hidden mt-16 isolate border border-gray-100 dark:border-none">
+                <div class="relative bg-white dark:bg-gradient-to-br dark:from-[#222] dark:to-[#1a1a1a] rounded-[2.5rem] shadow-2xl overflow-hidden mt-8 sm:mt-16 isolate border border-gray-100 dark:border-none">
                     <!-- Decorative glows -->
                     <div class="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-96 h-96 bg-[#ffcd00]/10 dark:bg-[#ffcd00]/20 blur-3xl rounded-full -z-10 opacity-70"></div>
                     <div class="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-64 h-64 bg-[#ffcd00]/5 dark:bg-[#ffcd00]/10 blur-3xl rounded-full -z-10"></div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-0">
                         <!-- Text Content -->
-                        <div class="p-8 sm:p-12 lg:py-16 lg:pr-16 lg:pl-8 flex flex-col justify-center order-2 lg:order-1">
-                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ffcd00]/10 border border-[#ffcd00]/20 text-[#ffcd00] text-sm font-bold w-fit mb-6 backdrop-blur-md">
-                                <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        <div class="p-6 sm:p-12 lg:py-16 lg:pr-16 lg:pl-8 flex flex-col justify-center order-2 lg:order-1">
+                            <div class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#ffcd00]/10 border border-[#ffcd00]/20 text-[#ffcd00] text-xs sm:text-sm font-bold w-fit mb-4 sm:mb-6 backdrop-blur-md">
+                                <i data-lucide="shield-check" class="w-3 h-3 sm:w-4 sm:h-4"></i>
                                 <span>للمشاريع والشركات</span>
                             </div>
-                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight mb-6">
+                            <h2 class="text-xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4 sm:mb-6">
                                 شريكك الموثوق في
                                 <br>
                                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ffcd00] to-[#ffda33]">التوريد والتركيب</span>
                             </h2>
-                            <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8 max-w-xl">
+                            <p class="text-sm sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6 sm:mb-8 max-w-xl">
                                 لا نكتفي ببيع المنتجات، بل نقدم حلولاً كهربائية متكاملة. من توريد أجود الخامات بأسعار تنافسية إلى التركيب الاحترافي الآمن، نضمن نجاح مشروعك بكفاءة عالية.
                             </p>
 
                             <!-- Feature List -->
-                            <ul class="space-y-5 mb-10">
-                                <li class="flex items-center gap-4">
-                                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
-                                        <i data-lucide="hard-hat" class="w-5 h-5 text-gray-900"></i>
+                            <ul class="space-y-3 sm:space-y-5 mb-6 sm:mb-10">
+                                <li class="flex items-center gap-3 sm:gap-4">
+                                    <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
+                                        <i data-lucide="hard-hat" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-900"></i>
                                     </div>
-                                    <span class="text-gray-700 dark:text-gray-100 font-medium text-lg">فريق فني متخصص ومعتمد</span>
+                                    <span class="text-gray-700 dark:text-gray-100 font-medium text-sm sm:text-lg">فريق فني متخصص ومعتمد</span>
                                 </li>
-                                <li class="flex items-center gap-4">
-                                     <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
-                                        <i data-lucide="badge-check" class="w-5 h-5 text-gray-900"></i>
+                                <li class="flex items-center gap-3 sm:gap-4">
+                                     <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
+                                        <i data-lucide="badge-check" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-900"></i>
                                     </div>
-                                    <span class="text-gray-700 dark:text-gray-100 font-medium text-lg">ضمان شامل على جودة التركيب</span>
+                                    <span class="text-gray-700 dark:text-gray-100 font-medium text-sm sm:text-lg">ضمان شامل على جودة التركيب</span>
                                 </li>
-                                <li class="flex items-center gap-4">
-                                     <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
-                                        <i data-lucide="coins" class="w-5 h-5 text-gray-900"></i>
+                                <li class="flex items-center gap-3 sm:gap-4">
+                                     <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
+                                        <i data-lucide="coins" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-900"></i>
                                     </div>
-                                    <span class="text-gray-700 dark:text-gray-100 font-medium text-lg">أسعار خاصة لتوريدات الجملة والمشاريع</span>
+                                    <span class="text-gray-700 dark:text-gray-100 font-medium text-sm sm:text-lg">أسعار خاصة لتوريدات الجملة والمشاريع</span>
                                 </li>
                             </ul>
 
-                            <div class="flex flex-wrap gap-4">
-                                 <a href="https://wa.me/201146641942" target="_blank" class="flex-1 sm:flex-none justify-center inline-flex items-center gap-3 px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white dark:bg-white/5 dark:text-white font-bold text-lg rounded-2xl dark:hover:bg-white/10 transition-all border border-transparent dark:border-white/10 backdrop-blur-sm shadow-lg dark:shadow-none">
-                                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            <div class="flex flex-wrap gap-3 sm:gap-4">
+                                 <a href="https://wa.me/201146641942" target="_blank" class="flex-1 sm:flex-none justify-center inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-gray-900 hover:bg-gray-800 text-white dark:bg-white/5 dark:text-white font-bold text-sm sm:text-lg rounded-xl sm:rounded-2xl dark:hover:bg-white/10 transition-all border border-transparent dark:border-white/10 backdrop-blur-sm shadow-lg dark:shadow-none">
+                                    <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5"></i>
                                     <span>استشارة فنية</span>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Image Side -->
-                        <div class="relative min-h-[300px] lg:min-h-full order-1 lg:order-2">
+                        <div class="relative min-h-[180px] sm:min-h-[300px] lg:min-h-full order-1 lg:order-2">
                             <div class="absolute inset-0 lg:ml-8 rounded-[2.5rem] overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop"
                                      alt="فني كهرباء محترف أثناء العمل"
@@ -988,48 +1114,48 @@
                 </div>
 
                 <!-- قسم إحصائيات الثقة (جديد) -->
-                <div class="mt-16 relative bg-white dark:bg-[#0a0a0a] py-16 px-6 rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-200 dark:border-white/5">
+                <div class="mt-8 sm:mt-16 relative bg-white dark:bg-[#0a0a0a] py-6 sm:py-16 px-3 sm:px-6 rounded-2xl sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-200 dark:border-white/5">
                     <!-- Decorative Background Glow -->
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#ffcd00]/10 blur-[100px] rounded-full pointer-events-none"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] sm:w-[500px] sm:h-[500px] bg-[#ffcd00]/10 blur-[50px] sm:blur-[100px] rounded-full pointer-events-none"></div>
                     
                     <div class="relative z-10">
-                        <div class="text-center mb-12">
-                            <h2 class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">
+                        <div class="text-center mb-6 sm:mb-12">
+                            <h2 class="text-base sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">
                                 أكثر من 10,000 عميل يثقون بخدماتنا
                             </h2>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
+                        <div class="grid grid-cols-3 gap-2 sm:gap-8 md:gap-12 text-center divide-x divide-x-reverse divide-gray-100 dark:divide-white/5 sm:divide-none">
                             
                             <!-- Stat 1 -->
-                            <div class="group">
+                            <div class="group flex flex-col items-center justify-center">
                                 <!-- Added id="happy-customer-stat" to sync with live counter -->
-                                <div id="happy-customer-stat" class="text-4xl sm:text-5xl font-black text-[#ffcd00] mb-2 font-mono tracking-tighter group-hover:scale-110 transition-transform duration-300" dir="ltr">
+                                <div id="happy-customer-stat" class="text-xl sm:text-5xl font-black text-[#ffcd00] mb-1 sm:mb-2 font-mono tracking-tighter group-hover:scale-110 transition-transform duration-300" dir="ltr">
                                     ...
                                 </div>
-                                <div class="text-gray-600 dark:text-gray-300 text-lg font-medium">
+                                <div class="text-gray-600 dark:text-gray-300 text-[10px] sm:text-lg font-medium leading-tight">
                                     عميل سعيد
                                 </div>
                             </div>
 
                             <!-- Stat 2 -->
-                            <div class="group border-y border-gray-200 dark:border-white/10 py-8 md:py-0 md:border-y-0 md:border-x md:px-8">
-                                <div class="text-4xl sm:text-5xl font-black text-[#ffcd00] mb-2 font-mono tracking-tighter group-hover:scale-110 transition-transform duration-300" dir="ltr">
+                            <div class="group flex flex-col items-center justify-center sm:border-x sm:border-gray-200 sm:dark:border-white/10 sm:px-8">
+                                <div class="text-xl sm:text-5xl font-black text-[#ffcd00] mb-1 sm:mb-2 font-mono tracking-tighter group-hover:scale-110 transition-transform duration-300" dir="ltr">
                                     20 +
                                 </div>
-                                <div class="text-gray-600 dark:text-gray-300 text-lg font-medium">
-                                    أكثر من 20 عاماً خبرة في مجال الكهرباء
+                                <div class="text-gray-600 dark:text-gray-300 text-[10px] sm:text-lg font-medium leading-tight">
+                                    عاماً خبرة
                                 </div>
                             </div>
 
                             <!-- Stat 3 -->
-                            <div class="group">
+                            <div class="group flex flex-col items-center justify-center">
                                 <!-- Changed 184+ to 36+ -->
-                                <div class="text-4xl sm:text-5xl font-black text-[#ffcd00] mb-2 font-mono tracking-tighter group-hover:scale-110 transition-transform duration-300" dir="ltr">
+                                <div class="text-xl sm:text-5xl font-black text-[#ffcd00] mb-1 sm:mb-2 font-mono tracking-tighter group-hover:scale-110 transition-transform duration-300" dir="ltr">
                                     36 +
                                 </div>
-                                <div class="text-gray-600 dark:text-gray-300 text-lg font-medium">
-                                    مؤسسة وشركة وثقت بنا
+                                <div class="text-gray-600 dark:text-gray-300 text-[10px] sm:text-lg font-medium leading-tight">
+                                    مؤسسة وثقت بنا
                                 </div>
                             </div>
 
@@ -1038,13 +1164,13 @@
                 </div>
 
                 <!-- قسم آراء العملاء الجديد -->
-                <div class="mt-16">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+                <div class="mt-8 sm:mt-16">
+                    <h2 class="text-lg sm:text-3xl font-bold text-center mb-4 sm:mb-8 text-gray-900 dark:text-white">
                         ماذا يقول عملاؤنا عنا
                     </h2>
                     
-                    <div class="testimonials-scroll-container py-4">
-                        <div class="testimonials-scroll-track space-x-4 space-x-reverse" id="testimonials-track">
+                    <div class="testimonials-scroll-container py-2 sm:py-4">
+                        <div class="testimonials-scroll-track space-x-2 space-x-reverse sm:space-x-4" id="testimonials-track">
                             <!-- سيتم ملء هذا القسم بواسطة JavaScript -->
                         </div>
                     </div>
@@ -1218,89 +1344,97 @@
                     </button>
                 </div>
                 
-                <div class="flex flex-col lg:flex-row gap-8 items-start">
+                <div class="flex flex-col lg:flex-row gap-4 lg:gap-8 items-start">
                     <!-- Sidebar Filters -->
-                    <aside class="w-full lg:w-72 flex-shrink-0 space-y-6 bg-white dark:bg-[#2c2f38] p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-white/5 static lg:sticky lg:top-24 transition-all z-10">
+                    <!-- MODIFIED: Changed p-6 to p-3 lg:p-6, and space-y-6 to grid layout on mobile -->
+                    <aside class="w-full lg:w-72 flex-shrink-0 bg-white dark:bg-[#2c2f38] p-3 lg:p-6 rounded-xl lg:rounded-2xl shadow-lg border border-gray-100 dark:border-white/5 static lg:sticky lg:top-24 transition-all z-10">
                         
-                        <div class="flex items-center gap-2 pb-4 border-b border-gray-100 dark:border-gray-700">
-                            <i data-lucide="filter" class="w-5 h-5 text-[#ffcd00]"></i>
-                            <h3 class="font-bold text-lg">تصفية وبحث</h3>
-                        </div>
-
-                        <!-- Search -->
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">بحث</label>
-                            <div class="relative">
-                                <input type="text" id="product-search-input" placeholder="اسم المنتج، الماركة..." class="w-full h-11 pl-10 pr-4 rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-sm transition-all">
-                                <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <!-- Grid Layout for Mobile: grid-cols-2, Gap reduced -->
+                        <div class="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-6">
+                            
+                            <!-- Header: Full width on mobile -->
+                            <div class="col-span-2 lg:col-span-1 flex items-center gap-2 pb-2 lg:pb-4 border-b border-gray-100 dark:border-gray-700">
+                                <i data-lucide="filter" class="w-4 h-4 lg:w-5 lg:h-5 text-[#ffcd00]"></i>
+                                <h3 class="font-bold text-base lg:text-lg">تصفية وبحث</h3>
                             </div>
-                        </div>
 
-                        <!-- Sort -->
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">ترتيب حسب</label>
-                            <div class="relative">
-                                <select id="product-sort-filter" class="w-full h-11 pl-10 pr-4 rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-sm appearance-none cursor-pointer transition-all">
-                                    <option value="default">الأحدث</option>
-                                    <option value="price-asc">السعر: من الأقل للأعلى</option>
-                                    <option value="price-desc">السعر: من الأعلى للأقل</option>
-                                </select>
-                                <i data-lucide="arrow-up-down" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-                            </div>
-                        </div>
-
-                        <!-- Category Filter -->
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">القسم</label>
-                            <div class="relative">
-                                <select id="product-category-filter" class="w-full h-11 pl-10 pr-4 rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-sm appearance-none cursor-pointer transition-all">
-                                    <option value="all">جميع الأقسام</option>
-                                    <option value="Lighting">إضاءة</option>
-                                    <option value="Cables">كابلات</option>
-                                    <option value="Switches">مفاتيح</option>
-                                    <option value="Parts">قطع غيار</option>
-                                    <option value="Paints">دهانات</option>
-                                    <option value="Ironmongery">حدايد</option>
-                                    <option value="Showers">الدش</option>
-                                    <option value="Electronics">الكترونيات</option>
-                                    <option value="OpticalPanels">لوحات</option>
-                                    <option value="BuildingMaterials">مواد البناء</option>
-                                </select>
-                                <i data-lucide="layers" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-                            </div>
-                        </div>
-
-                        <!-- Brand Filter -->
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">الماركة</label>
-                            <div class="relative">
-                                <select id="product-brand-filter" class="w-full h-11 pl-10 pr-4 rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-sm appearance-none cursor-pointer transition-all">
-                                    <option value="all">جميع الماركات</option>
-                                    <!-- Brands will be populated by JS -->
-                                </select>
-                                <i data-lucide="tag" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-                            </div>
-                        </div>
-
-                        <!-- Price Range Filter (NEW) -->
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">نطاق السعر (ج.م)</label>
-                            <div class="flex items-center gap-2" dir="ltr"> <!-- dir="ltr" to make inputs align logically for numbers -->
-                                <div class="relative w-full">
-                                    <input type="number" id="product-min-price" placeholder="Min" min="0" class="w-full h-11 px-3 rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-sm transition-all text-center">
-                                </div>
-                                <span class="text-gray-400 font-bold">-</span>
-                                <div class="relative w-full">
-                                    <input type="number" id="product-max-price" placeholder="Max" min="0" class="w-full h-11 px-3 rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-sm transition-all text-center">
+                            <!-- Search: Full width on mobile -->
+                            <div class="col-span-2 lg:col-span-1 space-y-1 lg:space-y-2">
+                                <label class="text-[10px] lg:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">بحث</label>
+                                <div class="relative">
+                                    <!-- Reduced height h-9 on mobile -->
+                                    <input type="text" id="product-search-input" placeholder="اسم المنتج، الماركة..." class="w-full h-9 lg:h-11 pl-8 lg:pl-10 pr-3 lg:pr-4 rounded-lg lg:rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-xs lg:text-sm transition-all">
+                                    <i data-lucide="search" class="w-3.5 h-3.5 lg:w-4 lg:h-4 absolute left-2.5 lg:left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                                 </div>
                             </div>
-                        </div>
 
+                            <!-- Sort: Half width on mobile -->
+                            <div class="col-span-1 lg:col-span-1 space-y-1 lg:space-y-2">
+                                <label class="text-[10px] lg:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">ترتيب حسب</label>
+                                <div class="relative">
+                                    <select id="product-sort-filter" class="w-full h-9 lg:h-11 pl-8 lg:pl-10 pr-3 lg:pr-4 rounded-lg lg:rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-xs lg:text-sm appearance-none cursor-pointer transition-all">
+                                        <option value="default">الأحدث</option>
+                                        <option value="price-asc">السعر: الأقل</option>
+                                        <option value="price-desc">السعر: الأعلى</option>
+                                    </select>
+                                    <i data-lucide="arrow-up-down" class="w-3.5 h-3.5 lg:w-4 lg:h-4 absolute left-2.5 lg:left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+
+                            <!-- Category Filter: Half width on mobile -->
+                            <div class="col-span-1 lg:col-span-1 space-y-1 lg:space-y-2">
+                                <label class="text-[10px] lg:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">القسم</label>
+                                <div class="relative">
+                                    <select id="product-category-filter" class="w-full h-9 lg:h-11 pl-8 lg:pl-10 pr-3 lg:pr-4 rounded-lg lg:rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-xs lg:text-sm appearance-none cursor-pointer transition-all">
+                                        <option value="all">الكل</option>
+                                        <option value="Lighting">إضاءة</option>
+                                        <option value="Cables">كابلات</option>
+                                        <option value="Switches">مفاتيح</option>
+                                        <option value="Parts">قطع غيار</option>
+                                        <option value="Paints">دهانات</option>
+                                        <option value="Ironmongery">حدايد</option>
+                                        <option value="Showers">الدش</option>
+                                        <option value="Electronics">الكترونيات</option>
+                                        <option value="OpticalPanels">لوحات</option>
+                                        <option value="BuildingMaterials">مواد البناء</option>
+                                    </select>
+                                    <i data-lucide="layers" class="w-3.5 h-3.5 lg:w-4 lg:h-4 absolute left-2.5 lg:left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+
+                            <!-- Brand Filter: Half width on mobile -->
+                            <div class="col-span-1 lg:col-span-1 space-y-1 lg:space-y-2">
+                                <label class="text-[10px] lg:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">الماركة</label>
+                                <div class="relative">
+                                    <select id="product-brand-filter" class="w-full h-9 lg:h-11 pl-8 lg:pl-10 pr-3 lg:pr-4 rounded-lg lg:rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-xs lg:text-sm appearance-none cursor-pointer transition-all">
+                                        <option value="all">الكل</option>
+                                        <!-- Brands will be populated by JS -->
+                                    </select>
+                                    <i data-lucide="tag" class="w-3.5 h-3.5 lg:w-4 lg:h-4 absolute left-2.5 lg:left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+
+                            <!-- Price Range Filter: Half width on mobile (Stacked inputs to fit) -->
+                            <div class="col-span-1 lg:col-span-1 space-y-1 lg:space-y-2">
+                                <label class="text-[10px] lg:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">السعر (ج.م)</label>
+                                <!-- Modified to flex-col on small screens if needed, but flex-row fits better with smaller inputs -->
+                                <div class="flex items-center gap-1 lg:gap-2" dir="ltr"> 
+                                    <div class="relative w-full">
+                                        <input type="number" id="product-min-price" placeholder="Min" min="0" class="w-full h-9 lg:h-11 px-1 lg:px-3 rounded-lg lg:rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-[10px] lg:text-sm transition-all text-center">
+                                    </div>
+                                    <span class="text-gray-400 font-bold text-xs">-</span>
+                                    <div class="relative w-full">
+                                        <input type="number" id="product-max-price" placeholder="Max" min="0" class="w-full h-9 lg:h-11 px-1 lg:px-3 rounded-lg lg:rounded-xl bg-gray-50 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-[10px] lg:text-sm transition-all text-center">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </aside>
 
                     <!-- Products Grid Container -->
                     <div class="flex-1 w-full">
-                        <div id="products-grid" class="grid grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4">
+                        <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4">
                             <!-- Products will be populated here -->
                         </div>
                         <div id="no-products-message" class="hidden flex flex-col items-center justify-center py-20 text-center bg-white dark:bg-[#2c2f38] rounded-3xl border border-dashed border-gray-200 dark:border-gray-700">
@@ -1317,178 +1451,175 @@
 
             <section id="page-details" class="page-section">
                 
-                <div class="mb-6">
-                    <a href="#products" class="nav-link inline-flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-lg shadow-sm hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" data-page="products">
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                <!-- Modern Breadcrumb & Back Button -->
+                <div class="max-w-7xl mx-auto mb-6 flex items-center justify-between px-4 sm:px-0">
+                    <a href="#products" class="group inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#ffcd00] transition-colors" data-page="products">
+                        <div class="w-8 h-8 rounded-full bg-white dark:bg-[#2c2f38] flex items-center justify-center shadow-sm group-hover:shadow-md transition-all border border-gray-200 dark:border-gray-700">
+                            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:-translate-x-1"></i>
+                        </div>
                         <span>العودة للمنتجات</span>
                     </a>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-8 lg:gap-12 mx-auto max-w-7xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mx-auto max-w-7xl">
 
-                    <div class="md:col-span-3">
-                        <div class="bg-white dark:bg-[#2c2f38] rounded-2xl shadow-xl overflow-hidden p-6 sm:p-8">
+                    <!-- Right Column: Gallery (7 cols) -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="bg-white dark:bg-[#2c2f38] rounded-[2.5rem] shadow-xl overflow-hidden border border-gray-100 dark:border-white/5 relative group p-2">
                             
-                          
-                            <div class="flex flex-col-reverse md:flex-row-reverse gap-4">
+                            <!-- Main Image Area -->
+                            <div class="relative rounded-[2rem] overflow-hidden bg-gray-50 dark:bg-[#222] aspect-square sm:aspect-[4/3]">
+                                <img id="main-product-image" 
+                                     src="https://placehold.co/600x600/ffffff/999999?text=Loading..." 
+                                     onerror="this.src='https://placehold.co/600x600/ffffff/999999?text=No+Image'"
+                                     alt="صورة المنتج الرئيسية" 
+                                     class="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105">
 
-                               
-                                <div class="relative group flex-1">
-                                    <img id="main-product-image" 
-                                         src="https://placehold.co/600x600/ffffff/999999?text=Main+Product+Image" 
-                                         onerror="this.src='https://placehold.co/600x600/ffffff/999999?text=صورة+المنتج+الرئيسية'"
-                                         alt="صورة المنتج الرئيسية" 
-                                         class="w-full h-auto object-cover rounded-lg shadow-md aspect-square">
-
-                                    <button id="gallery-prev-btn" class="absolute top-1/2 right-2 left-auto -translate-y-1/2 z-10 p-2 bg-black/30 text-white rounded-full hover:bg-black/50 opacity-70 hover:opacity-100 transition-opacity">
-                                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
-                                    </button>
-
-                                    <button id="gallery-next-btn" class="absolute top-1/2 left-2 right-auto -translate-y-1/2 z-10 p-2 bg-black/30 text-white rounded-full hover:bg-black/50 opacity-70 hover:opacity-100 transition-opacity">
-                                        <i data-lucide="chevron-right" class="w-6 h-6"></i>
-                                    </button>
-                                </div>
+                                <!-- Navigation Buttons -->
+                                <button id="gallery-prev-btn" class="absolute top-1/2 right-4 -translate-y-1/2 p-3 bg-white/80 dark:bg-black/50 backdrop-blur-md text-gray-900 dark:text-white rounded-full shadow-lg hover:bg-[#ffcd00] hover:text-gray-900 transition-all opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0">
+                                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                                </button>
+                                <button id="gallery-next-btn" class="absolute top-1/2 left-4 -translate-y-1/2 p-3 bg-white/80 dark:bg-black/50 backdrop-blur-md text-gray-900 dark:text-white rounded-full shadow-lg hover:bg-[#ffcd00] hover:text-gray-900 transition-all opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0">
+                                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                                </button>
                                 
-                            
-                                <div class="flex md:flex-col gap-2 overflow-x-auto md:overflow-y-auto md:max-h-[600px] flex-shrink-0 w-full md:w-20" id="details-thumbnail-container">
-                              
-                                </div>
-                            
-                            </div>
-
-                            
-                            <div class="mt-12 hidden md:block">
-                                <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">قد يعجبك أيضاً</h3>
-                                
-                                <div id="ai-suggestions-loading-desktop" class="hidden loading-dots justify-center py-8">
-                                    <div class="loading-dot"></div>
-                                    <div class="loading-dot"></div>
-                                    <div class="loading-dot"></div>
-                                </div>
-                                
-                              
-                                <div id="ai-suggestions-grid-desktop" class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-                                    
+                                <!-- Zoom/Expand Badge -->
+                                <div class="absolute bottom-4 left-4 p-2 bg-black/50 backdrop-blur-sm rounded-lg text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <i data-lucide="maximize-2" class="w-5 h-5"></i>
                                 </div>
                             </div>
-                          
+                        </div>
 
+                        <!-- Thumbnails (Horizontal Scroll) -->
+                        <div class="flex gap-3 overflow-x-auto pb-2 px-1 scrollbar-hide snap-x" id="details-thumbnail-container">
+                            <!-- Thumbnails injected by JS -->
+                        </div>
+
+                        <!-- DESKTOP ONLY: AI Suggestions (Compact) - Under gallery -->
+                        <div class="mt-8 border-t border-gray-200 dark:border-white/10 pt-6 hidden lg:block">
+                            <div class="flex items-center gap-2 mb-4 px-1">
+                                <div class="p-1.5 bg-[#ffcd00]/10 rounded-lg text-[#ffcd00]">
+                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                </div>
+                                <h2 class="text-base sm:text-lg font-bold text-gray-800 dark:text-gray-200">قد يعجبك أيضاً</h2>
+                            </div>
+                            
+                            <div id="ai-suggestions-loading-desktop" class="hidden loading-dots justify-center py-4">
+                                <div class="loading-dot w-1 h-1"></div><div class="loading-dot w-1 h-1"></div><div class="loading-dot w-1 h-1"></div>
+                            </div>
+                            
+                            <!-- Unified Grid for Suggestions - Adjusted columns for the column width -->
+                            <div id="ai-suggestions-grid-desktop" class="grid grid-cols-3 sm:grid-cols-4 gap-3"></div>
                         </div>
                     </div>
-                    <div class="md:col-span-2 flex flex-col gap-6">
-                        <div class="bg-white dark:bg-[#2c2f38] rounded-2xl shadow-xl p-6 sm:p-8">
-                            <!-- NEW: Category and Company container -->
-                            <div class="flex flex-wrap items-center gap-2 mb-3">
-                                <span id="details-product-category" class="px-3 py-1 text-xs font-bold text-[#997a00] dark:text-[#ffcd00] bg-[#ffcd00]/10 border border-[#ffcd00]/20 rounded-full hidden"></span>
-                                <span id="details-product-company" class="text-sm font-medium text-gray-500 dark:text-gray-400 hidden"></span>
+
+                    <!-- Left Column: Info & Actions (5 cols) -->
+                    <div class="lg:col-span-5 flex flex-col gap-6">
+                        
+                        <div class="bg-white dark:bg-[#2c2f38] rounded-[2rem] shadow-xl p-6 sm:p-8 border border-gray-100 dark:border-white/5 relative overflow-hidden">
+                            <!-- Decorative Background Blob -->
+                            <div class="absolute top-0 left-0 w-64 h-64 bg-[#ffcd00]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+
+                            <!-- Brand & Category Tags -->
+                            <div class="flex flex-wrap items-center gap-3 mb-4 relative z-10">
+                                <span id="details-product-company" class="hidden px-3 py-1 text-xs font-bold uppercase tracking-wider text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-white/10 rounded-lg"></span>
+                                <span id="details-product-category" class="hidden px-3 py-1 text-xs font-bold text-[#997a00] dark:text-[#ffcd00] bg-[#ffcd00]/10 border border-[#ffcd00]/20 rounded-lg"></span>
                             </div>
                             
-                            <h1 id="details-product-name" class="text-3xl lg:text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">جاري التحميل...</h1>
+                            <!-- Title -->
+                            <h1 id="details-product-name" class="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 text-gray-900 dark:text-white leading-tight relative z-10">جاري التحميل...</h1>
                             
-                            <div id="details-star-rating" class="star-rating mb-4 text-xl">
+                            <!-- Rating -->
+                            <div id="details-star-rating" class="flex items-center gap-1 text-[#ffcd00] text-lg mb-6"></div>
                             
+                            <!-- Price Block -->
+                            <div id="details-product-price" class="mb-8 p-4 rounded-2xl bg-gray-50 dark:bg-[#222] border border-gray-100 dark:border-white/5">
+                                <!-- Price injected by JS -->
                             </div>
-                            
-                            <div id="details-product-price" class="mb-6">
-                               
+
+                            <!-- Key Features Grid (New) -->
+                            <div id="details-key-features" class="grid grid-cols-2 gap-3 mb-8">
+                                <!-- Features injected by JS -->
                             </div>
             
-                            <!-- New Color Options Container -->
+                            <!-- Color Options -->
                             <div id="details-color-options" class="mb-8 hidden">
-                                <h3 class="text-base font-semibold mb-3 text-gray-900 dark:text-white">الألوان المتاحة</h3>
+                                <h3 class="text-sm font-bold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
+                                    <i data-lucide="palette" class="w-4 h-4 text-gray-400"></i>
+                                    اختر اللون
+                                </h3>
                                 <div id="color-swatches-container" class="flex flex-wrap gap-3"></div>
                             </div>
 
-                            <p id="details-product-description" class="text-gray-600 dark:text-gray-300 leading-relaxed mb-8 break-words">
-                                جاري تحميل الوصف...
-                            </p>
+                            <!-- Description (Short) -->
+                            <div class="prose dark:prose-invert max-w-none mb-8">
+                                <h3 class="text-sm font-bold mb-2 text-gray-900 dark:text-white">وصف مختصر</h3>
+                                <p id="details-product-description" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-4 hover:line-clamp-none transition-all cursor-pointer">
+                                    جاري تحميل الوصف...
+                                </p>
+                            </div>
             
-                            <div id="details-add-to-cart-wrapper" class="space-y-4 product-card-wrapper"
+                            <!-- Actions -->
+                            <div id="details-add-to-cart-wrapper" class="space-y-4 pt-6 border-t border-gray-100 dark:border-white/10 product-card-wrapper"
                                  data-product-id=""
                                  data-product-name=""
                                  data-product-price=""
                                  data-product-image="">
-                                
-                                <div class="flex items-end gap-3">
-                                    <div>
-                                        <label for="details-quantity-input" class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">الكمية</label>
-                                        <input type="number" id="details-quantity-input" value="1" min="1" 
-                                               class="w-24 px-4 py-3 rounded-lg bg-gray-100 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-lg font-bold text-center">
-                                    </div>
-                                    
-                                    <button class="add-to-cart-btn flex-1 flex items-center justify-center gap-3 px-6 py-3 bg-[#ffcd00] text-gray-900 font-bold text-lg rounded-lg shadow-lg hover:bg-[#ffda33] transform transition-all duration-300 hover:-translate-y-0.5">
-                                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
-                                        <span>إضافة للسلة</span>
-                                    </button>
-                                </div>
-                                <a id="details-whatsapp-link" href="https://wa.me/201146641942" target="_blank" class="w-full flex items-center justify-center gap-3 px-6 py-3 bg-transparent border border-green-500 text-green-500 font-bold text-lg rounded-lg shadow-lg hover:bg-green-500 hover:text-white transform transition-all duration-300">
-                                    <i data-lucide="message-circle" class="w-6 h-6"></i>
-                                    <span>تواصل عبر واتساب</span>
-                                </a>
+                                <!-- Buttons injected by JS -->
                             </div>
                         </div>
-                        <div class="bg-white dark:bg-[#2c2f38] rounded-2xl shadow-xl overflow-hidden">
+
+                        <!-- Technical Specs & Reviews (Collapsible/Tabs) -->
+                        <div class="bg-white dark:bg-[#2c2f38] rounded-[2rem] shadow-xl overflow-hidden border border-gray-100 dark:border-white/5">
                             <div class="flex border-b border-gray-200 dark:border-gray-700">
-                                <button class="tab-btn active-tab px-6 py-4 text-lg font-semibold text-[#ffcd00] border-b-2 border-[#ffcd00]" data-tab="specs">
-                                    المواصفات
+                                <button class="tab-btn active-tab flex-1 py-4 text-center font-bold text-gray-900 dark:text-white border-b-2 border-[#ffcd00] transition-colors hover:bg-gray-50 dark:hover:bg-white/5" data-tab="specs">
+                                    المواصفات الفنية
                                 </button>
-                                <button class="tab-btn px-6 py-4 text-lg font-semibold text-gray-500 hover:text-gray-900 dark:hover:text-white" data-tab="reviews">
+                                <button class="tab-btn flex-1 py-4 text-center font-bold text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:bg-gray-50 dark:hover:bg-white/5" data-tab="reviews">
                                     المراجعات (3)
                                 </button>
                             </div>
                             
-                            
                             <div class="p-6 sm:p-8">
-                                
-                                <div id="tab-content-specs" class="tab-content space-y-3">
-                                    <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">تفاصيل المنتج</h3>
-                                    <ul id="specs-list-container" class="space-y-3 text-base text-gray-600 dark:text-gray-300 max-w-md">
-                                      
+                                <!-- Specs Content -->
+                                <div id="tab-content-specs" class="tab-content space-y-4">
+                                    <ul id="specs-list-container" class="space-y-0 divide-y divide-gray-100 dark:divide-gray-700">
+                                      <!-- Specs List -->
                                     </ul>
                                 </div>
                             
-                            
-                            <div id="tab-content-reviews" class="tab-content hidden space-y-6">
-                                <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">مراجعات العملاء</h3>
-                                <div class="space-y-6">
-                                    <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
-                                        <div class="flex items-center mb-2">
-                                            <span class="font-semibold text-lg text-gray-900 dark:text-white">أحمد محمود</span>
-                                            <span class="text-sm text-gray-500 mr-3">منذ أسبوع</span>
+                                <!-- Reviews Content -->
+                                <div id="tab-content-reviews" class="tab-content hidden space-y-6">
+                                    <!-- Reviews Static for now -->
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-lg font-bold">أ</div>
+                                        <div>
+                                            <div class="flex items-center gap-2 mb-1">
+                                                <h4 class="font-bold text-gray-900 dark:text-white">أحمد محمود</h4>
+                                                <span class="text-xs text-gray-500">منذ أسبوع</span>
+                                            </div>
+                                            <div class="text-[#ffcd00] text-xs mb-2">★★★★☆</div>
+                                            <p class="text-gray-600 dark:text-gray-300 text-sm">منتج ممتاز وجودة عالية.</p>
                                         </div>
-                                        <div class="text-[#ffcd00] text-xl mb-2">★★★★☆</div>
-                                        <p class="text-base text-gray-600 dark:text-gray-300 mt-1">منتج ممتاز وجودة عالية، لكن التوصيل تأخر قليلاً.</p>
                                     </div>
-                                    <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
-                                        <div class="flex items-center mb-2">
-                                            <span class="font-semibold text-lg text-gray-900 dark:text-white">فاطمة علي</span>
-                                            <span class="text-sm text-gray-500 mr-3">منذ شهر</span>
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-lg font-bold">ف</div>
+                                        <div>
+                                            <div class="flex items-center gap-2 mb-1">
+                                                <h4 class="font-bold text-gray-900 dark:text-white">فاطمة علي</h4>
+                                                <span class="text-xs text-gray-500">منذ شهر</span>
+                                            </div>
+                                            <div class="text-[#ffcd00] text-xs mb-2">★★★★★</div>
+                                            <p class="text-gray-600 dark:text-gray-300 text-sm">أنصح به بشدة، التوصيل سريع.</p>
                                         </div>
-                                        <div class="text-[#ffcd00] text-xl mb-2">★★★★★</div>
-                                        <p class="text-base text-gray-600 dark:text-gray-300 mt-1">رائع! أنصح به بشدة.</p>
-                                     </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
               
-                <!-- Mobile Suggestions moved INSIDE page-details section -->
-                <div class="mt-12 md:hidden">
-                    <div class="bg-white dark:bg-[#2c2f38] rounded-2xl shadow-xl overflow-hidden p-6 sm:p-8">
-                        <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">قد يعجبك أيضاً</h3>
-                        
-                        <div id="ai-suggestions-loading-mobile" class="hidden loading-dots justify-center py-8">
-                            <div class="loading-dot"></div>
-                            <div class="loading-dot"></div>
-                            <div class="loading-dot"></div>
-                        </div>
-                        
-                        <div id="ai-suggestions-grid-mobile" class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-                            
-                        </div>
-                    </div>
-                </div>
+                <!-- Old AI Suggestions Location Removed from here -->
 
             </section>
             
@@ -1816,6 +1947,31 @@
                             </div>
                         </div>
 
+                        <!-- MOBILE ONLY: AI Suggestions (Compact) - After Specs -->
+                        <div class="mt-6 border-t border-gray-200 dark:border-white/10 pt-6 lg:hidden">
+                            <div class="flex items-center gap-2 mb-4 px-1">
+                                <div class="p-1.5 bg-[#ffcd00]/10 rounded-lg text-[#ffcd00]">
+                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                </div>
+                                <h2 class="text-base font-bold text-gray-800 dark:text-gray-200">قد يعجبك أيضاً</h2>
+                            </div>
+                            
+                            <div id="ai-suggestions-loading-mobile" class="hidden loading-dots justify-center py-4">
+                                <div class="loading-dot w-1 h-1"></div><div class="loading-dot w-1 h-1"></div><div class="loading-dot w-1 h-1"></div>
+                            </div>
+                            
+                            <!-- Mobile Grid -->
+                            <div id="ai-suggestions-grid-mobile" class="grid grid-cols-3 gap-2"></div>
+                        </div>
+
+                    </div>
+                </div>
+              
+                <!-- Old AI Suggestions Location Removed from here -->
+
+            </section>
+            
+            <section id="page-about" class="page-section space-y-12 pt-8">
                         <!-- 1. Top Notification Bar Settings -->
                         <div class="bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
                             <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
@@ -1845,6 +2001,43 @@
                                 إعدادات الواجهة الرئيسية (Hero)
                             </h2>
                             
+                            <!-- NEW: Visibility Controls -->
+                            <div class="mb-6 p-4 bg-white dark:bg-[#3d474e] rounded-lg border border-gray-200 dark:border-gray-600">
+                                <label class="block text-sm font-bold mb-3 text-gray-900 dark:text-white">التحكم في العرض</label>
+                                <div class="flex flex-col gap-4">
+                                    <!-- Visibility Checkboxes -->
+                                    <div class="flex flex-col gap-2">
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="admin-hero-vis-mobile" class="h-5 w-5 text-[#ffcd00] focus:ring-[#ffcd00] border-gray-300 rounded cursor-pointer">
+                                            <label for="admin-hero-vis-mobile" class="mr-3 text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer">إظهار البانر على الهاتف (Mobile)</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="checkbox" id="admin-hero-vis-desktop" class="h-5 w-5 text-[#ffcd00] focus:ring-[#ffcd00] border-gray-300 rounded cursor-pointer">
+                                            <label for="admin-hero-vis-desktop" class="mr-3 text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer">إظهار البانر على الكمبيوتر (Desktop)</label>
+                                        </div>
+                                    </div>
+
+                                    <hr class="border-gray-200 dark:border-gray-500">
+
+                                    <!-- Height Sliders (Mobile & Desktop) -->
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">ارتفاع البانر (الهاتف)</label>
+                                        <div class="flex items-center gap-4">
+                                            <input type="range" id="admin-hero-height-mobile" min="200" max="600" step="10" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-[#ffcd00]">
+                                            <span id="admin-hero-height-mobile-display" class="text-sm font-bold w-20 text-center bg-gray-100 dark:bg-[#2c2f38] px-2 py-1 rounded border border-gray-200 dark:border-gray-600">400px</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">ارتفاع البانر (الكمبيوتر)</label>
+                                        <div class="flex items-center gap-4">
+                                            <input type="range" id="admin-hero-height-desktop" min="300" max="900" step="10" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-[#ffcd00]">
+                                            <span id="admin-hero-height-desktop-display" class="text-sm font-bold w-20 text-center bg-gray-100 dark:bg-[#2c2f38] px-2 py-1 rounded border border-gray-200 dark:border-gray-600">500px</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="space-y-4">
                                 <div>
                                     <label class="block text-sm font-medium mb-1">نوع الخلفية</label>
@@ -2666,17 +2859,17 @@
             let testimonialsHTML = '';
             testimonialsData.forEach(t => {
                 testimonialsHTML += `
-                    <div class="inline-block w-80 p-6 mx-2 bg-white dark:bg-[#2c2f38] rounded-xl shadow-md border border-gray-200 dark:border-gray-700 whitespace-normal align-top">
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-lg font-bold text-gray-600 dark:text-gray-300 ml-3">
+                    <div class="inline-block w-56 sm:w-80 p-3 sm:p-6 mx-1 sm:mx-2 bg-white dark:bg-[#2c2f38] rounded-xl shadow-md border border-gray-200 dark:border-gray-700 whitespace-normal align-top">
+                        <div class="flex items-center mb-2 sm:mb-4">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-xs sm:text-lg font-bold text-gray-600 dark:text-gray-300 ml-2 sm:ml-3">
                                 ${t.name.charAt(0)}
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900 dark:text-white">${t.name}</h4>
-                                <div class="text-[#ffcd00] text-sm">★★★★★</div>
+                                <h4 class="text-xs sm:text-base font-semibold text-gray-900 dark:text-white">${t.name}</h4>
+                                <div class="text-[#ffcd00] text-[10px] sm:text-sm">★★★★★</div>
                             </div>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                        <p class="text-gray-600 dark:text-gray-300 text-[10px] sm:text-sm leading-relaxed">
                             "${t.text}"
                         </p>
                     </div>
@@ -2827,7 +3020,11 @@
                 if(userAvatar) userAvatar.src = photo;
                 
                
-                if(loginBtn) loginBtn.classList.remove('sm:inline-flex'); 
+                // MODIFIED: Hide login button completely when logged in
+                if(loginBtn) {
+                    loginBtn.classList.add('hidden');
+                    loginBtn.classList.remove('inline-flex');
+                }
         
 
              
@@ -2864,7 +3061,11 @@
                 if(userAvatar) userAvatar.src = '';
 
 
-                if(loginBtn) loginBtn.classList.add('sm:inline-flex'); 
+                // MODIFIED: Show login button when logged out
+                if(loginBtn) {
+                    loginBtn.classList.remove('hidden');
+                    loginBtn.classList.add('inline-flex');
+                }
 
 
 
@@ -3739,7 +3940,8 @@ ${productsContext}
                 }
 
                 // 2. Availability Badge
-                let imageClass = 'h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110';
+                // تم التعديل هنا: استخدام object-contain بدلاً من object-cover وإضافة p-2 لعمل هامش داخلي بسيط
+                let imageClass = 'h-full w-full object-contain object-center transition-transform duration-700 ease-out group-hover:scale-110 p-2';
                 let addToCartBtnState = '';
                 let addToCartBtnTitle = 'إضافة للسلة';
                 
@@ -4635,11 +4837,7 @@ ${productsContext}
                     return;
                 }
 
-                
-                console.log('Product found:', product); 
-
-                
-                const placeholder = 'https://placehold.co/150x150/eeeeee/777777?text=...';
+                const placeholder = 'https://placehold.co/600x600/eeeeee/777777?text=No+Image';
                 const mainImgEl = document.getElementById('main-product-image');
                 const thumbnailContainer = document.getElementById('details-thumbnail-container');
 
@@ -4654,88 +4852,74 @@ ${productsContext}
                 
                 currentGalleryImages = imageUrls;
                 currentGalleryIndex = 0;
-                
-                // --- NEW: Reset selected color when loading new product ---
                 currentSelectedColor = null;
-                // ----------------------------------------------------------
 
                 mainImgEl.src = imageUrls[0];
 
-                
                 imageUrls.forEach((url, index) => {
+                    const thumbWrapper = document.createElement('div');
+                    thumbWrapper.className = `cursor-pointer relative rounded-xl overflow-hidden h-20 w-20 sm:h-24 sm:w-24 flex-shrink-0 border-2 transition-all duration-300 snap-start ${index === 0 ? 'border-[#ffcd00] ring-2 ring-[#ffcd00]/20' : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600'}`;
+                    
                     const img = document.createElement('img');
                     img.src = url;
                     img.alt = `Thumbnail ${index + 1}`;
                     img.onerror = function() { this.src = placeholder; };
-                    img.className = "cursor-pointer rounded-md border-2 hover:border-[#ffcd00] transition-all duration-200 object-cover w-20 h-20 md:w-full md:h-auto md:aspect-square";
+                    img.className = "w-full h-full object-contain bg-white dark:bg-[#222] p-1";
                     
-                    
-                    if (index === 0) {
-                        img.classList.add('border-[#ffcd00]');
-                        img.classList.remove('border-transparent');
-                    } else {
-                        img.classList.add('border-transparent');
-                    }
-
-                    
-                    img.addEventListener('click', () => {
-                        
+                    thumbWrapper.onclick = () => {
                         updateGalleryView(index);
-                    });
+                        // Update active state visual
+                        Array.from(thumbnailContainer.children).forEach(child => {
+                            child.classList.remove('border-[#ffcd00]', 'ring-2', 'ring-[#ffcd00]/20');
+                            child.classList.add('border-transparent');
+                        });
+                        thumbWrapper.classList.remove('border-transparent');
+                        thumbWrapper.classList.add('border-[#ffcd00]', 'ring-2', 'ring-[#ffcd00]/20');
+                    };
                     
-                    thumbnailContainer.appendChild(img);
+                    thumbWrapper.appendChild(img);
+                    thumbnailContainer.appendChild(thumbWrapper);
                 });
 
-                
+                // Gallery Navigation Logic (Existing logic preserved, just button IDs matched)
                 const prevBtn = document.getElementById('gallery-prev-btn');
                 const nextBtn = document.getElementById('gallery-next-btn');
                 
-                
-                const newPrevBtn = prevBtn.cloneNode(true);
-                prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
-                
-                const newNextBtn = nextBtn.cloneNode(true);
-                nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+                if (prevBtn && nextBtn) {
+                    const newPrevBtn = prevBtn.cloneNode(true);
+                    prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
+                    const newNextBtn = nextBtn.cloneNode(true);
+                    nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
 
-                newPrevBtn.addEventListener('click', () => {
-                    updateGalleryView(currentGalleryIndex - 1);
-                });
+                    newPrevBtn.addEventListener('click', () => updateGalleryView(currentGalleryIndex - 1));
+                    newNextBtn.addEventListener('click', () => updateGalleryView(currentGalleryIndex + 1));
+                }
                 
-                newNextBtn.addEventListener('click', () => {
-                    updateGalleryView(currentGalleryIndex + 1);
-                });
-                
-                // NEW: Handle Category Badge
+                // Badges & Info
                 const categoryTranslations = {
-                    'Lighting': 'إضاءة',
-                    'Cables': 'كابلات',
-                    'Switches': 'مفاتيح',
-                    'Paints': 'دهانات',
-                    'Parts': 'قطع غيار',
-                    'Ironmongery': 'حدايد',
-                    'Showers': 'الدش',
-                    'Electronics': 'الكترونيات',
-                    'OpticalPanels': 'لوحات',
-                    'BuildingMaterials': 'مواد البناء',
-                    'Other': 'أخرى'
+                    'Lighting': 'إضاءة', 'Cables': 'كابلات', 'Switches': 'مفاتيح',
+                    'Paints': 'دهانات', 'Parts': 'قطع غيار', 'Ironmongery': 'حدايد',
+                    'Showers': 'الدش', 'Electronics': 'الكترونيات',
+                    'OpticalPanels': 'لوحات', 'BuildingMaterials': 'مواد البناء', 'Other': 'أخرى'
                 };
+                
                 const categoryEl = document.getElementById('details-product-category');
-                if (categoryEl && product.category) {
-                    categoryEl.textContent = categoryTranslations[product.category] || product.category;
-                    categoryEl.classList.remove('hidden');
-                } else if (categoryEl) {
-                    categoryEl.classList.add('hidden');
+                const companyEl = document.getElementById('details-product-company');
+
+                if (categoryEl) {
+                    if (product.category) {
+                        categoryEl.textContent = categoryTranslations[product.category] || product.category;
+                        categoryEl.classList.remove('hidden');
+                    } else {
+                        categoryEl.classList.add('hidden');
+                    }
                 }
 
-                const companyEl = document.getElementById('details-product-company');
                 if (companyEl) {
                     if (product.company && product.company.trim() !== '') {
-                        // Added a separator prefix if category is also shown
-                        const prefix = (categoryEl && !categoryEl.classList.contains('hidden')) ? '| ' : '';
-                        companyEl.textContent = `${prefix}${product.company}`;
+                        companyEl.textContent = product.company;
                         companyEl.classList.remove('hidden');
                     } else {
-                        companyEl.textContent = '';
                         companyEl.classList.add('hidden');
                     }
                 }
@@ -4743,51 +4927,74 @@ ${productsContext}
                 document.getElementById('details-product-name').textContent = product.name;
                 
                 const detailsRatingEl = document.getElementById('details-star-rating');
-                if (detailsRatingEl) {
-                    detailsRatingEl.innerHTML = generateStarRating();
-                }
+                if (detailsRatingEl) detailsRatingEl.innerHTML = generateStarRating() + '<span class="text-xs text-gray-400 font-medium mr-2">(4.8/5)</span>';
 
                 document.getElementById('details-product-description').textContent = product.description || "لا يوجد وصف متاح لهذا المنتج.";
 
-                
+                // Price Section
                 const priceEl = document.getElementById('details-product-price');
-                priceEl.classList.add('bg-gray-100', 'dark:bg-gray-700', 'p-4', 'rounded-lg', 'border', 'border-gray-200', 'dark:border-gray-600');
-
-                // MODIFIED: Use isOfferActive helper
+                // Removing old classes as they are now in HTML structure
+                
                 if (isOfferActive(product) && product.originalPrice && product.originalPrice > product.price) {
                     const discountAmount = product.originalPrice - product.price;
                     const discountPercent = Math.round((discountAmount / product.originalPrice) * 100);
-                    
-                    // NEW: Add countdown to details page if active
-                    let timerHtml = '';
                     const remaining = getRemainingTime(product);
-                    if (remaining) {
-                        timerHtml = `
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg text-sm font-medium mt-3">
-                                <i data-lucide="timer" class="w-4 h-4"></i>
-                                <span>ينتهي العرض خلال ${remaining}</span>
-                            </div>`;
-                    }
+                    
+                    let timerHtml = remaining ? `
+                        <div class="flex items-center gap-2 mt-3 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/10 px-3 py-1.5 rounded-lg w-fit">
+                            <i data-lucide="timer" class="w-4 h-4 animate-pulse"></i>
+                            <span class="text-xs font-bold">ينتهي العرض خلال ${remaining}</span>
+                        </div>` : '';
 
                     priceEl.innerHTML = `
-                        <div class="flex items-baseline gap-3">
-                            <span class="text-3xl lg:text-4xl font-bold text-[#ffcd00]">${product.price.toFixed(2)} EGP</span>
-                            <span class="text-lg lg:text-xl text-gray-500 line-through">${product.originalPrice.toFixed(2)} EGP</span>
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center gap-3">
+                                <span class="text-4xl font-black text-gray-900 dark:text-white">${product.price.toFixed(0)}<span class="text-lg align-top text-gray-500">.00</span> <span class="text-base font-medium text-gray-500">ج.م</span></span>
+                                <span class="px-2.5 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-bold rounded-full">خصم ${discountPercent}%</span>
+                            </div>
+                            <span class="text-sm text-gray-400 line-through font-medium">بدلاً من ${product.originalPrice.toFixed(2)} ج.م</span>
+                            ${timerHtml}
                         </div>
-                        <div class="text-sm font-semibold text-red-500 mt-2">
-                            !وفر ${discountAmount.toFixed(2)} EGP (خصم ${discountPercent}%)
-                        </div>
-                        ${timerHtml}
                     `;
                 } else {
                     priceEl.innerHTML = `
-                        <div class="flex items-baseline gap-3">
-                            <span class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">${product.price.toFixed(2)} EGP</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-4xl font-black text-gray-900 dark:text-white">${product.price.toFixed(0)}<span class="text-lg align-top text-gray-500">.00</span></span>
+                            <span class="text-base font-bold text-gray-500">ج.م</span>
                         </div>
                     `;
                 }
 
-                // --- NEW: Render Color Swatches ---
+                // --- NEW: Key Features Grid Logic ---
+                const featuresContainer = document.getElementById('details-key-features');
+                if (featuresContainer) {
+                    featuresContainer.innerHTML = '';
+                    const features = [];
+                    
+                    if (product.warranty) features.push({ icon: 'shield-check', label: 'الضمان', value: product.warranty, color: 'text-green-500' });
+                    if (product.madeIn) features.push({ icon: 'globe', label: 'صنع في', value: product.madeIn, color: 'text-blue-500' });
+                    if (product.company) features.push({ icon: 'award', label: 'الماركة', value: product.company, color: 'text-purple-500' });
+                    if (product.model) features.push({ icon: 'hash', label: 'موديل', value: product.model, color: 'text-gray-500' });
+                    
+                    // Add generic "Original" badge if nothing else
+                    if (features.length === 0) features.push({ icon: 'check-circle', label: 'الجودة', value: 'منتج أصلي 100%', color: 'text-[#ffcd00]' });
+
+                    features.forEach(f => {
+                        featuresContainer.innerHTML += `
+                            <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-100 dark:border-white/5">
+                                <div class="w-10 h-10 rounded-full bg-white dark:bg-[#333] flex items-center justify-center shadow-sm ${f.color}">
+                                    <i data-lucide="${f.icon}" class="w-5 h-5"></i>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase">${f.label}</span>
+                                    <span class="text-sm font-bold text-gray-900 dark:text-white truncate">${f.value}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                // Color Swatches
                 const colorOptionsContainer = document.getElementById('details-color-options');
                 const swatchesContainer = document.getElementById('color-swatches-container');
                 
@@ -4796,28 +5003,31 @@ ${productsContext}
                         swatchesContainer.innerHTML = '';
                         product.colorOptions.forEach(opt => {
                             const swatch = document.createElement('button');
-                            // Show color name on hover if available
                             swatch.title = opt.name || opt.hex;
-                            swatch.className = 'w-10 h-10 rounded-full border-2 border-gray-300 dark:border-gray-600 hover:scale-110 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ffcd00] relative overflow-hidden';
+                            swatch.className = 'w-12 h-12 rounded-full border-2 border-white dark:border-gray-600 hover:scale-110 transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-[#ffcd00] relative overflow-hidden group';
                             swatch.style.backgroundColor = opt.hex;
                             
+                            // Checkmark overlay for active state logic could be added here
                             swatch.addEventListener('click', () => {
-                                // --- NEW: Update selected color state ---
                                 currentSelectedColor = opt;
-                                // ----------------------------------------
-
-                                // If this color has a linked image, update the main image
                                 if (opt.imageUrl && opt.imageUrl.trim() !== '') {
                                     const mainImgEl = document.getElementById('main-product-image');
                                     if (mainImgEl) {
-                                        mainImgEl.src = opt.imageUrl;
-                                        // Optionally highlight this swatch as active
-                                        document.querySelectorAll('#color-swatches-container button').forEach(btn => btn.classList.remove('ring-2', 'ring-[#ffcd00]', 'scale-110'));
-                                        swatch.classList.add('ring-2', 'ring-[#ffcd00]', 'scale-110');
+                                        mainImgEl.style.opacity = '0.5';
+                                        setTimeout(() => {
+                                            mainImgEl.src = opt.imageUrl;
+                                            mainImgEl.style.opacity = '1';
+                                        }, 200);
                                     }
                                 }
+                                // Visual Feedback
+                                Array.from(swatchesContainer.children).forEach(b => {
+                                    b.classList.remove('ring-2', 'ring-[#ffcd00]', 'scale-110');
+                                    b.style.transform = 'scale(1)';
+                                });
+                                swatch.classList.add('ring-2', 'ring-[#ffcd00]');
+                                swatch.style.transform = 'scale(1.1)';
                             });
-
                             swatchesContainer.appendChild(swatch);
                         });
                         colorOptionsContainer.classList.remove('hidden');
@@ -4825,155 +5035,90 @@ ${productsContext}
                         colorOptionsContainer.classList.add('hidden');
                     }
                 }
-                // ----------------------------------
 
-                
-                const whatsappLink = document.getElementById('details-whatsapp-link');
-                if (whatsappLink) {
-                    const storePhone = "201146641942";
-                    const productName = product.name;
-                    
-                    const message = `مرحباً متجر مكة،\n\nأود الاستفسار/الطلب بخصوص هذا المنتج:\n*${productName}*\n\nهل يمكنني معرفة المزيد من التفاصيل أو إتمام الطلب؟\nشكراً لكم.`;
-                    const encodedMessage = encodeURIComponent(message);
-                    whatsappLink.href = `https://wa.me/${storePhone}?text=${encodedMessage}`;
-                }
-                
-
-                
+                // Add To Cart Section
                 const cartWrapper = document.getElementById('details-add-to-cart-wrapper');
+                // Dataset setup...
                 cartWrapper.dataset.productId = product.id;
                 cartWrapper.dataset.productName = product.name;
                 cartWrapper.dataset.productPrice = product.price;
                 cartWrapper.dataset.productImage = imageUrls[0]; 
-                
-                // --- HANDLE UNAVAILABLE PRODUCT IN DETAILS PAGE ---
+
                 if (product.isAvailable === false) {
-                    // If product is unavailable, hide add-to-cart and show message
                     cartWrapper.innerHTML = `
-                        <div class="w-full py-4 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-center rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-dashed border-gray-300 dark:border-gray-600">
-                            <i data-lucide="alert-circle" class="w-6 h-6"></i>
-                            <span>هذا المنتج غير متوفر حالياً</span>
+                        <div class="p-4 bg-gray-100 dark:bg-white/5 rounded-xl text-center border-2 border-dashed border-gray-300 dark:border-gray-600">
+                            <div class="flex flex-col items-center gap-2 text-gray-500">
+                                <i data-lucide="alert-circle" class="w-8 h-8"></i>
+                                <span class="font-bold">نفذت الكمية مؤقتاً</span>
+                            </div>
                         </div>
-                        <a id="details-whatsapp-link-unavailable" href="https://wa.me/201146641942" target="_blank" class="w-full flex items-center justify-center gap-3 px-6 py-3 bg-transparent border border-gray-400 text-gray-500 font-bold text-lg rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 mt-4">
-                            <i data-lucide="message-circle" class="w-6 h-6"></i>
-                            <span>الاستفسار عن التوفر</span>
+                        <a id="details-whatsapp-link-unavailable" href="#" target="_blank" class="flex items-center justify-center gap-2 w-full py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-xl hover:opacity-90 transition-all">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            <span>تنبيه عند التوفر (واتساب)</span>
                         </a>
                     `;
-                    // Update the whatsapp link for unavailable product
-                    const waLinkUnavailable = document.getElementById('details-whatsapp-link-unavailable');
-                    if (waLinkUnavailable) {
-                         const message = `مرحباً متجر مكة،\n\nأود الاستفسار عن توفر هذا المنتج مستقبلاً:\n*${product.name}*\n\nشكراً لكم.`;
-                         waLinkUnavailable.href = `https://wa.me/201146641942?text=${encodeURIComponent(message)}`;
-                    }
-
+                    const waLink = document.getElementById('details-whatsapp-link-unavailable');
+                    if(waLink) waLink.href = `https://wa.me/201146641942?text=${encodeURIComponent('أرغب في معرفة موعد توفر: ' + product.name)}`;
                 } else {
-                    // Reset to original Add to Cart structure if it was previously replaced
-                    // This handles going from an unavailable product to an available one without full page reload if handled by router
                     cartWrapper.innerHTML = `
-                        <div class="flex items-end gap-3">
-                            <div>
-                                <label for="details-quantity-input" class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">الكمية</label>
+                        <div class="flex gap-4">
+                            <div class="w-32 relative">
+                                <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-gray-500">
+                                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                                </div>
                                 <input type="number" id="details-quantity-input" value="1" min="1" 
-                                       class="w-24 px-4 py-3 rounded-lg bg-gray-100 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-lg font-bold text-center">
+                                       class="w-full pl-10 pr-4 py-4 rounded-xl bg-gray-50 dark:bg-[#333] border-transparent focus:border-[#ffcd00] focus:ring-0 font-bold text-center text-lg"
+                                       aria-label="الكمية">
                             </div>
-                            
-                            <button class="add-to-cart-btn flex-1 flex items-center justify-center gap-3 px-6 py-3 bg-[#ffcd00] text-gray-900 font-bold text-lg rounded-lg shadow-lg hover:bg-[#ffda33] transform transition-all duration-300 hover:-translate-y-0.5">
-                                <i data-lucide="shopping-cart" class="w-6 h-6"></i>
-                                <span>إضافة للسلة</span>
+                            <button class="add-to-cart-btn flex-1 bg-[#ffcd00] text-gray-900 font-black text-lg rounded-xl shadow-[0_4px_14px_0_rgba(255,205,0,0.39)] hover:shadow-[0_6px_20px_rgba(255,205,0,0.23)] hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
+                                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                                <span>أضف للسلة</span>
                             </button>
                         </div>
-                        <a id="details-whatsapp-link" href="https://wa.me/201146641942" target="_blank" class="w-full flex items-center justify-center gap-3 px-6 py-3 bg-transparent border border-green-500 text-green-500 font-bold text-lg rounded-lg shadow-lg hover:bg-green-500 hover:text-white transform transition-all duration-300">
-                            <i data-lucide="message-circle" class="w-6 h-6"></i>
-                            <span>تواصل عبر واتساب</span>
+                        <a id="details-whatsapp-link" href="#" target="_blank" class="flex items-center justify-center gap-2 w-full py-3 text-sm font-bold text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-xl transition-all border border-transparent hover:border-green-200 dark:hover:border-green-900">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>طلب سريع عبر واتساب</span>
                         </a>
                     `;
-                    // Re-attach listeners and update WA link
-                    // FIX: Removed manual setting of dataset.listenerAttached = 'false' as it's a fresh element
-                    setupAddToCartButtons(); 
-                    
-                    const whatsappLink = document.getElementById('details-whatsapp-link');
-                     if (whatsappLink) {
-                        const message = `مرحباً متجر مكة،\n\nأود الاستفسار/الطلب بخصوص هذا المنتج:\n*${product.name}*\n\nهل يمكنني معرفة المزيد من التفاصيل أو إتمام الطلب؟\nشكراً لكم.`;
-                        whatsappLink.href = `https://wa.me/201146641942?text=${encodeURIComponent(message)}`;
-                    }
+                    setupAddToCartButtons();
+                    const waLink = document.getElementById('details-whatsapp-link');
+                    if(waLink) waLink.href = `https://wa.me/201146641942?text=${encodeURIComponent('أود طلب المنتج: ' + product.name)}`;
                 }
-                // ---------------------------------------------
 
-                
-                
-                const quantityInput = document.getElementById('details-quantity-input');
-                if (quantityInput) {
-                    quantityInput.value = '1';
-                }
-                
-                
-                
-                document.querySelectorAll('.tab-btn').forEach(btn => {
-                    const isSpecs = btn.dataset.tab === 'specs';
-                    btn.classList.toggle('active-tab', isSpecs);
-                    btn.classList.toggle('text-[#ffcd00]', isSpecs);
-                    btn.classList.toggle('border-[#ffcd00]', isSpecs);
-                    btn.classList.toggle('text-gray-500', !isSpecs);
-                });
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    const isSpecs = content.id === 'tab-content-specs';
-                    content.classList.toggle('hidden', !isSpecs);
-                });
-                
-                
-
+                // Specs List
                 const specsContainer = document.getElementById('specs-list-container');
                 if (specsContainer) {
                     specsContainer.innerHTML = ''; 
-
-                 
                     const specs = [
-                        { label: 'الشركة', value: product.company },
-                        { label: 'الجهد', value: product.volts },
-                        { label: 'الطول', value: product.length ? `${product.length} meters` : undefined },
-                        { label: 'الضمان', value: product.warranty },
-                        { label: 'صنع في', value: product.madeIn },
-                        { label: 'رقم الموديل', value: product.model },
-                        { label: 'اللومن', value: product.lumens },
-                        { label: 'العمر الإفتراضي', value: product.lifespan },
-                        { label: 'شدة السحب', value: product.currentIntensity },
-                        { label: 'الواط', value: product.watt },
-                        { label: 'المقاسات المتاحة', value: product.sizes },
-                        // NEW: Add weight and size to details display
+                        { label: 'الجهد الكهربي', value: product.volts, unit: 'V' },
+                        { label: 'القدرة', value: product.watt, unit: 'Watt' },
+                        { label: 'شدة الإضاءة', value: product.lumens, unit: 'Lumen' },
+                        { label: 'الطول', value: product.length, unit: 'متر' },
+                        { label: 'المقاس', value: product.size },
                         { label: 'الوزن', value: product.weight },
-                        { label: 'الأبعاد', value: product.size },
-                        // Removed old colors from specs list as it now has its own section
+                        { label: 'الموديل', value: product.model }
                     ];
 
-                    let specsAdded = 0;
-
-                    
+                    let hasSpecs = false;
                     specs.forEach(spec => {
-                       
                         if (spec.value && String(spec.value).trim() !== '') {
-                            const li = document.createElement('li');
-                            li.className = "grid grid-cols-1 sm:grid-cols-2 sm:gap-4 pb-2 border-b border-gray-200 dark:border-gray-700";
-                            li.innerHTML = `
-                                <span class="font-medium text-gray-800 dark:text-gray-100">${spec.label}:</span>
-                                <span class="sm:text-left">${spec.value}</span>
+                            hasSpecs = true;
+                            specsContainer.innerHTML += `
+                                <li class="flex justify-between items-center py-3">
+                                    <span class="font-medium text-gray-500 dark:text-gray-400">${spec.label}</span>
+                                    <span class="font-bold text-gray-900 dark:text-white" dir="ltr">${spec.value} ${spec.unit || ''}</span>
+                                </li>
                             `;
-                            specsContainer.appendChild(li);
-                            specsAdded++;
                         }
                     });
-
-                   
-                    if (specsAdded === 0) {
-                        specsContainer.innerHTML = '<p class="text-gray-500">لا توجد مواصفات إضافية متاحة لهذا المنتج.</p>';
-                    } else {
-                       
-                        if (specsContainer.lastChild) {
-                            specsContainer.lastChild.classList.remove('border-b', 'pb-2');
-                        }
+                    
+                    if (!hasSpecs) {
+                        specsContainer.innerHTML = '<li class="py-4 text-center text-gray-400">لا توجد مواصفات تقنية إضافية.</li>';
                     }
                 }
-
-
+                
+                // Refresh Icons
+                lucide.createIcons();
             }
 
 
@@ -4997,7 +5142,7 @@ ${productsContext}
                     }
 
                     const currentCategory = currentProduct.category;
-                    const maxSuggestions = 3;
+                    const maxSuggestions = 4; // Increased slightly for better grid fill
                     let suggestions = [];
 
         
@@ -5040,7 +5185,7 @@ ${productsContext}
                     let suggestionsHtml = ''; 
                     if (suggestions.length === 0) {
                         
-                        suggestionsHtml = `<p class="text-gray-500 dark:text-gray-400 col-span-2 sm:col-span-3 text-center">لا توجد منتجات أخرى لاقتراحها.</p>`;
+                        suggestionsHtml = `<p class="text-gray-500 dark:text-gray-400 col-span-full text-center text-xs">لا توجد منتجات أخرى لاقتراحها.</p>`;
                     } else {
                         
                         suggestions.forEach(product => {
@@ -5079,7 +5224,7 @@ ${productsContext}
                         });
                      
                     } else {
-                        fallbackHtml = `<p class="text-red-500 col-span-2 sm:col-span-3 text-center">لا توجد اقتراحات حالياً.</p>`;
+                        fallbackHtml = `<p class="text-red-500 col-span-full text-center text-xs">لا توجد اقتراحات حالياً.</p>`;
                     }
                     
                     if (gridElDesktop) gridElDesktop.innerHTML = fallbackHtml;
@@ -5287,9 +5432,10 @@ ${productsContext}
                 const homepageConfigRef = doc(db, "config", "homepage");
                 onSnapshot(homepageConfigRef, (docSnap) => {
                     // DOM Elements
+                    const heroContainer = document.getElementById('hero-section-container'); // NEW
                     const videoEl = document.getElementById('hero-video');
                     const videoSourceEl = document.getElementById('hero-video-source');
-                    const imageEl = document.getElementById('hero-bg-image'); // Updated ID
+                    const imageEl = document.getElementById('hero-bg-image'); 
                     const badgeTextEl = document.getElementById('hero-badge-text');
                     const titleMainEl = document.getElementById('hero-title-main');
                     const titleSubEl = document.getElementById('hero-title-sub');
@@ -5303,12 +5449,70 @@ ${productsContext}
                     const adminTitleInput = document.getElementById('admin-hero-title');
                     const adminSubtitleInput = document.getElementById('admin-hero-subtitle');
                     const adminDescInput = document.getElementById('admin-hero-desc');
+                    
+                    // NEW: Admin Inputs for Visibility & Height (Separate)
+                    const adminVisMobile = document.getElementById('admin-hero-vis-mobile');
+                    const adminVisDesktop = document.getElementById('admin-hero-vis-desktop');
+                    
+                    const adminHeightMobileInput = document.getElementById('admin-hero-height-mobile');
+                    const adminHeightMobileDisplay = document.getElementById('admin-hero-height-mobile-display');
+                    const adminHeightDesktopInput = document.getElementById('admin-hero-height-desktop');
+                    const adminHeightDesktopDisplay = document.getElementById('admin-hero-height-desktop-display');
 
                     if (docSnap.exists()) {
                         const data = docSnap.data();
                         const heroType = data.heroType || 'image'; 
                         const videoUrl = data.videoUrl;
                         const imageUrl = data.imageUrl;
+                        
+                        // NEW: Visibility Logic
+                        const showMobile = data.visibleMobile !== false; 
+                        const showDesktop = data.visibleDesktop !== false; 
+                        
+                        // NEW: Height Logic (Separate Defaults)
+                        const heroHeightMobile = data.heroHeightMobile || 400;
+                        const heroHeightDesktop = data.heroHeightDesktop || 500;
+
+                        if (heroContainer) {
+                            // Apply Height via Dynamic Style Tag for Responsiveness
+                            let dynamicStyle = document.getElementById('hero-dynamic-style');
+                            if (!dynamicStyle) {
+                                dynamicStyle = document.createElement('style');
+                                dynamicStyle.id = 'hero-dynamic-style';
+                                document.head.appendChild(dynamicStyle);
+                            }
+                            
+                            // CSS logic: Default is mobile height, change to desktop height on medium screens (md)
+                            dynamicStyle.textContent = `
+                                #hero-section-container { min-height: ${heroHeightMobile}px !important; }
+                                @media (min-width: 768px) {
+                                    #hero-section-container { min-height: ${heroHeightDesktop}px !important; }
+                                }
+                            `;
+
+                            // Reset classes first
+                            heroContainer.classList.remove('hidden', 'flex', 'md:hidden', 'md:flex');
+                            
+                            if (showMobile && showDesktop) {
+                                heroContainer.classList.add('flex');
+                            } else if (!showMobile && !showDesktop) {
+                                heroContainer.classList.add('hidden');
+                            } else if (showMobile && !showDesktop) {
+                                heroContainer.classList.add('flex', 'md:hidden');
+                            } else if (!showMobile && showDesktop) {
+                                heroContainer.classList.add('hidden', 'md:flex');
+                            }
+                        }
+
+                        // Update Admin Inputs
+                        if (adminVisMobile) adminVisMobile.checked = showMobile;
+                        if (adminVisDesktop) adminVisDesktop.checked = showDesktop;
+                        
+                        if (adminHeightMobileInput) adminHeightMobileInput.value = heroHeightMobile;
+                        if (adminHeightMobileDisplay) adminHeightMobileDisplay.textContent = `${heroHeightMobile}px`;
+                        
+                        if (adminHeightDesktopInput) adminHeightDesktopInput.value = heroHeightDesktop;
+                        if (adminHeightDesktopDisplay) adminHeightDesktopDisplay.textContent = `${heroHeightDesktop}px`;
 
                         // Update Media
                         if (heroType === 'video' && videoUrl) {
@@ -5553,12 +5757,30 @@ ${productsContext}
              
                 const adminForm = document.getElementById('admin-settings-form');
                 
-                // NEW: Admin Slider Real-time Display Update
+                // NEW: Admin Slider Real-time Display Update (Logo Size)
                 const sizeSlider = document.getElementById('admin-logo-size');
                 const sizeDisplay = document.getElementById('admin-logo-size-display');
                 if (sizeSlider && sizeDisplay) {
                     sizeSlider.addEventListener('input', (e) => {
                         sizeDisplay.textContent = `${e.target.value}px`;
+                    });
+                }
+
+                // NEW: Admin Slider Real-time Display Update (Hero Height - Mobile)
+                const heroHeightMobileSlider = document.getElementById('admin-hero-height-mobile');
+                const heroHeightMobileDisplay = document.getElementById('admin-hero-height-mobile-display');
+                if (heroHeightMobileSlider && heroHeightMobileDisplay) {
+                    heroHeightMobileSlider.addEventListener('input', (e) => {
+                        heroHeightMobileDisplay.textContent = `${e.target.value}px`;
+                    });
+                }
+
+                // NEW: Admin Slider Real-time Display Update (Hero Height - Desktop)
+                const heroHeightDesktopSlider = document.getElementById('admin-hero-height-desktop');
+                const heroHeightDesktopDisplay = document.getElementById('admin-hero-height-desktop-display');
+                if (heroHeightDesktopSlider && heroHeightDesktopDisplay) {
+                    heroHeightDesktopSlider.addEventListener('input', (e) => {
+                        heroHeightDesktopDisplay.textContent = `${e.target.value}px`;
                     });
                 }
 
@@ -5597,10 +5819,18 @@ ${productsContext}
                             const titleSub = document.getElementById('admin-hero-subtitle').value;
                             const description = document.getElementById('admin-hero-desc').value;
                             
+                            // NEW: Get Visibility & Separate Height Values
+                            const visibleMobile = document.getElementById('admin-hero-vis-mobile').checked;
+                            const visibleDesktop = document.getElementById('admin-hero-vis-desktop').checked;
+                            const heroHeightMobile = document.getElementById('admin-hero-height-mobile').value;
+                            const heroHeightDesktop = document.getElementById('admin-hero-height-desktop').value;
+                            
                             const homepageConfigRef = doc(db, "config", "homepage");
                             await setDoc(homepageConfigRef, { 
                                 heroType, videoUrl, imageUrl, 
-                                badgeText, titleMain, titleSub, description 
+                                badgeText, titleMain, titleSub, description,
+                                visibleMobile, visibleDesktop, 
+                                heroHeightMobile, heroHeightDesktop // Save separate height fields
                             }, { merge: true });
 
                             // 3. Save Top Notification Bar Settings
@@ -5825,6 +6055,44 @@ ${productsContext}
                     });
                 }
                 // ---------------------------
+
+                // --- NEW: Mobile Departments Dropdown Logic ---
+                const mobileDeptBtn = document.getElementById('mobile-departments-btn');
+                const mobileDeptMenu = document.getElementById('mobile-departments-menu');
+                const mobileDeptIcon = document.getElementById('mobile-departments-icon');
+
+                if (mobileDeptBtn && mobileDeptMenu) {
+                    // Toggle Menu
+                    mobileDeptBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isHidden = mobileDeptMenu.classList.contains('hidden');
+                        if (isHidden) {
+                            mobileDeptMenu.classList.remove('hidden');
+                            if(mobileDeptIcon) mobileDeptIcon.style.transform = 'rotate(180deg)';
+                        } else {
+                            mobileDeptMenu.classList.add('hidden');
+                            if(mobileDeptIcon) mobileDeptIcon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    // Close when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!mobileDeptBtn.contains(e.target) && !mobileDeptMenu.contains(e.target)) {
+                            mobileDeptMenu.classList.add('hidden');
+                            if(mobileDeptIcon) mobileDeptIcon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    // Close when clicking an item inside
+                    const mobileDeptItems = mobileDeptMenu.querySelectorAll('.mobile-dept-item');
+                    mobileDeptItems.forEach(item => {
+                        item.addEventListener('click', () => {
+                            mobileDeptMenu.classList.add('hidden');
+                            if(mobileDeptIcon) mobileDeptIcon.style.transform = 'rotate(0deg)';
+                        });
+                    });
+                }
+                // ----------------------------------------------
 
                 // --- Visitor Counter Logic ---
                 const initVisitorCounter = async () => {
