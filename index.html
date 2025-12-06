@@ -532,9 +532,21 @@
     </style>
     
 </head>
-<body class="bg-white dark:bg-[#192230] text-gray-800 dark:text-gray-200 selection:bg-[#ffcd00] selection:text-gray-900">
+<body class="bg-white dark:bg-[#192230] text-gray-800 dark:text-gray-200 selection:bg-[#ffcd00] selection:text-gray-900 overflow-hidden"> <!-- Added overflow-hidden to body initially -->
 
-    <div id="app" class="min-h-screen flex flex-col">
+    <!-- شاشة التحميل (Global Loader) -->
+    <div id="global-loader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white dark:bg-[#192230] transition-opacity duration-700">
+        <div class="relative flex items-center justify-center mb-4">
+            <div class="absolute inset-0 rounded-full border-4 border-[#ffcd00]/20"></div>
+            <div class="w-16 h-16 rounded-full border-4 border-transparent border-t-[#ffcd00] animate-spin"></div>
+            <i data-lucide="zap" class="absolute w-6 h-6 text-[#ffcd00] fill-current animate-pulse"></i>
+        </div>
+        <h2 class="text-xl font-black text-gray-900 dark:text-white tracking-tight">متجر مكة</h2>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium">جاري تجهيز المنتجات...</p>
+    </div>
+
+    <!-- Main App Container (Hidden initially with opacity) -->
+    <div id="app" class="min-h-screen flex flex-col opacity-0 transition-opacity duration-700">
         
         <!-- RESTRUCTURED HEADER TO MATCH IMAGE -->
         <!-- Unified Background: bg-white for light, dark:bg-[#2f2921] (Site's Original Dark Color) for dark -->
@@ -545,8 +557,8 @@
             
             <!-- 1. Top Bar -->
             <!-- bg-transparent to inherit header color -->
-            <!-- تم تعديل justify-between إلى justify-center لتوسيط النص المتبقي -->
-            <div id="top-notification-bar" class="bg-transparent text-gray-900 dark:text-gray-300 text-xs py-1 px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-0 transition-all duration-300 border-b border-gray-100 dark:border-transparent">
+            <!-- MODIFIED: Added 'hidden' class by default so it doesn't flash before Firebase loads -->
+            <div id="top-notification-bar" class="hidden bg-transparent text-gray-900 dark:text-gray-300 text-xs py-1 px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-0 transition-all duration-300 border-b border-gray-100 dark:border-transparent">
                 
                 <!-- تم حذف قسم الروابط (مساعدة وسياسة الاسترجاع) من هنا -->
                 
@@ -881,8 +893,8 @@
                     <!-- Left Side: User Placeholder / Visitor Count (Positioned absolutely to left) -->
                     <div class="absolute left-0 flex items-center gap-4">
                         <!-- Happy Customers Counter (Modern Badge) -->
-                        <!-- Added dark:bg-[#2c2f38] to ensure visibility against the dark header -->
-                        <div class="flex items-center gap-3 px-3 py-1.5 bg-white dark:bg-[#2c2f38] border border-gray-200 dark:border-gray-700 rounded-full shadow-sm hover:shadow-md transition-all duration-300 group cursor-default">
+                        <!-- MODIFIED: Added id="header-visitor-counter" and 'hidden' class to prevent '...' flash -->
+                        <div id="header-visitor-counter" class="hidden flex items-center gap-3 px-3 py-1.5 bg-white dark:bg-[#2c2f38] border border-gray-200 dark:border-gray-700 rounded-full shadow-sm hover:shadow-md transition-all duration-300 group cursor-default">
                             <div class="relative">
                                 <div class="w-8 h-8 bg-[#ffcd00]/10 rounded-full flex items-center justify-center text-[#ffcd00] group-hover:bg-[#ffcd00] group-hover:text-gray-900 transition-colors">
                                     <i data-lucide="smile" class="w-5 h-5"></i>
@@ -893,7 +905,8 @@
                                 </span>
                             </div>
                             <div class="flex flex-col items-start">
-                                <span dir="ltr" id="visitor-count-number" class="text-sm font-bold text-gray-900 dark:text-white leading-none group-hover:text-[#ffcd00] transition-colors">...</span>
+                                <!-- REMOVED: '...' placeholder, starts empty -->
+                                <span dir="ltr" id="visitor-count-number" class="text-sm font-bold text-gray-900 dark:text-white leading-none group-hover:text-[#ffcd00] transition-colors"></span>
                                 <span class="text-[10px] text-gray-500 dark:text-gray-400 font-medium">عميل سعيد</span>
                             </div>
                         </div>
@@ -919,22 +932,22 @@
             </section>
 
             <section id="page-home" class="page-section space-y-12 pt-8">
-                 <!-- MODIFIED: Added id="hero-section-container" to control visibility -->
-                 <div id="hero-section-container" class="relative w-full rounded-[2.5rem] overflow-hidden shadow-2xl isolate min-h-[400px] sm:min-h-[500px] flex items-center group">
+                 <!-- MODIFIED: Added 'hidden' class by default so it relies purely on Admin Config -->
+                 <!-- REMOVED: Hardcoded content text to prevent flashing default data -->
+                 <div id="hero-section-container" class="hidden relative w-full rounded-[2.5rem] overflow-hidden shadow-2xl isolate min-h-[400px] sm:min-h-[500px] items-center group">
                     
                     <!-- Background Image with Zoom Effect on Hover -->
-                    <!-- تم حذف الرابط الثابت وإخفاء الصورة افتراضياً -->
                     <img id="hero-bg-image" 
                          src="" 
-                         alt="خلفية متجر مكة" 
+                         alt="خلفية المتجر" 
                          class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-1000 group-hover:scale-105 hidden">
                     
-                    <!-- Video Background (Optional - can be toggled via JS) -->
+                    <!-- Video Background -->
                     <video id="hero-video" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-30 hidden">
                         <source id="hero-video-source" src="" type="video/mp4">
                     </video>
 
-                    <!-- Modern Gradient Overlay: Dark on Right (Text), Fading to Left -->
+                    <!-- Modern Gradient Overlay -->
                     <div class="absolute inset-0 bg-gradient-to-l from-[#1a1a1a] via-[#1a1a1a]/80 to-transparent z-10"></div>
 
                     <!-- Decorative Abstract Shapes -->
@@ -949,18 +962,19 @@
                               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ffcd00] opacity-75"></span>
                               <span class="relative inline-flex rounded-full h-2 w-2 bg-[#ffcd00]"></span>
                             </span>
-                            <span id="hero-badge-text">الخيار الأول للمحترفين</span>
+                            <!-- Empty by default, populated by JS -->
+                            <span id="hero-badge-text"></span>
                         </div>
 
                         <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-tight drop-shadow-lg">
-                            <span id="hero-title-main">متجر مكة</span>
+                            <!-- Empty by default, populated by JS -->
+                            <span id="hero-title-main"></span>
                             <span id="hero-title-sub" class="block text-transparent bg-clip-text bg-gradient-to-bl from-[#ffcd00] to-[#ffda33] text-2xl sm:text-4xl lg:text-5xl mt-2">
-                                عالم الكهرباء الحديثة
                             </span>
                         </h1>
                         
+                        <!-- Empty by default, populated by JS -->
                         <p id="hero-description" class="text-lg sm:text-xl text-gray-300 font-medium mb-10 max-w-lg leading-relaxed drop-shadow-md border-r-4 border-[#ffcd00] pr-4">
-                            أكثر من 20 عامًا من الخبرة في قلب المقطم. نوفر لك أحدث حلول الإضاءة والديكور بأعلى معايير الجودة.
                         </p>
                         
                         <div class="flex flex-wrap gap-4">
@@ -979,7 +993,8 @@
                 <!-- REMOVED: Old Categories Section (أقسامنا الرئيسية) -->
             
                 <!-- قسم العروض الحالية (Slider) -->
-                <div class="relative group/slider my-12">
+                <!-- MODIFIED: Added id="home-offers-section" and 'hidden' class -->
+                <div id="home-offers-section" class="relative group/slider my-12 hidden">
                     <div class="flex justify-between items-center mb-6 px-2">
                         <h2 class="text-2xl sm:text-3xl font-bold text-right flex items-center gap-2">
                             <span class="w-2 h-8 bg-[#ffcd00] rounded-full inline-block"></span>
@@ -1013,7 +1028,8 @@
                 </div>
                 
                 <!-- قسم الأكثر مبيعاً (Slider) -->
-                <div class="relative group/slider my-12">
+                <!-- MODIFIED: Added id="home-bestsellers-section" and 'hidden' class -->
+                <div id="home-bestsellers-section" class="relative group/slider my-12 hidden">
                     <div class="flex justify-between items-center mb-6 px-2">
                         <h2 class="text-2xl sm:text-3xl font-bold text-right flex items-center gap-2">
                             <span class="w-2 h-8 bg-red-500 rounded-full inline-block"></span>
@@ -1130,8 +1146,9 @@
                             <!-- Stat 1 -->
                             <div class="group flex flex-col items-center justify-center">
                                 <!-- Added id="happy-customer-stat" to sync with live counter -->
+                                <!-- REMOVED: '...' placeholder -->
                                 <div id="happy-customer-stat" class="text-xl sm:text-5xl font-black text-[#ffcd00] mb-1 sm:mb-2 font-mono tracking-tighter group-hover:scale-110 transition-transform duration-300" dir="ltr">
-                                    ...
+                                    0
                                 </div>
                                 <div class="text-gray-600 dark:text-gray-300 text-[10px] sm:text-lg font-medium leading-tight">
                                     عميل سعيد
@@ -1947,31 +1964,6 @@
                             </div>
                         </div>
 
-                        <!-- MOBILE ONLY: AI Suggestions (Compact) - After Specs -->
-                        <div class="mt-6 border-t border-gray-200 dark:border-white/10 pt-6 lg:hidden">
-                            <div class="flex items-center gap-2 mb-4 px-1">
-                                <div class="p-1.5 bg-[#ffcd00]/10 rounded-lg text-[#ffcd00]">
-                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
-                                </div>
-                                <h2 class="text-base font-bold text-gray-800 dark:text-gray-200">قد يعجبك أيضاً</h2>
-                            </div>
-                            
-                            <div id="ai-suggestions-loading-mobile" class="hidden loading-dots justify-center py-4">
-                                <div class="loading-dot w-1 h-1"></div><div class="loading-dot w-1 h-1"></div><div class="loading-dot w-1 h-1"></div>
-                            </div>
-                            
-                            <!-- Mobile Grid -->
-                            <div id="ai-suggestions-grid-mobile" class="grid grid-cols-3 gap-2"></div>
-                        </div>
-
-                    </div>
-                </div>
-              
-                <!-- Old AI Suggestions Location Removed from here -->
-
-            </section>
-            
-            <section id="page-about" class="page-section space-y-12 pt-8">
                         <!-- 1. Top Notification Bar Settings -->
                         <div class="bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
                             <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
@@ -2078,8 +2070,6 @@
                             </div>
                         </div>
 
-                        <!-- REMOVED: 3. Sticky Offer Banner Settings Section -->
-                        
                         <button type="submit" id="save-admin-settings-btn" class="w-full px-6 py-4 bg-[#ffcd00] text-gray-900 font-bold text-lg rounded-xl shadow-lg hover:bg-[#ffda33] transition-transform hover:-translate-y-1">
                             حفظ جميع الإعدادات
                         </button>
@@ -2326,11 +2316,47 @@
                     </div>
                 </div>
 
-                <div>
-                    <label for="productImageUrls" class="block text-sm font-medium mb-1 text-gray-900 dark:text-white">روابط الصور (مفصولة بفاصلة)</label>
-                    <textarea id="productImageUrls" rows="3" class="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-gray-900 dark:text-white" placeholder="https://...image1.jpg, https://...image2.png"></textarea>
-                    <p class="text-xs text-gray-500 mt-1">الصورة الأولى ستكون هي الصورة الرئيسية.</p>
+                <!-- MODIFIED: Split Main Image into 3 Inputs -->
+                <div class="space-y-4">
+                    <div class="bg-gray-100 dark:bg-[#3d474e] p-4 rounded-xl border border-gray-200 dark:border-gray-600">
+                        <label class="block text-sm font-bold mb-3 text-gray-900 dark:text-white border-b border-gray-300 dark:border-gray-500 pb-2">
+                            تكوين صورة الغلاف الرئيسية <span class="text-red-500">*</span>
+                        </label>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end" dir="ltr">
+                            
+                            <!-- 1. Base URL (Fixed) -->
+                            <div class="sm:col-span-5">
+                                <label for="imgBaseUrl" class="block text-xs font-medium mb-1 text-gray-500 dark:text-gray-400 text-right">الرابط الأساسي (ثابت)</label>
+                                <input type="text" id="imgBaseUrl" class="w-full px-3 py-2 text-sm rounded-lg bg-white dark:bg-[#2c2f38] border border-gray-300 dark:border-gray-500 focus:border-[#ffcd00] focus:ring-[#ffcd00] text-gray-900 dark:text-white" placeholder="https://i.postimg.cc/" dir="ltr">
+                            </div>
+
+                            <!-- 2. Image Name -->
+                            <div class="sm:col-span-5">
+                                <label for="imgName" class="block text-xs font-medium mb-1 text-gray-500 dark:text-gray-400 text-right">اسم الصورة / الكود</label>
+                                <input type="text" id="imgName" required class="w-full px-3 py-2 text-sm rounded-lg bg-white dark:bg-[#2c2f38] border border-gray-300 dark:border-gray-500 focus:border-[#ffcd00] focus:ring-[#ffcd00] text-gray-900 dark:text-white" placeholder="Ex: AbCdEf/image" dir="ltr">
+                            </div>
+
+                            <!-- 3. Extension -->
+                            <div class="sm:col-span-2">
+                                <label for="imgExtension" class="block text-xs font-medium mb-1 text-gray-500 dark:text-gray-400 text-right">الصيغة</label>
+                                <select id="imgExtension" class="w-full px-1 py-2 text-sm rounded-lg bg-white dark:bg-[#2c2f38] border border-gray-300 dark:border-gray-500 focus:border-[#ffcd00] focus:ring-[#ffcd00] text-gray-900 dark:text-white" dir="ltr">
+                                    <option value=".jpg">.jpg</option>
+                                    <option value=".png">.png</option>
+                                    <option value=".jpeg">.jpeg</option>
+                                    <option value=".webp">.webp</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2 text-right">سيتم دمج الخانات تلقائياً: الرابط + الاسم + الصيغة</p>
+                    </div>
+                    
+                    <div>
+                        <label for="productGalleryImages" class="block text-sm font-medium mb-1 text-gray-900 dark:text-white">صور المعرض الإضافية (روابط كاملة مفصولة بفاصلة)</label>
+                        <textarea id="productGalleryImages" rows="2" class="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-[#3d474e] border-transparent focus:border-[#ffcd00] focus:ring-[#ffcd00] text-gray-900 dark:text-white" placeholder="https://...image2.jpg, https://...image3.png"></textarea>
+                    </div>
                 </div>
+                <!-- END MODIFIED -->
                 
                 <div>
                     <label for="productDescription" class="block text-sm font-medium mb-1 text-gray-900 dark:text-white">الوصف</label>
@@ -2695,6 +2721,8 @@
         let currentIsAdmin = false; 
         let preFilterType = 'all'; 
         let defaultProductsCheckDone = false; 
+        // --- NEW: Flag to track initial load ---
+        let isInitialLoadComplete = false;
 
         let aiChatHistory = [];
         const defaultSuggestions = [
@@ -2715,6 +2743,32 @@
         const productSearchInput = document.getElementById('product-search-input');
         const openHelpLink = document.getElementById('open-help-modal-link');
         
+        // --- NEW: Hide Loader Function ---
+        function hideGlobalLoader() {
+            if (isInitialLoadComplete) return;
+            
+            const loader = document.getElementById('global-loader');
+            const app = document.getElementById('app');
+            const body = document.body;
+
+            if (loader && app) {
+                // Fade out loader
+                loader.style.opacity = '0';
+                // Fade in app
+                app.style.opacity = '1';
+                
+                // Allow scrolling again
+                body.classList.remove('overflow-hidden');
+
+                // Remove loader from DOM after transition
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    isInitialLoadComplete = true;
+                }, 700);
+            }
+        }
+        // --------------------------------
+
         if (globalSearchInput) {
             globalSearchInput.addEventListener('input', (e) => {
                 const value = e.target.value;
@@ -3448,6 +3502,14 @@
                 const availCheck = document.getElementById('isAvailable');
                 if(availCheck) availCheck.checked = true;
                 
+                // --- NEW: Restore Base URL from LocalStorage ---
+                const savedBaseUrl = localStorage.getItem('admin_img_base_url');
+                const baseInput = document.getElementById('imgBaseUrl');
+                if (baseInput) {
+                    baseInput.value = savedBaseUrl || 'https://i.postimg.cc/';
+                }
+                // -----------------------------------------------
+
                 // --- NEW: Clear color variants container ---
                 const colorContainer = document.getElementById('color-variants-container');
                 if (colorContainer) colorContainer.innerHTML = '';
@@ -3478,11 +3540,32 @@
                 
                 const editingId = addProductForm.dataset.editingId; 
 
+                // --- MODIFIED: Combine 3 Parts for Main Image ---
+                const baseUrl = document.getElementById('imgBaseUrl').value.trim();
+                const imgName = document.getElementById('imgName').value.trim();
+                const imgExt = document.getElementById('imgExtension').value;
                 
-                const imageUrlsString = document.getElementById('productImageUrls').value;
-                const imageUrls = imageUrlsString.split(',')       
+                // Save Base URL for next time
+                if (baseUrl) {
+                    localStorage.setItem('admin_img_base_url', baseUrl);
+                }
+
+                const mainImageUrl = (baseUrl && imgName) ? (baseUrl + imgName + imgExt) : '';
+                // ------------------------------------------------
+
+                const galleryImagesString = document.getElementById('productGalleryImages').value;
+                
+                const galleryUrls = galleryImagesString.split(',')       
                                                 .map(url => url.trim())   
                                                 .filter(url => url && url.length > 0); 
+                
+                // Construct the full array: [Main Image, ...Gallery Images]
+                const finalImageUrls = [];
+                if (mainImageUrl) {
+                    finalImageUrls.push(mainImageUrl);
+                }
+                finalImageUrls.push(...galleryUrls);
+                // ------------------------------------------------------
 
                 // --- NEW: Collect Color Variants Data ---
                 const colorVariants = [];
@@ -3500,7 +3583,7 @@
                     name: document.getElementById('productName').value,
                     price: parseFloat(document.getElementById('productPrice').value),
                     
-                    imageUrls: imageUrls, 
+                    imageUrls: finalImageUrls, // Used the combined array
                     category: document.getElementById('productCategory').value,
                     description: document.getElementById('productDescription').value,
                     isOnSale: document.getElementById('isOnSale').checked,
@@ -4150,6 +4233,10 @@ ${productsContext}
                 // NEW: Get the top offers grid element
                 const topOffersSection = document.getElementById('current-offers-section');
                 const topOffersGrid = document.getElementById('top-offers-grid');
+                
+                // NEW: Get Home Page Slider Sections to toggle visibility
+                const homeOffersSection = document.getElementById('home-offers-section');
+                const homeBestsellersSection = document.getElementById('home-bestsellers-section');
 
                 if (!offersGrid || !bestsellersGrid || !productsGrid) return;
 
@@ -4179,8 +4266,27 @@ ${productsContext}
                     }
                 }
 
-                offers.slice(0, 6).forEach(p => offersGrid.innerHTML += renderProductCard(p)); // Keep original offers section limited
-                bestsellers.forEach(p => bestsellersGrid.innerHTML += renderProductCard(p));
+                // --- MODIFIED: Handle Home Offers Slider Visibility ---
+                if (homeOffersSection) {
+                    const limitedOffers = offers.slice(0, 6);
+                    if (limitedOffers.length > 0) {
+                        limitedOffers.forEach(p => offersGrid.innerHTML += renderProductCard(p));
+                        homeOffersSection.classList.remove('hidden');
+                    } else {
+                        homeOffersSection.classList.add('hidden');
+                    }
+                }
+                
+                // --- MODIFIED: Handle Home Bestsellers Slider Visibility ---
+                if (homeBestsellersSection) {
+                    if (bestsellers.length > 0) {
+                        bestsellers.forEach(p => bestsellersGrid.innerHTML += renderProductCard(p));
+                        homeBestsellersSection.classList.remove('hidden');
+                    } else {
+                        homeBestsellersSection.classList.add('hidden');
+                    }
+                }
+                // -----------------------------------------------------
                 
                 if (filteredProducts.length === 0) {
                     productsGrid.innerHTML = ''; 
@@ -4413,8 +4519,51 @@ ${productsContext}
                 setVal('productName', product.name || '');
                 setVal('productPrice', product.price || 0);
                 
+                // --- MODIFIED: Split existing Main URL into 3 fields ---
+                const allImages = product.imageUrls || (product.imageUrl ? [product.imageUrl] : []);
+                const mainUrl = allImages.length > 0 ? allImages[0] : '';
+
+                if (mainUrl) {
+                    // Try to extract extension
+                    const matchExt = mainUrl.match(/(\.jpg|\.png|\.jpeg|\.webp)$/i);
+                    const ext = matchExt ? matchExt[0].toLowerCase() : '.jpg'; // default to jpg if not found or custom
+                    
+                    // Set extension dropdown
+                    const extSelect = document.getElementById('imgExtension');
+                    if (extSelect) extSelect.value = ext;
+
+                    // Remove extension from URL
+                    let urlWithoutExt = mainUrl;
+                    if (matchExt) {
+                        urlWithoutExt = mainUrl.substring(0, mainUrl.lastIndexOf(ext));
+                    }
+
+                    // Try to split Base URL and Name
+                    // We check if the URL starts with the stored Base URL preference
+                    const savedBase = localStorage.getItem('admin_img_base_url') || 'https://i.postimg.cc/';
+                    
+                    if (urlWithoutExt.startsWith(savedBase)) {
+                        setVal('imgBaseUrl', savedBase);
+                        setVal('imgName', urlWithoutExt.substring(savedBase.length));
+                    } else {
+                        // Fallback: If it doesn't match stored base, try to guess or just put everything in Name
+                        // Let's assume common case: https://domain.com/path/file
+                        // We will set Base to the stored one (to keep it consistent) and put the FULL url (minus ext) in Name? 
+                        // No, that breaks the concatenation (Base + Name).
+                        // Better: Put empty Base and full path in Name.
+                        setVal('imgBaseUrl', ''); 
+                        setVal('imgName', urlWithoutExt);
+                    }
+                } else {
+                    setVal('imgBaseUrl', localStorage.getItem('admin_img_base_url') || 'https://i.postimg.cc/');
+                    setVal('imgName', '');
+                }
                 
-                setVal('productImageUrls', (product.imageUrls || []).join(', '));
+                // Remaining images are Gallery
+                const galleryImages = allImages.length > 1 ? allImages.slice(1) : [];
+                setVal('productGalleryImages', galleryImages.join(', '));
+                // -------------------------------------------------------
+
                 setVal('productCategory', product.category || 'Other');
                 setVal('productDescription', product.description || '');
                 
@@ -4710,11 +4859,26 @@ ${productsContext}
             }
 
             function renderArticleDetails(articleId) {
+                // --- FIX: Corrected logic to search in allArticles ---
                 const article = allArticles.find(a => a.shortId === articleId || a.id === articleId);
+                
+                // --- FIX: Handle loading state for direct links ---
                 if (!article) {
+                    if (allArticles.length === 0) {
+                        // Data hasn't loaded yet, stay on page and show loading
+                        const titleEl = document.getElementById('blog-post-title');
+                        const contentEl = document.getElementById('blog-post-content-wrapper');
+                        
+                        if (titleEl) titleEl.textContent = "جاري تحميل المقالة...";
+                        if (contentEl) contentEl.innerHTML = '<div class="text-center py-10"><div class="loading-dots mx-auto"><div class="loading-dot bg-gray-400"></div><div class="loading-dot bg-gray-400"></div><div class="loading-dot bg-gray-400"></div></div><p class="mt-4 text-gray-500">يرجى الانتظار قليلاً...</p></div>';
+                        return;
+                    }
+                    // Data loaded but article not found -> Redirect
+                    console.warn("Article not found:", articleId);
                     showPage('blog');
                     return;
                 }
+                // -------------------------------------------------
 
                 const titleEl = document.getElementById('blog-post-title');
                 const imageEl = document.getElementById('blog-post-image');
@@ -4831,11 +4995,25 @@ ${productsContext}
                 console.log('renderProductDetails called for:', productId); 
                 const product = allProducts.find(p => p.shortId === productId || p.id === productId);
                 
+                // --- FIX: Prevent redirecting to products list if data is still loading ---
                 if (!product) {
+                    if (allProducts.length === 0) {
+                        // If product list is empty, it means we are still loading data.
+                        // Show a loading state instead of redirecting.
+                        document.getElementById('details-product-name').textContent = "جاري تحميل بيانات المنتج...";
+                        document.getElementById('details-product-description').textContent = "يرجى الانتظار قليلاً...";
+                        // Hide price/actions temporarily
+                        if(document.getElementById('details-product-price')) document.getElementById('details-product-price').innerHTML = '';
+                        if(document.getElementById('details-add-to-cart-wrapper')) document.getElementById('details-add-to-cart-wrapper').innerHTML = '';
+                        return; 
+                    }
+                    
+                    // Only redirect if data is loaded AND product is truly missing
                     console.error("Product not found in allProducts array:", productId);
                     showPage('products'); 
                     return;
                 }
+                // ------------------------------------------------------------------------
 
                 const placeholder = 'https://placehold.co/600x600/eeeeee/777777?text=No+Image';
                 const mainImgEl = document.getElementById('main-product-image');
@@ -5256,11 +5434,41 @@ ${productsContext}
                     });
                     console.log("Products loaded from Firestore:", allProducts.length);
                     
-                    populateBrandFilter(); // NEW
+                    populateBrandFilter(); 
                     renderAllProductViews();
+
+                    // --- FIX: Hide loader once products are loaded ---
+                    hideGlobalLoader();
+                    // -----------------------------------------------
+
+                    // --- FIX: Force show product if URL hash exists after data load ---
+                    const hash = window.location.hash;
+                    if (hash.startsWith('#product/')) {
+                        // Clean the ID (remove encoding, slashes, spaces)
+                        const rawId = hash.substring('#product/'.length);
+                        const id = decodeURIComponent(rawId).replace(/\/$/, '').trim();
+                        
+                        console.log("Data loaded. Checking deep link for product:", id);
+
+                        // Check if we actually have this product now
+                        const productExists = allProducts.some(p => p.shortId === id || p.id === id);
+                        
+                        if (productExists) {
+                            // Found it! Force render details
+                            showPage('details', id);
+                        } else {
+                            // Loaded data but product ID is invalid -> Go to products list
+                            console.warn("Product not found after load:", id);
+                            showPage('products');
+                        }
+                    }
+                    // ----------------------------------------------------------------
+
                 }, (error) => {
                     console.error("Error fetching products: ", error);
                     showToast("خطأ أثناء جلب المنتجات.");
+                    // Hide loader even on error so user isn't stuck
+                    hideGlobalLoader();
                 });
             }
             
@@ -5378,6 +5586,23 @@ ${productsContext}
                     });
                     console.log("Articles loaded from Firestore:", allArticles.length);
                     renderArticles();
+
+                    // --- FIX: Force show article if URL hash exists after data load ---
+                    const hash = window.location.hash;
+                    if (hash.startsWith('#blog/')) {
+                        const rawId = hash.substring('#blog/'.length);
+                        const id = decodeURIComponent(rawId).replace(/\/$/, '').trim();
+                        
+                        const articleExists = allArticles.some(a => a.shortId === id || a.id === id);
+                        
+                        if (articleExists) {
+                            showPage('blog-post', id);
+                        } else {
+                            showPage('blog');
+                        }
+                    }
+                    // ----------------------------------------------------------------
+
                 }, (error) => {
                     console.error("Error fetching articles: ", error);
                     showToast("خطأ أثناء جلب المقالات.");
@@ -5641,7 +5866,7 @@ ${productsContext}
                         fetchAiSuggestions(itemId); 
                     } else if (pageId === 'blog-post' && itemId) {
                         renderArticleDetails(itemId);
-                    } else if (pageId === 'offers') { // NEW: Handle offers page
+                    } else if (pageId === 'offers') { 
                         renderOffersPage();
                     }
                 } else {
@@ -5653,10 +5878,18 @@ ${productsContext}
 
                 // NEW: Handle visibility of the top offers section based on page
                 const topOffersSection = document.getElementById('current-offers-section');
+                const topOffersGrid = document.getElementById('top-offers-grid'); // NEW reference
+
                 if (topOffersSection) {
                     if (pageId === 'home') {
-                         // It will be shown by renderAllProductViews if there are offers
-                         renderAllProductViews(); 
+                         // --- OPTIMIZATION FIX: Don't re-render everything ---
+                         // Removed: renderAllProductViews(); 
+                         
+                         // Just check if we have content to show, otherwise keep hidden
+                         if (topOffersGrid && topOffersGrid.children.length > 0) {
+                             topOffersSection.classList.remove('hidden');
+                         }
+                         // ----------------------------------------------------
                     } else {
                         topOffersSection.classList.add('hidden');
                     }
@@ -6005,10 +6238,12 @@ ${productsContext}
 
                     if (hash.startsWith('#product/')) {
                         targetPageId = 'details';
-                        targetItemId = hash.substring('#product/'.length);
+                        // --- FIX: Robust ID cleaning (decode, remove trailing slash, trim) ---
+                        targetItemId = decodeURIComponent(hash.substring('#product/'.length)).replace(/\/$/, '').trim();
                     } else if (hash.startsWith('#blog/')) {
                         targetPageId = 'blog-post';
-                        targetItemId = hash.substring('#blog/'.length);
+                        // --- FIX: Robust ID cleaning ---
+                        targetItemId = decodeURIComponent(hash.substring('#blog/'.length)).replace(/\/$/, '').trim();
                     } else {
                         const pageName = hash.substring(1);
                         if (simplePages.includes(pageName)) {
@@ -6098,7 +6333,8 @@ ${productsContext}
                 const initVisitorCounter = async () => {
                     const visitorRef = doc(db, "site_stats", "visitor_counter");
                     const countEl = document.getElementById('visitor-count-number');
-                    const statCountEl = document.getElementById('happy-customer-stat'); // Get the stats section element
+                    const statCountEl = document.getElementById('happy-customer-stat'); 
+                    const headerCounterContainer = document.getElementById('header-visitor-counter'); // NEW
 
                     // 1. Listen for real-time updates
                     onSnapshot(visitorRef, (docSnap) => {
@@ -6111,7 +6347,12 @@ ${productsContext}
                             
                             // Update Stats Section (Syncing)
                             if (statCountEl) statCountEl.textContent = formattedCount + " +";
+                            
+                            // --- NEW: Reveal Header Counter when data is ready ---
+                            if (headerCounterContainer) headerCounterContainer.classList.remove('hidden');
                         }
+                    }, (error) => {
+                        console.log("Visitor counter error (non-critical):", error);
                     });
 
                     // 2. Increment count only if it's a new unique visitor
@@ -6135,6 +6376,14 @@ ${productsContext}
                 };
                 initVisitorCounter();
                 // -----------------------------
+
+                // Force hide loader after 5 seconds if something hangs (Network issues)
+                setTimeout(() => {
+                    if (!isInitialLoadComplete) {
+                        console.warn("Forcing loader hide due to timeout");
+                        hideGlobalLoader();
+                    }
+                }, 5000);
 
                 // --- FAQ Accordion Logic (Updated to Max-Height Method) ---
                 const initFAQ = () => {
