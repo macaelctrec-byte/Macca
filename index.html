@@ -535,7 +535,7 @@
 <body class="bg-white dark:bg-[#192230] text-gray-800 dark:text-gray-200 selection:bg-[#ffcd00] selection:text-gray-900 overflow-hidden"> <!-- Added overflow-hidden to body initially -->
 
     <!-- شاشة التحميل (Global Loader) -->
-    <div id="global-loader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white dark:bg-[#192230] transition-opacity duration-700">
+    <div id="global-loader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white dark:bg-[#192230] transition-opacity duration-200">
         <div class="relative flex items-center justify-center mb-4">
             <div class="absolute inset-0 rounded-full border-4 border-[#ffcd00]/20"></div>
             <div class="w-16 h-16 rounded-full border-4 border-transparent border-t-[#ffcd00] animate-spin"></div>
@@ -2764,7 +2764,7 @@
                 setTimeout(() => {
                     loader.style.display = 'none';
                     isInitialLoadComplete = true;
-                }, 700);
+                },100);
             }
         }
         // --------------------------------
