@@ -12,11 +12,11 @@
     <meta property="og:description" content="اكتشف تشكيلتنا الواסعة من الإضاءة الحديثة، الدهانات، والكابلات. خبرة 20 عامًا في المقطم.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://macca3.shop/"> 
-    <meta property="og:image" content="https://i.postimg.cc/NfqhM3Th/photo-2025-10-28-14-04-33.jpg"> 
+    <meta property="og:image" content="https://macca3.shop/images/188.webp"> 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="متجر مكة | للإضاءة الحديثة والدهانات">
     <meta name="twitter:description" content="خبرة 20 عامًا في الإضاءة الحديثة والدهانات بالمقطم.">
-    <meta name="twitter:image" content="https://i.postimg.cc/NfqhM3Th/photo-2025-10-28-14-04-33.jpg">
+    <meta name="twitter:image" content="https://macca3.shop/images/19.webp">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffcd00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M13 3L7 12h4l-1 8 7-12h-4z'/></svg>" type="image/svg+xml">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffcd00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M13 3L7 12h4l-1 8 7-12h-4z'/></svg>">
     <script>
@@ -529,24 +529,45 @@
             left: 2px;
         }
         /* --- END SLIDER STYLES --- */
+        
+        /* --- NEW LOADER ANIMATION --- */
+        @keyframes loading-bar {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(0%); }
+            100% { transform: translateX(100%); }
+        }
     </style>
     
 </head>
 <body class="bg-white dark:bg-[#192230] text-gray-800 dark:text-gray-200 selection:bg-[#ffcd00] selection:text-gray-900 overflow-hidden"> <!-- Added overflow-hidden to body initially -->
 
-    <!-- شاشة التحميل (Global Loader) -->
-    <div id="global-loader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white dark:bg-[#192230] transition-opacity duration-700">
-        <div class="relative flex items-center justify-center mb-4">
-            <div class="absolute inset-0 rounded-full border-4 border-[#ffcd00]/20"></div>
-            <div class="w-16 h-16 rounded-full border-4 border-transparent border-t-[#ffcd00] animate-spin"></div>
-            <i data-lucide="zap" class="absolute w-6 h-6 text-[#ffcd00] fill-current animate-pulse"></i>
+    <!-- شاشة التحميل العصرية (Global Loader) -->
+    <div id="global-loader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white dark:bg-[#0a0a0a] transition-opacity duration-300">
+        <div class="relative flex flex-col items-center justify-center transform scale-90 sm:scale-100">
+            <!-- Modern Icon Wrapper -->
+            <div class="relative w-20 h-20 mb-6">
+                <!-- Decorative Ring -->
+                <div class="absolute inset-0 rounded-full border-4 border-gray-100 dark:border-white/10"></div>
+                <!-- Spinning Arc -->
+                <div class="absolute inset-0 rounded-full border-4 border-t-[#ffcd00] border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+                <!-- Center Icon -->
+                <div class="absolute inset-2 bg-[#ffcd00] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,205,0,0.3)] animate-pulse">
+                    <i data-lucide="zap" class="w-8 h-8 text-gray-900 fill-current"></i>
+                </div>
+            </div>
+            
+            <h2 class="text-2xl font-black text-gray-900 dark:text-white tracking-tighter mb-1">متجر مكة</h2>
+            <p class="text-[10px] text-gray-400 dark:text-gray-500 font-bold tracking-widest uppercase mb-4">Macca Electric Tools</p>
+            
+            <!-- Minimal Progress Bar -->
+            <div class="w-32 h-1 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                <div class="h-full bg-[#ffcd00] w-full rounded-full animate-[loading-bar_1.5s_ease-in-out_infinite]"></div>
+            </div>
         </div>
-        <h2 class="text-xl font-black text-gray-900 dark:text-white tracking-tight">متجر مكة</h2>
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 font-medium">جاري تجهيز المنتجات...</p>
     </div>
 
     <!-- Main App Container (Hidden initially with opacity) -->
-    <div id="app" class="min-h-screen flex flex-col opacity-0 transition-opacity duration-700">
+    <div id="app" class="min-h-screen flex flex-col opacity-0 transition-opacity duration-500">
         
         <!-- RESTRUCTURED HEADER TO MATCH IMAGE -->
         <!-- Unified Background: bg-white for light, dark:bg-[#2f2921] (Site's Original Dark Color) for dark -->
@@ -607,13 +628,6 @@
                     <!-- MODIFIED: Changed order to 3, reduced gap on mobile (gap-2) to fit next to search -->
                     <div class="flex items-center gap-2 sm:gap-4 order-3 md:order-3 flex-shrink-0">
                         
-                        <!-- Favorites Icon (NEW) -->
-                        <a href="#favorites" class="relative group p-1 transition-transform hover:scale-110" data-page="favorites" title="المفضلة">
-                            <i data-lucide="heart" class="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-red-500 transition-colors"></i>
-                            <!-- Badge can be enabled later if functionality is added -->
-                            <span id="favorites-count-badge" class="absolute -top-1 -right-1 h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white border-2 border-white dark:border-[#222] hidden">0</span>
-                        </a>
-
                         <!-- Cart Icon (Always visible) -->
                         <a href="#cart" class="relative group p-1" data-page="cart">
                             <i data-lucide="shopping-bag" class="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-[#ffcd00] transition-colors"></i>
@@ -1063,69 +1077,85 @@
                 </div>
 
                 <!-- Modernized Supply & Installation Services Section -->
-                <div class="relative bg-white dark:bg-gradient-to-br dark:from-[#222] dark:to-[#1a1a1a] rounded-[2.5rem] shadow-2xl overflow-hidden mt-8 sm:mt-16 isolate border border-gray-100 dark:border-none">
-                    <!-- Decorative glows -->
-                    <div class="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-96 h-96 bg-[#ffcd00]/10 dark:bg-[#ffcd00]/20 blur-3xl rounded-full -z-10 opacity-70"></div>
-                    <div class="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-64 h-64 bg-[#ffcd00]/5 dark:bg-[#ffcd00]/10 blur-3xl rounded-full -z-10"></div>
+                <div class="relative bg-white dark:bg-[#0a0a0a] rounded-[2.5rem] overflow-hidden shadow-2xl mt-8 sm:mt-16 isolate border border-gray-100 dark:border-white/10 group">
+                    
+                    <!-- Decorative Background Effects -->
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] dark:opacity-10 mix-blend-overlay"></div>
+                    <div class="absolute -top-24 -right-24 w-96 h-96 bg-[#ffcd00]/10 rounded-full blur-[80px] animate-pulse"></div>
+                    <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-blue-500/5 rounded-full blur-[80px]"></div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-0">
-                        <!-- Text Content -->
-                        <div class="p-6 sm:p-12 lg:py-16 lg:pr-16 lg:pl-8 flex flex-col justify-center order-2 lg:order-1">
-                            <div class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#ffcd00]/10 border border-[#ffcd00]/20 text-[#ffcd00] text-xs sm:text-sm font-bold w-fit mb-4 sm:mb-6 backdrop-blur-md">
-                                <i data-lucide="shield-check" class="w-3 h-3 sm:w-4 sm:h-4"></i>
-                                <span>للمشاريع والشركات</span>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 relative z-10">
+                        
+                        <!-- Content Side (7 cols) -->
+                        <div class="lg:col-span-7 p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
+                            
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ffcd00]/10 border border-[#ffcd00]/20 text-[#ffcd00] text-xs font-bold w-fit mb-6 backdrop-blur-md">
+                                <span class="relative flex h-2 w-2">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ffcd00] opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-2 w-2 bg-[#ffcd00]"></span>
+                                </span>
+                                <span>حلول المشاريع والشركات</span>
                             </div>
-                            <h2 class="text-xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4 sm:mb-6">
-                                شريكك الموثوق في
+
+                            <h2 class="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
+                                ارتقِ بمشروعك مع
                                 <br>
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ffcd00] to-[#ffda33]">التوريد والتركيب</span>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#ffcd00] via-[#ffda33] to-amber-600 dark:to-white">الخبرة الهندسية</span>
                             </h2>
-                            <p class="text-sm sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6 sm:mb-8 max-w-xl">
-                                لا نكتفي ببيع المنتجات، بل نقدم حلولاً كهربائية متكاملة. من توريد أجود الخامات بأسعار تنافسية إلى التركيب الاحترافي الآمن، نضمن نجاح مشروعك بكفاءة عالية.
+                            
+                            <p class="text-gray-600 dark:text-gray-400 text-lg mb-10 leading-relaxed max-w-2xl border-r-2 border-[#ffcd00]/30 pr-4">
+                                لا نكتفي بالتوريد، بل نصنع الفارق. نقدم حلولاً كهربائية متكاملة تجمع بين أجود الخامات والتنفيذ الفني الدقيق لضمان أمان وكفاءة منشأتك.
                             </p>
 
-                            <!-- Feature List -->
-                            <ul class="space-y-3 sm:space-y-5 mb-6 sm:mb-10">
-                                <li class="flex items-center gap-3 sm:gap-4">
-                                    <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
-                                        <i data-lucide="hard-hat" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-900"></i>
+                            <!-- Modern Features Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+                                <div class="bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5 p-5 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 group/card">
+                                    <div class="w-10 h-10 rounded-full bg-[#ffcd00]/10 flex items-center justify-center mb-3 group-hover/card:bg-[#ffcd00] transition-colors">
+                                        <i data-lucide="shield-check" class="w-5 h-5 text-[#ffcd00] group-hover/card:text-gray-900 transition-colors"></i>
                                     </div>
-                                    <span class="text-gray-700 dark:text-gray-100 font-medium text-sm sm:text-lg">فريق فني متخصص ومعتمد</span>
-                                </li>
-                                <li class="flex items-center gap-3 sm:gap-4">
-                                     <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
-                                        <i data-lucide="badge-check" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-900"></i>
+                                    <h4 class="text-gray-900 dark:text-white font-bold mb-1">جودة معتمدة</h4>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">خامات أصلية بضمان الوكيل</p>
+                                </div>
+                                
+                                <div class="bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5 p-5 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 group/card">
+                                    <div class="w-10 h-10 rounded-full bg-[#ffcd00]/10 flex items-center justify-center mb-3 group-hover/card:bg-[#ffcd00] transition-colors">
+                                        <i data-lucide="users" class="w-5 h-5 text-[#ffcd00] group-hover/card:text-gray-900 transition-colors"></i>
                                     </div>
-                                    <span class="text-gray-700 dark:text-gray-100 font-medium text-sm sm:text-lg">ضمان شامل على جودة التركيب</span>
-                                </li>
-                                <li class="flex items-center gap-3 sm:gap-4">
-                                     <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#ffcd00] flex items-center justify-center shadow-lg shadow-[#ffcd00]/20">
-                                        <i data-lucide="coins" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-900"></i>
-                                    </div>
-                                    <span class="text-gray-700 dark:text-gray-100 font-medium text-sm sm:text-lg">أسعار خاصة لتوريدات الجملة والمشاريع</span>
-                                </li>
-                            </ul>
+                                    <h4 class="text-gray-900 dark:text-white font-bold mb-1">فريق محترف</h4>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">فنيون ومهندسون متخصصون</p>
+                                </div>
 
-                            <div class="flex flex-wrap gap-3 sm:gap-4">
-                                 <a href="https://wa.me/201146641942" target="_blank" class="flex-1 sm:flex-none justify-center inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-gray-900 hover:bg-gray-800 text-white dark:bg-white/5 dark:text-white font-bold text-sm sm:text-lg rounded-xl sm:rounded-2xl dark:hover:bg-white/10 transition-all border border-transparent dark:border-white/10 backdrop-blur-sm shadow-lg dark:shadow-none">
-                                    <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5"></i>
-                                    <span>استشارة فنية</span>
+                                <div class="bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5 p-5 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 group/card">
+                                    <div class="w-10 h-10 rounded-full bg-[#ffcd00]/10 flex items-center justify-center mb-3 group-hover/card:bg-[#ffcd00] transition-colors">
+                                        <i data-lucide="coins" class="w-5 h-5 text-[#ffcd00] group-hover/card:text-gray-900 transition-colors"></i>
+                                    </div>
+                                    <h4 class="text-gray-900 dark:text-white font-bold mb-1">أسعار تنافسية</h4>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">عروض خاصة لتوريدات الجملة</p>
+                                </div>
+                            </div>
+
+                            <!-- Action Button -->
+                            <div class="flex flex-wrap gap-4">
+                                <a href="https://wa.me/201146641942" target="_blank" class="group/btn relative w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-[#ffcd00] text-gray-900 font-bold text-lg rounded-xl overflow-hidden shadow-[0_0_20px_rgba(255,205,0,0.3)] hover:shadow-[0_0_30px_rgba(255,205,0,0.5)] transition-all transform hover:-translate-y-1">
+                                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite]"></div>
+                                    <span>طلب معاينة أو استشارة</span>
+                                    <i data-lucide="arrow-left" class="w-5 h-5 transition-transform group-hover/btn:-translate-x-1"></i>
                                 </a>
                             </div>
+
                         </div>
 
-                        <!-- Image Side -->
-                        <div class="relative min-h-[180px] sm:min-h-[300px] lg:min-h-full order-1 lg:order-2">
-                            <div class="absolute inset-0 lg:ml-8 rounded-[2.5rem] overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop"
-                                     alt="فني كهرباء محترف أثناء العمل"
-                                     class="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105"
-                                     loading="lazy"
-                                     onerror="this.src='https://placehold.co/800x1000/2c2f38/ffcd00?text=خدمات+احترافية'">
-                                <!-- Gradient overlay for better text integration on small screens if needed -->
-                                <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent lg:bg-gradient-to-r lg:from-white lg:via-transparent lg:to-transparent dark:from-gray-900 dark:lg:from-gray-900 opacity-80 lg:opacity-100"></div>
-                            </div>
+                        <!-- Image Side (5 cols) -->
+                        <div class="lg:col-span-5 relative min-h-[300px] lg:min-h-full overflow-hidden">
+                            <!-- Gradient Overlay for smooth text blending -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10 lg:bg-gradient-to-r lg:from-white lg:via-transparent lg:to-transparent dark:from-[#0a0a0a] dark:lg:from-[#0a0a0a]"></div>
+                            
+                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop" 
+                                 alt="مهندس كهرباء في الموقع" 
+                                 class="absolute inset-0 w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-110 filter brightness-95 dark:brightness-75 hover:brightness-100"
+                                 loading="lazy">
                         </div>
+
                     </div>
                 </div>
 
@@ -1753,7 +1783,6 @@
                         <i data-lucide="phone" class="w-12 h-12 text-[#ffcd00] mx-auto mb-4"></i>
                         <h3 class="text-xl font-semibold mb-2">اتصل بنا</h3>
                         <div class="text-gray-600 dark:text-gray-300" dir="ltr">
-                            <a href="tel:0225071272" class="block hover:text-[#ffda33] transition-colors">0225071272 (هاتف المتجر)</a>
                             <a href="https://wa.me/201146641942" class="block hover:text-[#ffda33] transition-colors">01146641942 (واتساب)</a>
                         </div>
                     </div>
@@ -1852,16 +1881,6 @@
                 </div>
             </section>
             
-            <section id="page-blog-2" class="page-section hidden">
-            </section>
-            
-            <section id="page-blog-3" class="page-section hidden">
-            </section>
-            
-            <section id="page-blog-4" class="page-section hidden">
-            </section>
-
-            
             <section id="page-cart" class="page-section pt-8">
                 
                 <div class="flex items-center gap-3 mb-8">
@@ -1909,31 +1928,6 @@
                 </div>
             </section>
 
-            <!-- NEW: Favorites Page Section -->
-            <section id="page-favorites" class="page-section pt-8">
-                <div class="flex items-center gap-3 mb-8">
-                    <i data-lucide="heart" class="w-8 h-8 sm:w-10 sm:h-10 text-red-500"></i>
-                    <h1 class="text-3xl sm:text-4xl font-bold">المفضلة</h1>
-                </div>
-                
-                <div class="bg-white dark:bg-[#2c2f38] p-6 sm:p-8 rounded-xl shadow-lg min-h-[300px]">
-                    <div id="favorites-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 hidden">
-                        <!-- Favorites will be populated here later -->
-                    </div>
-                    
-                    <div id="no-favorites-message" class="text-center py-12">
-                        <i data-lucide="heart-off" class="w-16 h-16 mx-auto text-gray-400"></i>
-                        <h2 class="text-2xl font-semibold mt-4">قائمة المفضلة فارغة</h2>
-                        <p class="text-gray-500 dark:text-gray-400 mt-2">لم تقم بإضافة أي منتجات للمفضلة بعد.</p>
-                        <a href="#products" class="nav-link mt-6 inline-flex items-center gap-2 px-6 py-3 bg-[#ffcd00] text-gray-900 font-bold rounded-lg shadow-lg hover:bg-[#ffda33]" data-page="products">
-                            <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                            <span>تصفح المنتجات</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-          
             <section id="page-admin" class="page-section pt-8">
                 <h1 class="text-3xl sm:text-4xl font-bold mb-8">لوحة التحكم</h1>
                 
@@ -2134,13 +2128,10 @@
                         <h3>4. سياسة الخصوصية</h3>
                         <p>نحن نحترم خصوصيتك. المعلومات التي نجمعها (مثل عند استخدام "تسجيل الدخول بحساب جوجل") تُستخدم فقط لإدارة حسابك وتسهيل عملية الطلب. نحن لا نشارك بياناتك الشخصية مع أطراف ثالثة دون موافقتك.</p>
 
-                        <h3>5. المساعد الذكي (AI)</h3>
-                        <p>المساعد الذكي متوفر لتقديم معلومات عن المنتجات ونصائح عامة. المعلومات المقدمة من المساعد الذكي هي لأغراض إرشادية وقد لا تكون دقيقة بنسبة 100%. للحصول على تأكيد نهائي بخصوص المواصفات أو الأسعار، يرجى التواصل مع فريقنا مباشرة.</p>
-                        
-                        <h3>6. حقوق الملكية الفكرية</h3>
+                        <h3>5. حقوق الملكية الفكرية</h3>
                         <p>جميع المحتويات على هذا الموقع، بما في ذلك النصوص، الرسومات، الشعارات، والصور، هي ملك لـ "متجر مكة" ومحمية بموجب قوانين حقوق النشر.</p>
 
-                        <h3>7. طرق الدفع</h3>
+                        <h3>6. طرق الدفع</h3>
                         <p>نحن نقبل حاليًا طرق الدفع التالية:</p>
                         
                         <!-- NEW: Modern Payment Methods Section -->
@@ -2173,7 +2164,7 @@
                         <!-- END: Modern Payment Methods Section -->
 
 
-                        <h3>8. سياسة الإسترجاع وحماية المستهلك</h3>
+                        <h3>7. سياسة الإسترجاع وحماية المستهلك</h3>
                         <p>نحن نلتزم بقانون حماية المستهلك المصري. يحق للعملاء استرجاع المنتجات خلال 14 يومًا من تاريخ الشراء، بشرط أن يكون المنتج بحالته الأصلية ولم يتم استخدامه.</p>
                         <p>في حالة وجود أي شكوى أو للاستفسار عن حقوقك كمستهلك، يمكنك التواصل مباشرة مع جهاز حماية المستهلك:</p>
                         <ul>
@@ -2212,21 +2203,11 @@
                                         <span>شروط الاستخدام</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" id="open-help-modal-btn" class="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-[#ffcd00]">
-                                        <i data-lucide="help-circle" class="w-4 h-4 text-[#ffcd00] flex-shrink-0"></i>
-                                        <span>مساعدة</span>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                         <div class="text-center sm:text-right">
                             <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4">اتصل بنا</h3>
                             <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-300">
-                                <li class="flex items-start gap-3 justify-center sm:justify-start">
-                                    <i data-lucide="phone" class="w-4 h-4 text-[#ffcd00] flex-shrink-0 mt-1"></i>
-                                    <a href="tel:0225071272" class="hover:text-[#ffda33]" dir="ltr">0225071272 (المتجر)</a>
-                                </li>
                                 <li class="flex items-start gap-3 justify-center sm:justify-start">
                                     <i data-lucide="smartphone" class="w-4 h-4 text-[#ffcd00] flex-shrink-0 mt-1"></i>
                                     <a href="https://wa.me/201146641942" class="hover:text-[#ffda33]" dir="ltr">01146641942 (واتساب)</a>
@@ -2646,55 +2627,6 @@
         </div>
     </div>
 
-    <div id="gemini-help-modal" class="ai-modal-backdrop modal hidden fixed inset-0 z-50 flex items-end justify-end p-0 sm:p-4 bg-black/50 transition-opacity duration-300" data-state="closed">
-        
-        <div id="gemini-help-panel" class="w-full max-w-full sm:max-w-md max-h-[90vh] sm:max-h-[700px] flex flex-col transition-all duration-300 ease-out opacity-0 translate-y-6 rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden border bg-white/95 dark:bg-[#202124]/95 backdrop-blur-xl border-gray-200 dark:border-gray-700">
-            
-            <div class="flex-shrink-0 flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
-                <div class="flex items-center gap-3">
-                    <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full items-center justify-center bg-gradient-to-br from-[#ffcd00] to-[#ffb700]">
-                        <i data-lucide="sparkles" class="w-6 h-6 text-gray-900"></i>
-                    </span>
-                    <div>
-                        <h2 class="text-base font-semibold">المساعد الذكي</h2>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">اسألني عن المنتجات أو اطلب نصيحة</p>
-                    </div>
-                </div>
-                <div class="flex gap-1">
-                    <button id="clear-chat-btn" class="p-2 text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" title="بدء محادثة جديدة">
-                        <i data-lucide="refresh-ccw" class="w-5 h-5"></i>
-                    </button>
-                    <button id="close-help-modal-btn" class="p-2 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" title="إغلاق">
-                        <i data-lucide="x" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div id="chat-history" class="flex-1 p-4 space-y-4 overflow-y-auto flex flex-col bg-white dark:bg-[#202124]">
-                <div class="model-message self-start">
-                    أهلاً بك في متجر مكة! كيف يمكنني مساعدتك اليوم؟
-                </div>
-                
-                <div id="loading-indicator" class="hidden loading-dots self-start">
-                    <div class="loading-dot"></div>
-                    <div class="loading-dot"></div>
-                    <div class="loading-dot"></div>
-                </div>
-            </div>
-            
-         
-
-            <form id="help-form" class="flex-shrink-0 p-4 border-t border-gray-200 dark:border-gray-700 bg-white/70 dark:bg-[#202124]/70">
-                <div class="relative flex items-center">
-                    <input type="text" id="help-input" placeholder="ابحث عن منتج أو اطلب نصيحة..." class="w-full px-4 py-3 pr-12 rounded-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:border-[#ffcd00] focus:ring-[#ffcd00] transition-colors" style="padding-left: 52px;">
-                    <button type="submit" class="absolute left-2 right-auto p-2.5 bg-[#ffcd00] text-gray-900 rounded-full hover:bg-[#ffda33] transition-colors shadow-sm disabled:opacity-50" style="left: 8px;">
-                        <i data-lucide="send" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    
     <script type="module">
         
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -2720,7 +2652,8 @@
             updateDoc,
             setDoc,
             getDoc,
-            increment  // Added increment here
+            increment,
+            enableIndexedDbPersistence // إضافة دالة التخزين المؤقت لقاعدة البيانات
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         
@@ -2738,6 +2671,19 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app); 
+        
+        // --- تفعيل الكاش لقاعدة البيانات (Offline Persistence) ---
+        // هذا يسمح بتحميل البيانات فوراً حتى لو كان الإنترنت بطيئاً أو مقطوعاً
+        enableIndexedDbPersistence(db)
+            .catch((err) => {
+                if (err.code == 'failed-precondition') {
+                    console.log('Persistence failed: Multiple tabs open');
+                } else if (err.code == 'unimplemented') {
+                    console.log('Persistence is not available in this browser');
+                }
+            });
+        // -------------------------------------------------------
+
         const provider = new GoogleAuthProvider();
  
         setPersistence(auth, browserSessionPersistence);
@@ -2753,14 +2699,6 @@
         // --- NEW: Flag to track initial load ---
         let isInitialLoadComplete = false;
 
-        let aiChatHistory = [];
-        const defaultSuggestions = [
-            "ما هي أفضل العروض؟",
-            "أبحث عن إضاءة ليد",
-            "ما هي المنتجات الأكثر مبيعاً؟",
-            "أحتاج مساعدة في اختيار كابل"
-        ];
-        
         let currentGalleryImages = [];
         let currentGalleryIndex = 0;
         // --- NEW: Track selected color on details page ---
@@ -2770,7 +2708,6 @@
         // --- NEW: Global Search Listener ---
         const globalSearchInput = document.getElementById('global-search-input');
         const productSearchInput = document.getElementById('product-search-input');
-        const openHelpLink = document.getElementById('open-help-modal-link');
         
         // --- NEW: Hide Loader Function ---
         function hideGlobalLoader() {
@@ -2781,7 +2718,7 @@
             const body = document.body;
 
             if (loader && app) {
-                // Fade out loader
+                // Fade out loader faster (duration-300)
                 loader.style.opacity = '0';
                 // Fade in app
                 app.style.opacity = '1';
@@ -2793,7 +2730,7 @@
                 setTimeout(() => {
                     loader.style.display = 'none';
                     isInitialLoadComplete = true;
-                }, 700);
+                }, 300); // Updated to match CSS transition
             }
         }
         // --------------------------------
@@ -2826,18 +2763,6 @@
             }
         }
 
-        if (openHelpLink) {
-            openHelpLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                const helpModal = document.getElementById('gemini-help-modal');
-                if (helpModal) {
-                    helpModal.classList.remove('hidden');
-                    requestAnimationFrame(() => {
-                        helpModal.dataset.state = 'open';
-                    });
-                }
-            });
-        }
         // -----------------------------------
 
         // --- NEW: Helper to check if offer is active ---
@@ -3825,152 +3750,6 @@
 
             // Terms Modal JavaScript (REMOVED)
 
-            const helpModal = document.getElementById('gemini-help-modal');
-            const openHelpBtn = document.getElementById('open-help-modal-btn');
-            const closeHelpBtn = document.getElementById('close-help-modal-btn');
-
-            if (openHelpBtn && helpModal) {
-                openHelpBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    helpModal.classList.remove('hidden');
-                    // Use requestAnimationFrame to ensure the class removal is processed 
-                    // before setting data-state, allowing the transition to work.
-                    requestAnimationFrame(() => {
-                        helpModal.dataset.state = 'open';
-                    });
-                });
-            }
-
-            if (closeHelpBtn && helpModal) {
-                closeHelpBtn.addEventListener('click', () => {
-                    helpModal.dataset.state = 'closed';
-                    // Wait for the transition to finish before hiding
-                    setTimeout(() => {
-                        helpModal.classList.add('hidden');
-                    }, 300);
-                });
-            }
-
-            const helpForm = document.getElementById('help-form');
-            if (helpForm) {
-                helpForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const input = document.getElementById('help-input');
-                    if (!input || !input.value.trim()) return;
-
-                    const userText = input.value.trim();
-                    input.value = ''; // مسح حقل الإدخال
-                    
-                    const chatHistoryEl = document.getElementById('chat-history');
-                    const loadingIndicator = document.getElementById('loading-indicator');
-                    
-                    // 1. عرض رسالة المستخدم
-                    const userMsg = document.createElement('div');
-                    userMsg.className = 'user-message';
-                    userMsg.textContent = userText;
-                    chatHistoryEl.insertBefore(userMsg, loadingIndicator);
-                    chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
-
-                    // 2. إظهار مؤشر التحميل
-                    if (loadingIndicator) {
-                        loadingIndicator.classList.remove('hidden');
-                        loadingIndicator.classList.add('flex');
-                    }
-                    chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
-
-                    // 3. تجهيز سياق المنتجات للذكاء الاصطناعي
-                    const productsContext = allProducts.map(p => 
-                        `- ${p.name} (${p.price} EGP) [${p.isAvailable !== false ? 'متوفر' : 'غير متوفر'}]`
-                    ).join('\n');
-
-                    const systemPrompt = `أنت مساعد مبيعات خبير لـ "متجر مكة للأدوات الكهربائية".
-هدفنا مساعدة العملاء في العثور على المنتجات المناسبة من قائمتنا الحالية فقط:
-${productsContext}
-
-قواعد الرد:
-- تحدث بلهجة ودودة ومحترفة (مصرية أو فصحى بسيطة).
-- لا تقترح أبداً منتجات غير موجودة في القائمة أعلاه.
-- إذا كان المنتج "غير متوفر"، أخبر العميل بذلك واقترح بديلاً مشابهاً "متوفر" إن وجد.
-- اجعل ردودك قصيرة، مباشرة، ومفيدة. شجع العميل على الشراء بلطف.`;
-
-                    // إضافة رسالة المستخدم للسجل
-                    aiChatHistory.push({ role: "user", parts: [{ text: userText }] });
-
-                    // 4. الاتصال بـ Gemini API
-                    try {
-                        // تنبيه هام: إذا كنت تستخدم هذا الكود خارج بيئة التطوير الحالية، يجب عليك وضع مفتاح API الخاص بك هنا.
-                        // يمكنك الحصول عليه من: https://aistudio.google.com/app/apikey
-                        const apiKey = "AIzaSyBPE9qC_o61aeUXq11youK0EH73fhMEmfI"; 
-                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                        
-                        const payload = {
-                            contents: aiChatHistory,
-                            systemInstruction: { parts: [{ text: systemPrompt }] }
-                        };
-
-                        const response = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if (!response.ok) {
-                            const errorData = await response.text();
-                            console.error("AI API Error Details:", response.status, errorData);
-                            throw new Error(`HTTP Error: ${response.status} - Check Console for details`);
-                        }
-
-                        const data = await response.json();
-                        const aiResponseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                        if (aiResponseText) {
-                            // 5. عرض رد المساعد
-                            const aiMsg = document.createElement('div');
-                            aiMsg.className = 'model-message';
-                            // تحويل تنسيق markdown البسيط (تغميق النص) إلى HTML
-                            aiMsg.innerHTML = aiResponseText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
-                            chatHistoryEl.insertBefore(aiMsg, loadingIndicator);
-                            
-                            // إضافة رد المساعد للسجل للمحادثة التالية
-                            aiChatHistory.push({ role: "model", parts: [{ text: aiResponseText }] });
-                        }
-
-                    } catch (error) {
-                        console.error("Full AI Chat Error:", error);
-                        const errorMsg = document.createElement('div');
-                        errorMsg.className = 'model-message bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400';
-                        errorMsg.textContent = "عذراً، حدث خطأ فني. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى قريباً.";
-                        chatHistoryEl.insertBefore(errorMsg, loadingIndicator);
-                        aiChatHistory.pop(); // إزالة آخر رسالة مستخدم لتجنب الأخطاء المتراكمة
-                    } finally {
-                        // 6. إخفاء مؤشر التحميل
-                        if (loadingIndicator) {
-                            loadingIndicator.classList.add('hidden');
-                            loadingIndicator.classList.remove('flex');
-                        }
-                        chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
-                    }
-                });
-            }
-
-            // تفعيل زر "محادثة جديدة" لمسح السجل
-            const clearChatBtn = document.getElementById('clear-chat-btn');
-            if (clearChatBtn) {
-                clearChatBtn.addEventListener('click', () => {
-                    aiChatHistory = [];
-                    const chatHistoryEl = document.getElementById('chat-history');
-                    const loadingIndicator = document.getElementById('loading-indicator');
-                    if (chatHistoryEl && loadingIndicator) {
-                        chatHistoryEl.innerHTML = `
-                            <div class="model-message self-start">
-                                أهلاً بك مجدداً في متجر مكة! كيف يمكنني مساعدتك في اختيار منتجاتك اليوم؟
-                            </div>
-                        `;
-                        chatHistoryEl.appendChild(loadingIndicator);
-                    }
-                });
-            }
-
             if(addArticleForm) addArticleForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const editingId = addArticleForm.dataset.editingId;
@@ -4283,7 +4062,9 @@ ${productsContext}
                 // NEW: Populate Top Offers Section
                 if (topOffersSection && topOffersGrid) {
                     if (offers.length > 0) {
-                        offers.forEach(p => topOffersGrid.innerHTML += renderProductCard(p));
+                        // OPTIMIZATION: Build HTML string first instead of repeated innerHTML +=
+                        topOffersGrid.innerHTML = offers.map(p => renderProductCard(p)).join('');
+                        
                         // Only show this section on 'home' page
                         if (document.getElementById('page-home').classList.contains('active')) {
                              topOffersSection.classList.remove('hidden');
@@ -4299,7 +4080,8 @@ ${productsContext}
                 if (homeOffersSection) {
                     const limitedOffers = offers.slice(0, 6);
                     if (limitedOffers.length > 0) {
-                        limitedOffers.forEach(p => offersGrid.innerHTML += renderProductCard(p));
+                        // OPTIMIZATION: Build HTML string first
+                        offersGrid.innerHTML = limitedOffers.map(p => renderProductCard(p)).join('');
                         homeOffersSection.classList.remove('hidden');
                     } else {
                         homeOffersSection.classList.add('hidden');
@@ -4309,7 +4091,8 @@ ${productsContext}
                 // --- MODIFIED: Handle Home Bestsellers Slider Visibility ---
                 if (homeBestsellersSection) {
                     if (bestsellers.length > 0) {
-                        bestsellers.forEach(p => bestsellersGrid.innerHTML += renderProductCard(p));
+                        // OPTIMIZATION: Build HTML string first
+                        bestsellersGrid.innerHTML = bestsellers.map(p => renderProductCard(p)).join('');
                         homeBestsellersSection.classList.remove('hidden');
                     } else {
                         homeBestsellersSection.classList.add('hidden');
@@ -4324,8 +4107,8 @@ ${productsContext}
                 } else {
                     noProductsMessage.classList.add('hidden');
                     productsGrid.classList.remove('hidden'); 
-                    productsGrid.innerHTML = ''; 
-                    filteredProducts.forEach(p => productsGrid.innerHTML += renderProductCard(p));
+                    // OPTIMIZATION: Build HTML string first to prevent UI freeze
+                    productsGrid.innerHTML = filteredProducts.map(p => renderProductCard(p)).join('');
                 }
 
                 
@@ -4465,9 +4248,8 @@ ${productsContext}
                 } else {
                     noOffersMsg.classList.add('hidden');
                     grid.classList.remove('hidden');
-                    offers.forEach(p => {
-                        grid.innerHTML += renderProductCard(p);
-                    });
+                    // OPTIMIZATION: Build HTML string first
+                    grid.innerHTML = offers.map(p => renderProductCard(p)).join('');
                 }
                 setupAddToCartButtons();
                 setupDeleteProductButtons();
@@ -4779,10 +4561,8 @@ ${productsContext}
                     return;
                 }
 
-                blogGrid.innerHTML = '';
-                allArticles.forEach(article => {
-                    blogGrid.innerHTML += renderArticleCard(article);
-                });
+                // OPTIMIZATION: Build HTML string first
+                blogGrid.innerHTML = allArticles.map(article => renderArticleCard(article)).join('');
 
 
                 setupDeleteArticleButtons();
@@ -5337,9 +5117,10 @@ ${productsContext}
                 
               
                 if (loadingElDesktop) loadingElDesktop.classList.remove('hidden');
-                if (gridElDesktop) gridElDesktop.innerHTML = ''; 
+                // لا نمسح المحتوى فوراً لتجنب الوميض إذا كان هناك محتوى سابق
+                // if (gridElDesktop) gridElDesktop.innerHTML = ''; 
                 if (loadingElMobile) loadingElMobile.classList.remove('hidden');
-                if (gridElMobile) gridElMobile.innerHTML = ''; 
+                // if (gridElMobile) gridElMobile.innerHTML = ''; 
 
                 try {
                     const currentProduct = allProducts.find(p => p.shortId === productId || p.id === productId);
@@ -5452,6 +5233,20 @@ ${productsContext}
             }
 
             function loadProducts() {
+                // 1. محاولة التحميل الفوري من LocalStorage (الكاش المحلي)
+                const cachedData = localStorage.getItem('macca_products_cache');
+                if (cachedData) {
+                    try {
+                        allProducts = JSON.parse(cachedData);
+                        console.log("Loaded products from local cache:", allProducts.length);
+                        populateBrandFilter();
+                        renderAllProductViews();
+                        hideGlobalLoader(); // إخفاء شاشة التحميل فوراً
+                    } catch (e) {
+                        console.error("Error parsing cached products", e);
+                    }
+                }
+
                 const productsRef = collection(db, "products");
                 const q = query(productsRef);
 
@@ -5461,7 +5256,11 @@ ${productsContext}
                     querySnapshot.forEach((doc) => {
                         allProducts.push({ id: doc.id, ...doc.data() });
                     });
-                    console.log("Products loaded from Firestore:", allProducts.length);
+                    
+                    // تحديث الكاش المحلي بالبيانات الجديدة
+                    localStorage.setItem('macca_products_cache', JSON.stringify(allProducts));
+                    
+                    console.log("Products loaded/updated from Firestore:", allProducts.length);
                     
                     populateBrandFilter(); 
                     renderAllProductViews();
@@ -5605,6 +5404,15 @@ ${productsContext}
             });
 
             function loadArticles() {
+                // 1. التحميل من الكاش أولاً
+                const cachedArticles = localStorage.getItem('macca_articles_cache');
+                if (cachedArticles) {
+                    try {
+                        allArticles = JSON.parse(cachedArticles);
+                        renderArticles();
+                    } catch (e) {}
+                }
+
                 const articlesRef = collection(db, "articles");
                 const q = query(articlesRef);
 
@@ -5613,6 +5421,10 @@ ${productsContext}
                     querySnapshot.forEach((doc) => {
                         allArticles.push({ id: doc.id, ...doc.data() });
                     });
+                    
+                    // تحديث الكاش
+                    localStorage.setItem('macca_articles_cache', JSON.stringify(allArticles));
+                    
                     console.log("Articles loaded from Firestore:", allArticles.length);
                     renderArticles();
 
@@ -5642,51 +5454,62 @@ ${productsContext}
             function loadSiteConfig() {
                
                 // 0. Load Branding Config (NEW)
+                // محاولة التحميل من الكاش للإعدادات
+                const cachedBranding = localStorage.getItem('macca_config_branding');
+                if (cachedBranding) applyBrandingConfig(JSON.parse(cachedBranding));
+
                 const brandingConfigRef = doc(db, "config", "branding");
                 onSnapshot(brandingConfigRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        localStorage.setItem('macca_config_branding', JSON.stringify(data)); // حفظ في الكاش
+                        applyBrandingConfig(data);
+                    }
+                });
+
+                function applyBrandingConfig(data) {
                     const logoImg = document.getElementById('site-logo-img');
                     const adminLogoInput = document.getElementById('admin-logo-url');
-                    
-                    // New Elements for Size
                     const adminLogoSizeInput = document.getElementById('admin-logo-size');
                     const adminLogoSizeDisplay = document.getElementById('admin-logo-size-display');
 
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        const logoUrl = data.logoUrl;
-                        const logoSize = data.logoSize || 80; // Default 80px
+                    const logoUrl = data.logoUrl;
+                    const logoSize = data.logoSize || 80;
 
-                        if (logoUrl && logoUrl.trim() !== '') {
-                            // Show Custom Image Logo
-                            if (logoImg) {
-                                logoImg.src = logoUrl;
-                                logoImg.classList.remove('hidden');
-                                // Apply Dynamic Size
-                                logoImg.style.height = `${logoSize}px`;
-                                // Ensure standard class doesn't override (inline style wins, but good practice)
-                                logoImg.classList.remove('h-20'); 
-                            }
-                        } else {
-                            // Hide Custom Image Logo if no URL
-                            if (logoImg) logoImg.classList.add('hidden');
+                    if (logoUrl && logoUrl.trim() !== '') {
+                        if (logoImg) {
+                            logoImg.src = logoUrl;
+                            logoImg.classList.remove('hidden');
+                            logoImg.style.height = `${logoSize}px`;
+                            logoImg.classList.remove('h-20'); 
                         }
-
-                        // Populate Admin Input
-                        if (adminLogoInput) adminLogoInput.value = logoUrl || '';
-                        
-                        // Populate Size Controls
-                        if (adminLogoSizeInput) adminLogoSizeInput.value = logoSize;
-                        if (adminLogoSizeDisplay) adminLogoSizeDisplay.textContent = `${logoSize}px`;
+                    } else {
+                        if (logoImg) logoImg.classList.add('hidden');
                     }
-                });
+                    if (adminLogoInput) adminLogoInput.value = logoUrl || '';
+                    if (adminLogoSizeInput) adminLogoSizeInput.value = logoSize;
+                    if (adminLogoSizeDisplay) adminLogoSizeDisplay.textContent = `${logoSize}px`;
+                }
 
                 // REMOVED: 1. Load Sticky Banner Config logic
 
                 // 2. Load Homepage (Hero) Config
+                // كاش للصفحة الرئيسية
+                const cachedHome = localStorage.getItem('macca_config_home');
+                if (cachedHome) applyHomeConfig(JSON.parse(cachedHome));
+
                 const homepageConfigRef = doc(db, "config", "homepage");
                 onSnapshot(homepageConfigRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        localStorage.setItem('macca_config_home', JSON.stringify(data));
+                        applyHomeConfig(data);
+                    }
+                });
+
+                function applyHomeConfig(data) {
                     // DOM Elements
-                    const heroContainer = document.getElementById('hero-section-container'); // NEW
+                    const heroContainer = document.getElementById('hero-section-container');
                     const videoEl = document.getElementById('hero-video');
                     const videoSourceEl = document.getElementById('hero-video-source');
                     const imageEl = document.getElementById('hero-bg-image'); 
@@ -5703,117 +5526,97 @@ ${productsContext}
                     const adminTitleInput = document.getElementById('admin-hero-title');
                     const adminSubtitleInput = document.getElementById('admin-hero-subtitle');
                     const adminDescInput = document.getElementById('admin-hero-desc');
-                    
-                    // NEW: Admin Inputs for Visibility & Height (Separate)
                     const adminVisMobile = document.getElementById('admin-hero-vis-mobile');
                     const adminVisDesktop = document.getElementById('admin-hero-vis-desktop');
-                    
                     const adminHeightMobileInput = document.getElementById('admin-hero-height-mobile');
                     const adminHeightMobileDisplay = document.getElementById('admin-hero-height-mobile-display');
                     const adminHeightDesktopInput = document.getElementById('admin-hero-height-desktop');
                     const adminHeightDesktopDisplay = document.getElementById('admin-hero-height-desktop-display');
 
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        const heroType = data.heroType || 'image'; 
-                        const videoUrl = data.videoUrl;
-                        const imageUrl = data.imageUrl;
-                        
-                        // NEW: Visibility Logic
-                        const showMobile = data.visibleMobile !== false; 
-                        const showDesktop = data.visibleDesktop !== false; 
-                        
-                        // NEW: Height Logic (Separate Defaults)
-                        const heroHeightMobile = data.heroHeightMobile || 400;
-                        const heroHeightDesktop = data.heroHeightDesktop || 500;
+                    const heroType = data.heroType || 'image'; 
+                    const videoUrl = data.videoUrl;
+                    const imageUrl = data.imageUrl;
+                    const showMobile = data.visibleMobile !== false; 
+                    const showDesktop = data.visibleDesktop !== false; 
+                    const heroHeightMobile = data.heroHeightMobile || 400;
+                    const heroHeightDesktop = data.heroHeightDesktop || 500;
 
-                        if (heroContainer) {
-                            // Apply Height via Dynamic Style Tag for Responsiveness
-                            let dynamicStyle = document.getElementById('hero-dynamic-style');
-                            if (!dynamicStyle) {
-                                dynamicStyle = document.createElement('style');
-                                dynamicStyle.id = 'hero-dynamic-style';
-                                document.head.appendChild(dynamicStyle);
-                            }
-                            
-                            // CSS logic: Default is mobile height, change to desktop height on medium screens (md)
-                            dynamicStyle.textContent = `
-                                #hero-section-container { min-height: ${heroHeightMobile}px !important; }
-                                @media (min-width: 768px) {
-                                    #hero-section-container { min-height: ${heroHeightDesktop}px !important; }
-                                }
-                            `;
-
-                            // Reset classes first
-                            heroContainer.classList.remove('hidden', 'flex', 'md:hidden', 'md:flex');
-                            
-                            if (showMobile && showDesktop) {
-                                heroContainer.classList.add('flex');
-                            } else if (!showMobile && !showDesktop) {
-                                heroContainer.classList.add('hidden');
-                            } else if (showMobile && !showDesktop) {
-                                heroContainer.classList.add('flex', 'md:hidden');
-                            } else if (!showMobile && showDesktop) {
-                                heroContainer.classList.add('hidden', 'md:flex');
-                            }
+                    if (heroContainer) {
+                        let dynamicStyle = document.getElementById('hero-dynamic-style');
+                        if (!dynamicStyle) {
+                            dynamicStyle = document.createElement('style');
+                            dynamicStyle.id = 'hero-dynamic-style';
+                            document.head.appendChild(dynamicStyle);
                         }
-
-                        // Update Admin Inputs
-                        if (adminVisMobile) adminVisMobile.checked = showMobile;
-                        if (adminVisDesktop) adminVisDesktop.checked = showDesktop;
                         
-                        if (adminHeightMobileInput) adminHeightMobileInput.value = heroHeightMobile;
-                        if (adminHeightMobileDisplay) adminHeightMobileDisplay.textContent = `${heroHeightMobile}px`;
+                        dynamicStyle.textContent = `
+                            #hero-section-container { min-height: ${heroHeightMobile}px !important; }
+                            @media (min-width: 768px) {
+                                #hero-section-container { min-height: ${heroHeightDesktop}px !important; }
+                            }
+                        `;
+
+                        heroContainer.classList.remove('hidden', 'flex', 'md:hidden', 'md:flex');
                         
-                        if (adminHeightDesktopInput) adminHeightDesktopInput.value = heroHeightDesktop;
-                        if (adminHeightDesktopDisplay) adminHeightDesktopDisplay.textContent = `${heroHeightDesktop}px`;
-
-                        // Update Media
-                        if (heroType === 'video' && videoUrl) {
-                            if (videoSourceEl) videoSourceEl.src = videoUrl;
-                            if (videoEl) {
-                                videoEl.load();
-                                videoEl.classList.remove('hidden');
-                            }
-                            if (imageEl) imageEl.classList.add('hidden');
-                        } else {
-                            if (imageEl) {
-                                // Updated Logic: Only show image if URL exists
-                                if (imageUrl && imageUrl.trim() !== '') {
-                                    imageEl.src = imageUrl;
-                                    imageEl.classList.remove('hidden');
-                                } else {
-                                    imageEl.classList.add('hidden');
-                                }
-                            }
-                            if (videoEl) videoEl.classList.add('hidden');
+                        if (showMobile && showDesktop) {
+                            heroContainer.classList.add('flex');
+                        } else if (!showMobile && !showDesktop) {
+                            heroContainer.classList.add('hidden');
+                        } else if (showMobile && !showDesktop) {
+                            heroContainer.classList.add('flex', 'md:hidden');
+                        } else if (!showMobile && showDesktop) {
+                            heroContainer.classList.add('hidden', 'md:flex');
                         }
-
-                        // Update Text
-                        if (badgeTextEl && data.badgeText) badgeTextEl.textContent = data.badgeText;
-                        if (titleMainEl && data.titleMain) titleMainEl.textContent = data.titleMain;
-                        if (titleSubEl && data.titleSub) titleSubEl.textContent = data.titleSub;
-                        if (descEl && data.description) descEl.textContent = data.description;
-
-                        // Update Admin Form
-                        if (adminHeroTypeSelect) {
-                            adminHeroTypeSelect.value = heroType;
-                            adminHeroTypeSelect.dispatchEvent(new Event('change'));
-                        }
-                        if (adminVideoUrlInput) adminVideoUrlInput.value = videoUrl || '';
-                        if (adminImageUrlInput) adminImageUrlInput.value = imageUrl || '';
-                        if (adminBadgeInput) adminBadgeInput.value = data.badgeText || '';
-                        if (adminTitleInput) adminTitleInput.value = data.titleMain || '';
-                        if (adminSubtitleInput) adminSubtitleInput.value = data.titleSub || '';
-                        if (adminDescInput) adminDescInput.value = data.description || '';
                     }
-                });
+
+                    if (adminVisMobile) adminVisMobile.checked = showMobile;
+                    if (adminVisDesktop) adminVisDesktop.checked = showDesktop;
+                    if (adminHeightMobileInput) adminHeightMobileInput.value = heroHeightMobile;
+                    if (adminHeightMobileDisplay) adminHeightMobileDisplay.textContent = `${heroHeightMobile}px`;
+                    if (adminHeightDesktopInput) adminHeightDesktopInput.value = heroHeightDesktop;
+                    if (adminHeightDesktopDisplay) adminHeightDesktopDisplay.textContent = `${heroHeightDesktop}px`;
+
+                    if (heroType === 'video' && videoUrl) {
+                        if (videoSourceEl) videoSourceEl.src = videoUrl;
+                        if (videoEl) {
+                            videoEl.load();
+                            videoEl.classList.remove('hidden');
+                        }
+                        if (imageEl) imageEl.classList.add('hidden');
+                    } else {
+                        if (imageEl) {
+                            if (imageUrl && imageUrl.trim() !== '') {
+                                imageEl.src = imageUrl;
+                                imageEl.classList.remove('hidden');
+                            } else {
+                                imageEl.classList.add('hidden');
+                            }
+                        }
+                        if (videoEl) videoEl.classList.add('hidden');
+                    }
+
+                    if (badgeTextEl && data.badgeText) badgeTextEl.textContent = data.badgeText;
+                    if (titleMainEl && data.titleMain) titleMainEl.textContent = data.titleMain;
+                    if (titleSubEl && data.titleSub) titleSubEl.textContent = data.titleSub;
+                    if (descEl && data.description) descEl.textContent = data.description;
+
+                    if (adminHeroTypeSelect) {
+                        adminHeroTypeSelect.value = heroType;
+                        adminHeroTypeSelect.dispatchEvent(new Event('change'));
+                    }
+                    if (adminVideoUrlInput) adminVideoUrlInput.value = videoUrl || '';
+                    if (adminImageUrlInput) adminImageUrlInput.value = imageUrl || '';
+                    if (adminBadgeInput) adminBadgeInput.value = data.badgeText || '';
+                    if (adminTitleInput) adminTitleInput.value = data.titleMain || '';
+                    if (adminSubtitleInput) adminSubtitleInput.value = data.titleSub || '';
+                    if (adminDescInput) adminDescInput.value = data.description || '';
+                }
 
                 // 3. Load Top Notification Bar Config
                 const topbarConfigRef = doc(db, "config", "top_bar");
                 onSnapshot(topbarConfigRef, (docSnap) => {
                     const topBarEl = document.getElementById('top-notification-bar');
-                    const contentEl = document.getElementById('top-bar-content'); // Container for text
+                    const contentEl = document.getElementById('top-bar-content');
                     const textEl = document.getElementById('top-bar-text');
                     const highlightEl = document.getElementById('top-bar-highlight');
                     
@@ -5824,12 +5627,10 @@ ${productsContext}
                     if (docSnap.exists()) {
                         const data = docSnap.data();
                         
-                        // Update Admin Inputs
                         if (adminText) adminText.value = data.text || '';
                         if (adminHighlight) adminHighlight.value = data.highlight || '';
                         if (adminVisible) adminVisible.checked = data.visible !== false;
 
-                        // Logic: Hide content text part if both fields are empty
                         const hasContent = (data.text && data.text.trim() !== '') || (data.highlight && data.highlight.trim() !== '');
 
                         if (contentEl) {
@@ -5844,7 +5645,6 @@ ${productsContext}
                             }
                         }
                         
-                        // Global Visibility Toggle (Existing logic)
                         if (topBarEl) {
                             if (data.visible === false) {
                                 topBarEl.classList.add('hidden');
@@ -5853,7 +5653,6 @@ ${productsContext}
                             }
                         }
                     } else {
-                        // If no config exists yet, hide the text part by default
                         if (contentEl) contentEl.classList.add('hidden');
                     }
                 });
@@ -6362,8 +6161,8 @@ ${productsContext}
 
                     let targetPageId = 'home'; // default
                     let targetItemId = null;
-                    // MODIFIED: Added 'offers', 'terms', and 'favorites' to simplePages
-                    const simplePages = ['home', 'products', 'blog', 'contact', 'cart', 'admin', 'about', 'offers', 'terms', 'favorites'];
+                    // MODIFIED: Removed 'favorites' from simplePages
+                    const simplePages = ['home', 'products', 'blog', 'contact', 'cart', 'admin', 'about', 'offers', 'terms'];
 
                     if (hash.startsWith('#product/')) {
                         targetPageId = 'details';
@@ -6506,13 +6305,13 @@ ${productsContext}
                 initVisitorCounter();
                 // -----------------------------
 
-                // Force hide loader after 5 seconds if something hangs (Network issues)
+                // Force hide loader after 2.5 seconds (Reduced from 5s)
                 setTimeout(() => {
                     if (!isInitialLoadComplete) {
                         console.warn("Forcing loader hide due to timeout");
                         hideGlobalLoader();
                     }
-                }, 5000);
+                }, 2500);
 
                 // --- FAQ Accordion Logic (Updated to Max-Height Method) ---
                 const initFAQ = () => {
