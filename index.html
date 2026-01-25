@@ -536,56 +536,6 @@
             50% { transform: translateX(0%); }
             100% { transform: translateX(100%); }
         }
-        @media (max-width: 767px) {
-    main {
-        padding-bottom: 80px !important; /* مساحة عشان المنيو ما تغطيش آخر المنتجات */
-    }
-    /* تعديل مكان زرار الواتساب عشان ما يخبطش في المنيو */
-    .whatsapp-fab {
-        bottom: 85px !important; 
-    }
-    #scroll-to-top-btn {
-        bottom: 150px !important;
-    }
-}
-
-/* ستايل للعنصر النشط في المنيو */
-.mobile-nav-link.active {
-    @apply text-[#ffcd00] !important;
-}
-.mobile-nav-link.active i {
-    @apply scale-110 transition-transform;
-}
-@media (max-width: 640px) {
-    /* تنظيم شبكة المنتجات لتكون 2 في كل سطر بشكل متساوي */
-    #products-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px !important;
-    }
-    /* تصغير العناوين لتوفير مساحة للصور */
-    .product-card-wrapper h3 {
-        font-size: 0.8rem !important;
-        height: 2.4rem !important;
-        line-height: 1.2 !important;
-    }
-    /* إخفاء شريط التمرير مع بقاء الحركة */
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
-    /* تنسيق رقاقات الأقسام للموبيل */
-.category-chip {
-    @apply flex-shrink-0 px-5 py-2 rounded-full text-xs font-bold border transition-all duration-200 shadow-sm;
-}
-/* إخفاء السكرول بار مع الحفاظ على الحركة */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-.no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-}
-  #main-product-image { cursor: pointer; }
     </style>
     
 </head>
@@ -750,12 +700,12 @@
                         
                         <a href="#products" data-page="products" data-category-filter="Lighting" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
                             <i data-lucide="lightbulb" class="w-6 h-6 text-yellow-500"></i>
-                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">إضاءةحديثه</span>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">إضاءة</span>
                         </a>
 
                         <a href="#products" data-page="products" data-category-filter="Cables" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
                             <i data-lucide="plug-2" class="w-6 h-6 text-blue-500"></i>
-                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">كابلات واسلاك</span>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">كابلات</span>
                         </a>
 
                         <a href="#products" data-page="products" data-category-filter="Switches" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
@@ -765,7 +715,7 @@
 
                         <a href="#products" data-page="products" data-category-filter="Paints" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
                             <i data-lucide="paint-bucket" class="w-6 h-6 text-green-500"></i>
-                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">دهانات وديكور </span>
+                            <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">دهانات</span>
                         </a>
 
                         <a href="#products" data-page="products" data-category-filter="Ironmongery" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
@@ -793,10 +743,6 @@
                             <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">بناء</span>
                         </a>
 
-                <a href="#products" data-page="products" data-category-filter="Parts" class="mobile-dept-item flex flex-col items-center text-center gap-2 p-3 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-[#ffcd00]/10 transition-colors border border-transparent hover:border-[#ffcd00]/20">
-    <i data-lucide="key" class="w-6 h-6 text-purple-500"></i>
-    <span class="text-[10px] font-bold text-gray-800 dark:text-gray-200">اوكر وكولين</span>
-</a>
                         <a href="#products" data-page="products" data-category-filter="all" class="col-span-3 py-3 text-center bg-[#ffcd00] text-gray-900 font-bold rounded-xl text-xs mt-1 shadow-md mobile-dept-item">
                             عرض جميع المنتجات &larr;
                         </a>
@@ -929,14 +875,15 @@
                                     </a>
 
                                     <a href="#products" data-page="products" data-category-filter="Parts" class="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group/item border border-transparent hover:border-gray-100 dark:hover:border-white/5">
-    <div class="w-10 h-10 rounded-lg bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover/item:scale-110 transition-transform">
-        <i data-lucide="key" class="w-5 h-5"></i>
-    </div>
-    <div>
-        <span class="block text-sm font-bold text-gray-800 dark:text-gray-200">اوكر وكولين</span>
-        <span class="block text-[10px] text-gray-400"> مقابض، اكسسوارات</span>
-    </div>
-</a>
+                                        <div class="w-10 h-10 rounded-lg bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover/item:scale-110 transition-transform">
+                                            <i data-lucide="settings" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <span class="block text-sm font-bold text-gray-800 dark:text-gray-200">قطع غيار</span>
+                                            <span class="block text-[10px] text-gray-400">صيانة وإصلاح</span>
+                                        </div>
+                                    </a>
+
                                 </div>
 
                                 <!-- Footer: Added data-category-filter="all" -->
@@ -1490,7 +1437,7 @@
                                         <option value="Lighting">إضاءة</option>
                                         <option value="Cables">كابلات</option>
                                         <option value="Switches">مفاتيح</option>
-                                        <option value="Parts">اوكر وكولين</option>
+                                        <option value="Parts">قطع غيار</option>
                                         <option value="Paints">دهانات</option>
                                         <option value="Ironmongery">حدايد</option>
                                         <option value="Showers">الدش</option>
@@ -1584,9 +1531,9 @@
                                 </button>
                                 
                                 <!-- Zoom/Expand Badge -->
-                                <button id="expand-image-btn" class="absolute bottom-4 left-4 p-2 bg-black/50 backdrop-blur-sm rounded-lg text-white opacity-0 group-hover:opacity-100 transition-all cursor-pointer z-30 hover:bg-[#ffcd00] hover:text-gray-900 shadow-lg">
-    <i data-lucide="maximize-2" class="w-5 h-5"></i>
-</button>
+                                <div class="absolute bottom-4 left-4 p-2 bg-black/50 backdrop-blur-sm rounded-lg text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <i data-lucide="maximize-2" class="w-5 h-5"></i>
+                                </div>
                             </div>
                         </div>
 
@@ -1654,7 +1601,7 @@
                             <!-- Description (Short) -->
                             <div class="prose dark:prose-invert max-w-none mb-8">
                                 <h3 class="text-sm font-bold mb-2 text-gray-900 dark:text-white">وصف مختصر</h3>
-                               <p id="details-product-description" class="whitespace-pre-line text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-4 hover:line-clamp-none transition-all cursor-pointer">
+                                <p id="details-product-description" class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-4 hover:line-clamp-none transition-all cursor-pointer">
                                     جاري تحميل الوصف...
                                 </p>
                             </div>
@@ -1836,9 +1783,8 @@
                         <i data-lucide="phone" class="w-12 h-12 text-[#ffcd00] mx-auto mb-4"></i>
                         <h3 class="text-xl font-semibold mb-2">اتصل بنا</h3>
                         <div class="text-gray-600 dark:text-gray-300" dir="ltr">
-    <a href="https://wa.me/201146641942" class="block hover:text-[#ffda33] transition-colors">01146641942 (واتساب)</a>
-    <a href="tel:01120910905" class="block hover:text-[#ffda33] transition-colors">01120910905 (مكالمات مباشرة)</a> 
-</div>
+                            <a href="https://wa.me/201146641942" class="block hover:text-[#ffda33] transition-colors">01146641942 (واتساب)</a>
+                        </div>
                     </div>
                     <div class="bg-white dark:bg-[#2c2f38] p-6 rounded-xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-1">
                         <i data-lucide="clock" class="w-12 h-12 text-[#ffcd00] mx-auto mb-4"></i>
@@ -2270,10 +2216,6 @@
                                     <i data-lucide="mail" class="w-4 h-4 text-[#ffcd00] flex-shrink-0 mt-1"></i>
                                     <a href="mailto:macaelctrec@gmail.com" class="hover:text-[#ffda33]">macaelctrec@gmail.com</a>
                                 </li>
-     <li class="flex items-start gap-3 justify-center sm:justify-start">
-    <i data-lucide="phone" class="w-4 h-4 text-[#ffcd00] flex-shrink-0 mt-1"></i>
-    <a href="tel:01120910905" class="hover:text-[#ffda33]" dir="ltr">01120910905</a>
-</li>
                             </ul>
                         </div>
                     
@@ -2378,7 +2320,7 @@
                             <option value="Showers">الدش</option>
                             <option value="Electronics">الكترونيات</option>
                             <option value="OpticalPanels">لوحات</option>
-                            <option value="Parts">اوكر وكولين</option>
+                            <option value="BuildingMaterials">مواد البناء</option>
                             <option value="Other">أخرى</option>
                         </select>
                     </div>
@@ -3074,13 +3016,6 @@
             const isAdmin = user && user.email === "macaelctrec@gmail.com";
             currentIsAdmin = isAdmin; 
             
-            // --- الكود الرابع: التحكم في ظهور زر الإدارة في القائمة السفلية ---
-            const mobileAdminLink = document.getElementById('mobile-bottom-admin-link');
-            if (isAdmin) {
-                if(mobileAdminLink) mobileAdminLink.classList.remove('hidden');
-            } else {
-                if(mobileAdminLink) mobileAdminLink.classList.add('hidden');
-            }
 
             const dropdownAdminLink = document.getElementById('dropdown-admin-link'); // +++ ADJUSTED THIS +++
  
@@ -3289,37 +3224,12 @@
                     if (cartCountBadge) cartCountBadge.classList.add('hidden');
                     if (mobileCartCountBadge) mobileCartCountBadge.classList.add('hidden');
                 }
-                function updateCartView() {
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    // ... الكود القديم ...
-    
-    // زود السطر ده:
-    const bottomCartBadge = document.getElementById('mobile-bottom-cart-badge');
-    if (bottomCartBadge) {
-        if (totalItems > 0) {
-            bottomCartBadge.textContent = totalItems;
-            bottomCartBadge.classList.remove('hidden');
-        } else {
-            bottomCartBadge.classList.add('hidden');
-        }
-    }
-}// --- كود تحديث عداد المنيو السفلية ---
-    const bottomCartBadge = document.getElementById('mobile-bottom-cart-badge');
-    if (bottomCartBadge) {
-        if (totalItems > 0) {
-            bottomCartBadge.textContent = totalItems;
-            bottomCartBadge.classList.remove('hidden');
-        } else {
-            bottomCartBadge.classList.add('hidden');
-        }
-    }
+                
                 if (document.getElementById('page-cart').classList.contains('active')) {
                     renderCartPage();
                 }
             }
 
-
-        
             function renderCartPage() {
                 if (!cartItemsContainer || !cartEmptyMessage || !cartSummary) return;
 
@@ -3407,52 +3317,68 @@
             }
 
             // Updated generateWhatsAppInvoice to accept customer data
-          function generateWhatsAppInvoice(customerData = null) {
-    if (cart.length === 0) {
-        showToast("سلّتك فارغة.");
-        return;
-    }
+            function generateWhatsAppInvoice(customerData = null) {
+                if (cart.length === 0) {
+                    showToast("سلّتك فارغة.");
+                    return;
+                }
 
-    const storePhone = "201146641942";
-    const baseUrl = "https://macca3.shop/"; 
+                const storePhone = "201146641942";
+                const orderId = generateShortId(6).toUpperCase();
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('ar-EG');
+                const timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
 
-    let message = `👋 *طلب جديد من متجر مكة*\n\n`;
-    
-    if (customerData) {
-        message += `👤 *بيانات العميل:*\n`;
-        message += `▪️ الاسم: ${customerData.name}\n`;
-        message += `▪️ الهاتف: ${customerData.phone}\n`;
-        message += `▪️ العنوان: ${customerData.address}\n`;
-        if (customerData.notes) message += `📝 ملاحظات: ${customerData.notes}\n`;
-        message += `━━━━━━━━━━━━━━\n\n`;
-    }
+                let message = `👋 مرحباً متجر مكة، أود تأكيد طلب جديد:\n\n`;
+                
+                if (customerData) {
+                    message += `👤 *بيانات العميل:*\n`;
+                    message += `▪ الاسم: ${customerData.name}\n`;
+                    message += `▪ الهاتف: ${customerData.phone}\n`;
+                    message += `▪ العنوان: ${customerData.address}\n`;
+                    if (customerData.notes) {
+                        message += `📝 ملاحظات: ${customerData.notes}\n`;
+                    }
+                    message += `━━━━━━━━━━━━━━\n\n`;
+                }
 
-    message += `📦 *تفاصيل المنتجات:*\n`;
-    let subtotal = 0;
-    
-    cart.forEach((item, index) => {
-        const itemTotal = parseFloat(item.price) * item.quantity;
-        subtotal += itemTotal;
-        const colorInfo = item.selectedColor ? ` (اللون: ${item.selectedColor.name})` : '';
-        const productLink = `${baseUrl}#product/${item.id}`; 
+                message += `🧾 *فاتورة طلب مبدئية*\n`;
+                message += `🔖 رقم المرجع: #${orderId}\n`;
+                message += `📅 التاريخ: ${dateStr} - ${timeStr}\n`;
+                message += `━━━━━━━━━━━━━━\n\n`;
+                
+                message += `📦 *المنتجات المطلوبة:*\n`;
+                let subtotal = 0;
+                cart.forEach((item, index) => {
+                    const itemTotal = parseFloat(item.price) * item.quantity;
+                    subtotal += itemTotal;
+                    
+                    // --- MODIFIED: Include color in invoice ---
+                    const colorInfo = item.selectedColor ? ` (لون: ${item.selectedColor.name || 'مخصص'})` : '';
+                    message += `${index + 1}️⃣ *${item.name}${colorInfo}*\n`;
+                    // ------------------------------------------
+                    message += `   ▪ الكمية: ${item.quantity}\n`;
+                    message += `   ▪ سعر الوحدة: ${parseFloat(item.price).toFixed(2)} EGP\n`;
+                    message += `   ▪ المجموع: ${itemTotal.toFixed(2)} EGP\n`;
+                    if (index < cart.length - 1) {
+                        message += `   --------------------\n`;
+                    }
+                });
 
-        message += `${index + 1}️⃣ *${item.name}${colorInfo}*\n`;
-        message += `   ▪️ الكمية: ${item.quantity}\n`;
-        message += `   ▪️ السعر: ${itemTotal.toFixed(2)} EGP\n`;
-        message += `   🖼️ الصورة: ${item.image}\n`; 
-        message += `   🔗 الرابط: ${productLink}\n`;
-        message += `   --------------------\n`;
-    });
+                message += `\n━━━━━━━━━━━━━━\n`;
+                message += `💰 *ملخص الدفع:*\n`;
+                message += `▫ المجموع الفرعي: ${subtotal.toFixed(2)} EGP\n`;
+                message += `🚚 الشحن: يتم تحديده عند التأكيد\n`;
+                message += `📢 *الإجمالي النهائي: ${subtotal.toFixed(2)} EGP*\n`;
+                message += `━━━━━━━━━━━━━━\n\n`;
+                message += `📍 *يرجى مراجعة الطلب وتأكيده.*\n`;
+                message += `شكراً لكم!`;
+                
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${storePhone}&text=${encodedMessage}`;
 
-    message += `\n💰 *الإجمالي النهائي: ${subtotal.toFixed(2)} EGP*\n`;
-    message += `━━━━━━━━━━━━━━\n`;
-    message += `✅ يرجى تأكيد الطلب.`;
-    
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=${storePhone}&text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
-}
-// تأكد من وجود هذا القوس في نهاية الدالة }
+                window.open(whatsappUrl, '_blank');
+            }
 
             
             function setupAddToCartButtons() {
@@ -4959,7 +4885,7 @@
                 // Badges & Info
                 const categoryTranslations = {
                     'Lighting': 'إضاءة', 'Cables': 'كابلات', 'Switches': 'مفاتيح',
-                    'Paints': 'دهانات', 'Parts': 'اوكر وكولين', 'Ironmongery': 'حدايد',
+                    'Paints': 'دهانات', 'Parts': 'قطع غيار', 'Ironmongery': 'حدايد',
                     'Showers': 'الدش', 'Electronics': 'الكترونيات',
                     'OpticalPanels': 'لوحات', 'BuildingMaterials': 'مواد البناء', 'Other': 'أخرى'
                 };
@@ -5180,44 +5106,7 @@
                 
                 // Refresh Icons
                 lucide.createIcons();
-               // دالة موحدة لفتح الصورة (Lightbox)
-const openLightboxFunc = (e) => {
-    e.stopPropagation();
-    const lightbox = document.getElementById('image-lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const mainImg = document.getElementById('main-product-image');
-    
-    if (lightbox && lightboxImg && mainImg) {
-        lightboxImg.src = mainImg.src;
-        lightbox.classList.remove('hidden');
-        setTimeout(() => {
-            lightbox.classList.add('opacity-100');
-            lightboxImg.classList.remove('scale-95');
-            lightboxImg.classList.add('scale-100');
-        }, 10);
-    }
-};
-
-// ربط الدالة بالزرار وبالصورة نفسها
-const expandBtn = document.getElementById('expand-image-btn');
-const mainImg = document.getElementById('main-product-image');
-
-if (expandBtn) expandBtn.onclick = openLightboxFunc;
-if (mainImg) mainImg.onclick = openLightboxFunc;
-
-// كود قفل الـ Lightbox (يفضل كما هو)
-const lightbox = document.getElementById('image-lightbox');
-const closeLightbox = () => {
-    if(!lightbox) return;
-    lightbox.classList.remove('opacity-100');
-    document.getElementById('lightbox-img').classList.add('scale-95');
-    setTimeout(() => lightbox.classList.add('hidden'), 300);
-};
-
-document.getElementById('close-lightbox').onclick = closeLightbox;
-if(lightbox) lightbox.onclick = (e) => { if(e.target === lightbox) closeLightbox(); };
-}
-           
+            }
 
 
             async function fetchAiSuggestions(productId) {
@@ -6302,17 +6191,6 @@ if(lightbox) lightbox.onclick = (e) => { if(e.target === lightbox) closeLightbox
                     allMobileNavLinks.forEach(link => {
                         link.classList.toggle('active', link.dataset.page === targetPageId);
                     });
-                    // الكود الرابع: تنبيه الصفحة النشطة في المنيو اللي تحت
-document.querySelectorAll('.mobile-nav-link').forEach(link => {
-    const pageId = link.dataset.page;
-    if (hash.includes(pageId)) {
-        link.classList.add('active', 'text-[#ffcd00]');
-        link.classList.remove('text-gray-500', 'dark:text-gray-400');
-    } else {
-        link.classList.remove('active', 'text-[#ffcd00]');
-        link.classList.add('text-gray-500', 'dark:text-gray-400');
-    }
-});
                 }
 
 
@@ -6483,42 +6361,6 @@ document.querySelectorAll('.mobile-nav-link').forEach(link => {
         
 
     </script>
-<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-[#2c2f38]/90 backdrop-blur-lg border-t border-gray-200 dark:border-white/5 z-50 px-2 pb-safe">
-    <div class="flex justify-around items-center h-16">
-        
-        <a href="#home" class="mobile-nav-link flex flex-col items-center gap-1 text-gray-500 dark:text-gray-400" data-page="home">
-            <i data-lucide="home" class="w-6 h-6"></i>
-            <span class="text-[10px] font-bold">الرئيسية</span>
-        </a>
 
-        <a href="#products" class="mobile-nav-link flex flex-col items-center gap-1 text-gray-500 dark:text-gray-400" data-page="products">
-            <i data-lucide="layout-grid" class="w-6 h-6"></i>
-            <span class="text-[10px] font-bold">الأقسام</span>
-        </a>
-
-        <a href="#cart" class="mobile-nav-link flex flex-col items-center gap-1 text-gray-500 dark:text-gray-400 relative" data-page="cart">
-            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
-            <span id="mobile-bottom-cart-badge" class="absolute -top-1 -right-1 h-4 w-4 bg-[#ffcd00] text-gray-900 text-[9px] font-bold rounded-full flex items-center justify-center border-2 border-white dark:border-[#2c2f38] hidden">0</span>
-            <span class="text-[10px] font-bold">السلة</span>
-        </a>
-
-        <a href="#offers" class="mobile-nav-link flex flex-col items-center gap-1 text-red-500" data-page="offers">
-            <i data-lucide="flame" class="w-6 h-6 fill-current animate-pulse"></i>
-            <span class="text-[10px] font-bold">العروض</span>
-        </a>
-
-        <a href="#admin" id="mobile-bottom-admin-link" class="hidden flex flex-col items-center gap-1 text-gray-500 dark:text-gray-400" data-page="admin">
-            <i data-lucide="user-cog" class="w-6 h-6"></i>
-            <span class="text-[10px] font-bold">الإدارة</span>
-        </a>
-
-    </div>
-</nav>
-<div id="image-lightbox" class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4 transition-all duration-300 opacity-0">
-    <button id="close-lightbox" class="absolute top-6 right-6 text-white hover:text-[#ffcd00] transition-colors z-[110]">
-        <i data-lucide="x" class="w-10 h-10"></i>
-    </button>
-    <img id="lightbox-img" src="" class="max-w-full max-h-full object-contain rounded-2xl shadow-2xl transform scale-95 transition-transform duration-300">
-</div>
 </body>
 </html>
